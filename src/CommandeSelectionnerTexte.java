@@ -9,6 +9,9 @@ public class CommandeSelectionnerTexte implements Commande {
         this.moteur = moteur;
     }
 
+    /**
+     * execute()
+     */
     public void execute() {
         moteur.selectionner();
     }
