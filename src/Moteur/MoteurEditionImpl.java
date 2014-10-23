@@ -5,19 +5,19 @@ package Moteur;
  */
 public class MoteurEditionImpl implements MoteurEdition {
 
-    private StringBuffer buffer;
+    private Buffer buffer;
     private PressePapier pp;
     private Selection selection;
 
     public MoteurEditionImpl(){
-        this.buffer = BufferImpl.getBuffer();
+        this.buffer = BufferImpl.getBufferInstance();
         this.pp = new PressePapierImpl();
         this.selection = new SelectionImpl();
     }
 
     @Override
     public void copier(){
-
+        pp.setContenu(buffer.getContenu(selection.getDebut(),selection.getFin()));
     }
 
     @Override

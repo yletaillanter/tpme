@@ -5,13 +5,20 @@ package Moteur;
  */
 public class BufferImpl implements Buffer {
 
-    static private StringBuffer buffer;
+    private static BufferImpl buffer;
+    private StringBuffer innerBuffer;
 
-    private BufferImpl(){}
+    private BufferImpl(){
+        innerBuffer = new StringBuffer();
+    }
 
-    static public StringBuffer getBuffer(){
+    public static BufferImpl getBufferInstance(){
         if(buffer == null)
-            return new StringBuffer();
+            return new BufferImpl();
         return buffer;
+    }
+
+    public String getContenu(int debut, int fin){
+        return null;
     }
 }
