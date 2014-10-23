@@ -5,5 +5,4 @@ package commandes;
  */
 public interface Commande {
     public void execute();
-    public void execute2();
 }
