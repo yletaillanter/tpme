@@ -1,14 +1,16 @@
+package Moteur;
+
 /**
  * Created by 14007427 on 22/10/2014.
  */
 public class MoteurEditionImpl implements MoteurEdition {
 
-    private Buffer buffer;
+    private StringBuffer buffer;
     private PressePapier pp;
     private Selection selection;
 
     public MoteurEditionImpl(){
-        this.buffer = new BufferImpl();
+        this.buffer = BufferImpl.getBuffer();
         this.pp = new PressePapierImpl();
         this.selection = new SelectionImpl();
     }
