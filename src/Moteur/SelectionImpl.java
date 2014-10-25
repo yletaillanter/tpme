@@ -8,18 +8,22 @@ public class SelectionImpl implements Selection {
     private int debut;
     private int fin;
 
+    @Override
     public int getDebut() {
-        return debut;
+        return this.debut;
     }
 
+    @Override
     public void setDebut(int debut) {
         this.debut = debut;
     }
 
+    @Override
     public int getFin() {
-        return fin;
+        return this.fin;
     }
 
+    @Override
     public void setFin(int fin) {
         this.fin = fin;
     }

@@ -5,7 +5,7 @@ package Moteur;
  */
 public interface Selection {
     public int getDebut();
-    public int setDebut();
+    public void setDebut(int debut);
     public int getFin();
-    public int setFin();
+    public void setFin(int fin);
 }
