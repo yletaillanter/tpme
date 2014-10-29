@@ -1,9 +1,9 @@
 package Moteur;
 
 /**
- * Created by 14007427 on 22/10/2014.
+ * Created by Yoann Le Taillanter on 22/10/2014.
  */
-public interface Selection {
+interface Selection {
     public int getDebut();
     public void setDebut(int debut);
     public int getFin();

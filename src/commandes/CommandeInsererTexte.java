@@ -1,21 +1,25 @@
 package commandes;
 
-import Moteur.MoteurEdition;
+import Moteur.*;
+import IHM.*;
+
+import java.util.logging.Level;
 
 /**
- * Created by 14007427 on 22/10/2014.
+ * Created by Yoann Le Taillanter on 22/10/2014.
  */
 public class CommandeInsererTexte implements Commande {
 
     private MoteurEdition moteur;
+    private IHM ihm;
 
-    public CommandeInsererTexte(MoteurEdition moteur) {
-
+    public CommandeInsererTexte(MoteurEdition moteur, IHM ihm) {
         this.moteur = moteur;
+        this.ihm = ihm;
     }
 
     public void execute(){
-
-        moteur.inserer();
+        moteur.inserer(ihm.getInputUser());
+        logger.log(Level.INFO,"CommandeInsererTexte: Execute()");
     }
 }

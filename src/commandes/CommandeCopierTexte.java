@@ -2,20 +2,22 @@ package commandes;
 
 import Moteur.MoteurEdition;
 
+import java.util.logging.Level;
+
 /**
- * Created by 14007427 on 22/10/2014.
+ * Created by Yoann Le Taillanter on 22/10/2014.
  */
 public class CommandeCopierTexte implements Commande {
 
     private MoteurEdition moteur;
 
-    public CommandeCopierTexte(MoteurEdition m) {
+    public CommandeCopierTexte(MoteurEdition moteur) {
 
-        this.moteur = m;
+        this.moteur = moteur;
     }
 
     public void execute (){
-
         moteur.copier();
+        logger.log(Level.INFO,"CommandeCopierTexte: Execute()");
     }
 }

@@ -2,8 +2,10 @@ package commandes;
 
 import Moteur.MoteurEdition;
 
+import java.util.logging.Level;
+
 /**
- * Created by 14007427 on 22/10/2014.
+ * Created by Yoann Le Taillanter on 22/10/2014.
  */
 public class CommandeCollerTexte implements Commande {
 
@@ -15,7 +17,7 @@ public class CommandeCollerTexte implements Commande {
     }
 
     public void execute() {
-
         moteur.coller();
+        logger.log(Level.INFO,"CommandeCollerTexte: Execute()");
     }
 }
