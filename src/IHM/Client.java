@@ -8,7 +8,6 @@ import Moteur.MoteurEditionImpl;
  * Created by Yoann Le Taillanter on 22/10/2014.
  */
 class Client{
-
     public IHMImpl ihm;
     MoteurEdition moteur;
 
@@ -28,7 +27,6 @@ class Client{
         ihm.launch(ihm.getClass());
         */
     }
-
     private void configureCommand() {
         ihm.addCommand(new CommandeCopierTexte(moteur), "Copy");
         ihm.addCommand(new CommandeCollerTexte(moteur), "Paste");

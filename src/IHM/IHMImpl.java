@@ -152,6 +152,7 @@ public class IHMImpl extends JFrame implements IHM {
 
     public void setDot(int dot) {
         this.dot = dot;
+        logger.log(Level.INFO,"dot:"+dot);
     }
 
     public int getMark() {
@@ -159,6 +160,7 @@ public class IHMImpl extends JFrame implements IHM {
     }
 
     public void setMark(int mark) {
+        logger.log(Level.INFO,"mark:"+mark);
         this.mark = mark;
     }
 }

@@ -21,12 +21,8 @@ public class MoteurEditionImpl implements MoteurEdition {
 
     @Override
     public void copier() {
-        pp.setPressePapierContent(
-                buffer.getContentAt(
-                        selection.getDebut(),selection.getFin()
-                )
-        );
-        logger.log(Level.INFO,"copier");
+        //if(buffer.getLength()>)
+        pp.setPressePapierContent(buffer.getContentAt(selection.getDebut(),selection.getFin()));
     }
 
     @Override
@@ -40,22 +36,29 @@ public class MoteurEditionImpl implements MoteurEdition {
     @Override
     public void coller(){
         buffer.addContentAtPosition(pp.getPressePapierContent(), selection.getDebut());
-        logger.log(Level.INFO,"coller");
+        //logger.log(Level.INFO,"coller");
     }
 
     @Override
     public void couper(){
         pp.setPressePapierContent(buffer.getContentAt(selection.getDebut(),selection.getFin()));
         buffer.deleteContent(selection.getDebut(),selection.getFin());
-        logger.log(Level.INFO,"couper");
+        //logger.log(Level.INFO,"couper");
     }
 
     @Override
     public void selectionner(int dot, int mark){
-        selection.setDebut(dot);
-        selection.setFin(mark);
-        logger.log(Level.INFO,""+dot);
-        logger.log(Level.INFO,""+mark);
+        if(dot>=mark){
+            selection.setDebut(mark);
+            selection.setFin(dot);
+        }
+        else {
+            selection.setDebut(dot);
+            selection.setFin(mark);
+        }
+
+        //logger.log(Level.INFO,""+dot);
+        //logger.log(Level.INFO,""+mark);
     }
 /* inutile
     @Override

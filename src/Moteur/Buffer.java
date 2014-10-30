@@ -9,4 +9,5 @@ interface Buffer {
     public void addContent(String txt);
     public void addContentAtPosition(String txt, int position);
     public void deleteContent(int debut, int fin);
+    public int getLength();
 }

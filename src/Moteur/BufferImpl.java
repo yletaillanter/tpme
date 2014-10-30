@@ -13,6 +13,7 @@ public class BufferImpl implements Buffer {
      */
     private BufferImpl(){
         innerBuffer = new StringBuilder();
+        innerBuffer.append("CECI EST UN TESTD");
     }
 
     /**
@@ -40,7 +41,7 @@ public class BufferImpl implements Buffer {
      * @return String from buffer between 'deb' and 'fin'
      */
     public String getContentAt(int deb, int fin){
-        return innerBuffer.substring(deb, fin);
+            return innerBuffer.substring(deb, fin);
     }
 
     /**
@@ -62,5 +63,10 @@ public class BufferImpl implements Buffer {
 
     public void deleteContent(int deb,int fin){
         innerBuffer.delete(deb,fin);
+    }
+
+    @Override
+    public int getLength() {
+        return innerBuffer.capacity();
     }
 }
