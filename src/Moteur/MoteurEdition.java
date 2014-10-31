@@ -11,5 +11,5 @@ public interface MoteurEdition {
     public void selectionner(int dot, int mark);
     //public PressePapier getPressePapier();
     //public Selection getSelectionImpl();
-    //public Buffer getBuffer();
+    public BufferImpl getBuffer();
 }

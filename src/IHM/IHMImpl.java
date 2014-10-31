@@ -1,10 +1,13 @@
 package IHM;
 
+import Moteur.BufferImpl;
+import Moteur.Buffer;
 import Observer.*;
 
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+
 import java.util.HashMap;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -27,6 +30,7 @@ public class IHMImpl<T> extends JFrame implements IHM, Observer<T> {
     private JTextArea userInput;
     private int dot;
     private int mark;
+    private JTextArea bufferDisplay;
 
     /**
      * Constructors
@@ -59,8 +63,7 @@ public class IHMImpl<T> extends JFrame implements IHM, Observer<T> {
         mainPanel.setLayout(new GridLayout(2, 0));
 
         //Upper part
-        JTextArea bufferDisplay = new JTextArea();
-        bufferDisplay.setText("CECI EST UN TEST");
+        bufferDisplay = new JTextArea();
         bufferDisplay.setEditable(false);
         bufferDisplay.getCaret().setVisible(true);
         bufferDisplay.getCaret().setSelectionVisible(true);
@@ -170,5 +173,8 @@ public class IHMImpl<T> extends JFrame implements IHM, Observer<T> {
     @Override
     public void doUpdate(Subject<T> s) {
 
+        if(s instanceof BufferImpl){
+            bufferDisplay.setText(((BufferImpl) s).getContent());
+        }
     }
 }

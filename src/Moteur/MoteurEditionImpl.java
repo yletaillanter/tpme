@@ -9,7 +9,7 @@ import java.util.logging.Logger;
 public class MoteurEditionImpl implements MoteurEdition {
 
     Logger logger = Logger.getLogger("tpme.Moteur.MoteurEditionImpl");
-    private Buffer buffer;
+    private BufferImpl buffer;
     private Selection selection;
     private PressePapier pp;
 
@@ -70,10 +70,10 @@ public class MoteurEditionImpl implements MoteurEdition {
     public Selection getSelectionImpl() {
         return selection;
     }
-
+*/
     @Override
-    public Buffer getBuffer() {
+    public BufferImpl getBuffer() {
         return buffer;
     }
-*/
+
 }

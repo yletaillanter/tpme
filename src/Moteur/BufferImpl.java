@@ -20,7 +20,6 @@ public class BufferImpl<T> implements Buffer, Subject<T> {
      */
     private BufferImpl(){
         innerBuffer = new StringBuilder();
-        innerBuffer.append("CECI EST UN TESTD");
         registeredObservers = new ArrayList<Observer<T>>();
     }
 

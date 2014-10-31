@@ -20,6 +20,7 @@ class Client{
     private void run() {
         moteur = new MoteurEditionImpl();
         ihm = new IHMImpl();
+        moteur.getBuffer().register(ihm);
         this.configureCommand();
 
         /*
