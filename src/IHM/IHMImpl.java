@@ -26,7 +26,7 @@ public class IHMImpl<T> extends JFrame implements IHM, Observer<T> {
 
     Logger logger = Logger.getLogger("tpme.IHM.IHMImpl");
     private HashMap<String, Commande> commands;
-    private Button copyButton, pasteButton, cutButton, insertButton, selectButton;
+    private Button copyButton, pasteButton, cutButton, insertButton;
     private JTextArea userInput;
     private int dot;
     private int mark;
@@ -91,12 +91,10 @@ public class IHMImpl<T> extends JFrame implements IHM, Observer<T> {
         copyButton = new Button("Copy");
         pasteButton = new Button("Paste");
         cutButton = new Button("Cut");
-        selectButton = new Button("Select");
         insertButton = new Button("Insert");
         buttonPanel.add(copyButton);
         buttonPanel.add(pasteButton);
         buttonPanel.add(cutButton);
-        buttonPanel.add(selectButton);
         buttonPanel.add(insertButton);
         userPanel.add(buttonPanel);
         setButtonAction();
@@ -114,7 +112,7 @@ public class IHMImpl<T> extends JFrame implements IHM, Observer<T> {
             @Override
             public void actionPerformed(ActionEvent e) {
                 commands.get("Copy").execute();
-                logger.log(Level.INFO, "Copy clicked");
+                //logger.log(Level.INFO, "Copy clicked");
             }
         });
 
@@ -122,7 +120,7 @@ public class IHMImpl<T> extends JFrame implements IHM, Observer<T> {
             @Override
             public void actionPerformed(ActionEvent e) {
                 commands.get("Paste").execute();
-                logger.log(Level.INFO, "Paste clicked");
+                //logger.log(Level.INFO, "Paste clicked");
             }
         });
 
@@ -130,7 +128,7 @@ public class IHMImpl<T> extends JFrame implements IHM, Observer<T> {
             @Override
             public void actionPerformed(ActionEvent e) {
                 commands.get("Cut").execute();
-                logger.log(Level.INFO, "Cut clicked");
+                //logger.log(Level.INFO, "Cut clicked");
             }
         });
 
@@ -138,7 +136,7 @@ public class IHMImpl<T> extends JFrame implements IHM, Observer<T> {
             @Override
             public void actionPerformed(ActionEvent e) {
                 commands.get("Insert").execute();
-                logger.log(Level.INFO, "Insert clicked");
+                //logger.log(Level.INFO, "Insert clicked");
             }
         });
 
@@ -158,7 +156,7 @@ public class IHMImpl<T> extends JFrame implements IHM, Observer<T> {
 
     public void setDot(int dot) {
         this.dot = dot;
-        logger.log(Level.INFO,"dot:"+dot);
+        //logger.log(Level.INFO,"dot:"+dot);
     }
 
     public int getMark() {
@@ -166,7 +164,7 @@ public class IHMImpl<T> extends JFrame implements IHM, Observer<T> {
     }
 
     public void setMark(int mark) {
-        logger.log(Level.INFO,"mark:"+mark);
+        //logger.log(Level.INFO,"mark:"+mark);
         this.mark = mark;
     }
 
