@@ -66,8 +66,6 @@ public class IHMImpl<T> extends JFrame implements IHM, Observer<T> {
         //Upper part
         bufferDisplay = new JTextArea();
         bufferDisplay.setEditable(false);
-        bufferDisplay.getCaret().setVisible(true);
-        bufferDisplay.getCaret().setSelectionVisible(true);
 
         bufferDisplay.addCaretListener(new CaretListener() {
             @Override
@@ -83,8 +81,8 @@ public class IHMImpl<T> extends JFrame implements IHM, Observer<T> {
         bufferDisplay.addFocusListener(new FocusListener() {
             @Override
             public void focusGained(FocusEvent e) {
-                bufferDisplay.getCaret().setSelectionVisible(true);
-                logger.log(Level.INFO,"focuuuuuuuuuuuuuuuuuuuuuuuuuuuuus");
+                bufferDisplay.getCaret().setVisible(true);
+                //logger.log(Level.INFO,"focus");
             }
 
             @Override
