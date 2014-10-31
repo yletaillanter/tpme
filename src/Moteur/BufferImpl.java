@@ -77,6 +77,9 @@ public class BufferImpl<T> implements Buffer, Subject<T> {
 
     public void deleteContent(int deb,int fin){
         innerBuffer.delete(deb,fin);
+        for (Observer<T> o : registeredObservers) {
+            o.doUpdate(this);
+        }
     }
 
     @Override
