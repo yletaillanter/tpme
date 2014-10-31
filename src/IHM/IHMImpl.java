@@ -1,5 +1,7 @@
 package IHM;
 
+import Observer.*;
+
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -7,6 +9,7 @@ import java.util.HashMap;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
+import Observer.Observer;
 import commandes.*;
 
 import javax.swing.*;
@@ -16,7 +19,7 @@ import javax.swing.event.CaretListener;
 /**
  * Created by Yoann Le Taillanter on 22/10/2014.
  */
-public class IHMImpl extends JFrame implements IHM {
+public class IHMImpl<T> extends JFrame implements IHM, Observer<T> {
 
     Logger logger = Logger.getLogger("tpme.IHM.IHMImpl");
     private HashMap<String, Commande> commands;
@@ -162,5 +165,10 @@ public class IHMImpl extends JFrame implements IHM {
     public void setMark(int mark) {
         logger.log(Level.INFO,"mark:"+mark);
         this.mark = mark;
+    }
+
+    @Override
+    public void doUpdate(Subject<T> s) {
+
     }
 }

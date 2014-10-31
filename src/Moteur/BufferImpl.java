@@ -1,10 +1,17 @@
 package Moteur;
 
+import Observer.Observer;
+import Observer.Subject;
+
+import java.util.ArrayList;
+import java.util.List;
+
 /**
  * Created by Yoann Le Taillanter on 22/10/2014.
  */
-public class BufferImpl implements Buffer {
+public class BufferImpl<T> implements Buffer, Subject<T> {
 
+    private ArrayList<Observer<T>> registeredObservers;
     private static BufferImpl buffer;
     private StringBuilder innerBuffer;
 
@@ -14,6 +21,7 @@ public class BufferImpl implements Buffer {
     private BufferImpl(){
         innerBuffer = new StringBuilder();
         innerBuffer.append("CECI EST UN TESTD");
+        registeredObservers = new ArrayList<Observer<T>>();
     }
 
     /**
@@ -68,5 +76,30 @@ public class BufferImpl implements Buffer {
     @Override
     public int getLength() {
         return innerBuffer.capacity();
+    }
+
+    @Override
+    public void register(Observer<T> o) throws IllegalArgumentException {
+
+    }
+
+    @Override
+    public void unregister(Observer<T> o) throws IllegalArgumentException {
+
+    }
+
+    @Override
+    public boolean isRegistered(Observer<T> o) {
+        return false;
+    }
+
+    @Override
+    public T getValue() {
+        return null;
+    }
+
+    @Override
+    public void setValue(T v) {
+
     }
 }
