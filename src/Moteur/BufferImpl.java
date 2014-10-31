@@ -58,6 +58,9 @@ public class BufferImpl<T> implements Buffer, Subject<T> {
      */
     public void addContent(String txt){
         innerBuffer.append(txt);
+        for (Observer<T> o : registeredObservers) {
+            o.doUpdate(this);
+        }
     }
 
     /**
@@ -67,6 +70,10 @@ public class BufferImpl<T> implements Buffer, Subject<T> {
      */
     public void addContentAtPosition(String txt, int position){
         innerBuffer.insert(position,txt);
+
+        for (Observer<T> o : registeredObservers) {
+            o.doUpdate(this);
+        }
     }
 
     public void deleteContent(int deb,int fin){
@@ -80,19 +87,28 @@ public class BufferImpl<T> implements Buffer, Subject<T> {
 
     @Override
     public void register(Observer<T> o) throws IllegalArgumentException {
-
+        if (registeredObservers.contains(o)) {
+            throw new IllegalArgumentException("o is registered already");
+        }
+        registeredObservers.add(o);
     }
 
     @Override
     public void unregister(Observer<T> o) throws IllegalArgumentException {
-
+        if (!registeredObservers.contains(o)) {
+            throw new IllegalArgumentException("o is not registered");
+        }
+        registeredObservers.remove(o);
     }
 
     @Override
     public boolean isRegistered(Observer<T> o) {
-        return false;
+        if (o == null) {
+            throw new IllegalArgumentException("o is null");
+        }
+        return registeredObservers.contains(o);
     }
-
+/*
     @Override
     public T getValue() {
         return null;
@@ -102,4 +118,5 @@ public class BufferImpl<T> implements Buffer, Subject<T> {
     public void setValue(T v) {
 
     }
+    */
 }

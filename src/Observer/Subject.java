@@ -38,7 +38,7 @@ public interface Subject<T> {
      *
      * @return subject's value property
      */
-    T getValue();
+    //T getValue();
 
 
     /**
@@ -46,5 +46,5 @@ public interface Subject<T> {
      *
      * @param v new value for subject's value
      */
-    void setValue(T v);
+    //void setValue(T v);
 }
