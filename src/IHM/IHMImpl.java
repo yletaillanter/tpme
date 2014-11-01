@@ -28,7 +28,7 @@ public class IHMImpl<T> extends JFrame implements IHM, Observer<T> {
     private JTextField userInput;
     private int dot;
     private int mark;
-    private JTextArea bufferDisplay;
+    private JTextPane bufferDisplay;
     private JPopupMenu popup;
     private JMenuItem menuItem;
     private JCheckBox retourChariot;
@@ -66,7 +66,7 @@ public class IHMImpl<T> extends JFrame implements IHM, Observer<T> {
         mainPanel.setLayout(new GridLayout(2, 0));
 
         //Upper part
-        bufferDisplay = new JTextArea();
+        bufferDisplay = new JTextPane();
         bufferDisplay.setEditable(false);
 
         bufferDisplay.addCaretListener(new CaretListener() {
