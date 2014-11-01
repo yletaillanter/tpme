@@ -4,11 +4,8 @@ import Moteur.BufferImpl;
 import Observer.*;
 
 import java.awt.*;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
+import java.awt.event.*;
 
-import java.awt.event.FocusEvent;
-import java.awt.event.FocusListener;
 import java.util.HashMap;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -33,6 +30,10 @@ public class IHMImpl<T> extends JFrame implements IHM, Observer<T> {
     private int mark;
     private JTextArea bufferDisplay;
 
+    JPopupMenu popup;
+    JMenuItem menuItem;
+
+
     /**
      * Constructors
      */
@@ -55,6 +56,7 @@ public class IHMImpl<T> extends JFrame implements IHM, Observer<T> {
         setResizable(false);
         setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
         setContentPane(buildContentPane());
+        createPopupMenu();
         setVisible(true);
     }
 
@@ -73,8 +75,6 @@ public class IHMImpl<T> extends JFrame implements IHM, Observer<T> {
                 setDot(e.getDot());
                 setMark(e.getMark());
                 commands.get("Select").execute();
-                //bufferDisplay.getCaret().setSelectionVisible(true);
-
             }
         });
 
@@ -88,6 +88,40 @@ public class IHMImpl<T> extends JFrame implements IHM, Observer<T> {
             @Override
             public void focusLost(FocusEvent e) {
 
+            }
+        });
+
+        bufferDisplay.addMouseListener(new MouseListener() {
+            @Override
+            public void mouseClicked(MouseEvent e) {
+
+            }
+
+            @Override
+            public void mousePressed(MouseEvent e) {
+                maybeShowPopup(e);
+            }
+
+            @Override
+            public void mouseReleased(MouseEvent e) {
+                maybeShowPopup(e);
+            }
+
+            @Override
+            public void mouseEntered(MouseEvent e) {
+
+            }
+
+            @Override
+            public void mouseExited(MouseEvent e) {
+
+            }
+
+            private void maybeShowPopup(MouseEvent e) {
+                if (e.isPopupTrigger()) {
+                    popup.show(e.getComponent(),
+                            e.getX(), e.getY());
+                }
             }
         });
 
@@ -118,6 +152,39 @@ public class IHMImpl<T> extends JFrame implements IHM, Observer<T> {
         userPanel.add(userInput);
 
         return mainPanel;
+    }
+
+    public void createPopupMenu(){
+        // #########################TEST JPOPUP ####################
+
+        //Create the popup menu.
+        popup = new JPopupMenu();
+        menuItem = new JMenuItem("Copy");
+        menuItem.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                commands.get("Copy").execute();
+            }
+        });
+        popup.add(menuItem);
+
+        menuItem = new JMenuItem("Paste");
+        menuItem.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                commands.get("Paste").execute();
+            }
+        });
+        popup.add(menuItem);
+
+        menuItem = new JMenuItem("Cut");
+        menuItem.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                commands.get("Cut").execute();
+            }
+        });
+        popup.add(menuItem);
     }
 
     public void setButtonAction(){
