@@ -25,13 +25,12 @@ public class IHMImpl<T> extends JFrame implements IHM, Observer<T> {
     Logger logger = Logger.getLogger("tpme.IHM.IHMImpl");
     private HashMap<String, Commande> commands;
     private Button copyButton, pasteButton, cutButton, insertButton;
-    private JTextArea userInput;
+    private JTextField userInput;
     private int dot;
     private int mark;
     private JTextArea bufferDisplay;
-
-    JPopupMenu popup;
-    JMenuItem menuItem;
+    private JPopupMenu popup;
+    private JMenuItem menuItem;
 
 
     /**
@@ -148,7 +147,20 @@ public class IHMImpl<T> extends JFrame implements IHM, Observer<T> {
         setButtonAction();
 
         // zone de texte
-        userInput = new JTextArea();
+        userInput = new JTextField();
+        userInput.addKeyListener(new KeyListener() {
+            @Override
+            public void keyTyped(KeyEvent e) {}
+            @Override
+            public void keyPressed(KeyEvent e) {
+                if(e.getKeyChar() == Event.ENTER){
+                        commands.get("Insert").execute();
+                        userInput.setText("");
+                }
+            }
+            @Override
+            public void keyReleased(KeyEvent e) {}
+           });
         userPanel.add(userInput);
 
         return mainPanel;
