@@ -7,7 +7,7 @@ public interface MoteurEdition {
     public void copier();
     public void coller();
     public void couper();
-    public void inserer(String txt);
+    public void inserer(String txt,boolean retourChariot);
     public void selectionner(int dot, int mark);
     //public PressePapier getPressePapier();
     //public Selection getSelectionImpl();

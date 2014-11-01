@@ -12,4 +12,5 @@ public interface IHM {
     public int getDot();
     public void setMark(int mark);
     public int getMark();
+    public boolean retourChariotIsChecked();
 }

@@ -31,7 +31,8 @@ public class IHMImpl<T> extends JFrame implements IHM, Observer<T> {
     private JTextArea bufferDisplay;
     private JPopupMenu popup;
     private JMenuItem menuItem;
-
+    private JCheckBox retourChariot;
+    private boolean retourChariotChecked = false;
 
     /**
      * Constructors
@@ -139,10 +140,12 @@ public class IHMImpl<T> extends JFrame implements IHM, Observer<T> {
         pasteButton = new Button("Paste");
         cutButton = new Button("Cut");
         insertButton = new Button("Insert");
+        retourChariot = new JCheckBox("retour à la ligne");
         buttonPanel.add(copyButton);
         buttonPanel.add(pasteButton);
         buttonPanel.add(cutButton);
         buttonPanel.add(insertButton);
+        buttonPanel.add(retourChariot);
         userPanel.add(buttonPanel);
         setButtonAction();
 
@@ -233,6 +236,13 @@ public class IHMImpl<T> extends JFrame implements IHM, Observer<T> {
                 //logger.log(Level.INFO, "Insert clicked");
             }
         });
+
+        retourChariot.addItemListener(new ItemListener() {
+            @Override
+            public void itemStateChanged(ItemEvent e) {
+                retourChariotChecked = !retourChariotIsChecked();
+            }
+        });
     }
 
     public String getInputUser(){
@@ -259,6 +269,11 @@ public class IHMImpl<T> extends JFrame implements IHM, Observer<T> {
     public void setMark(int mark) {
         //logger.log(Level.INFO,"mark:"+mark);
         this.mark = mark;
+    }
+
+    public boolean retourChariotIsChecked(){
+       logger.log(Level.INFO,"retour Chariot state: "+retourChariotChecked);
+       return retourChariotChecked;
     }
 
     @Override

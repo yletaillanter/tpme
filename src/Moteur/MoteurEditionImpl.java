@@ -26,9 +26,14 @@ public class MoteurEditionImpl implements MoteurEdition {
     }
 
     @Override
-    public void inserer(String txt){
+    public void inserer(String txt, boolean retourChariot){
         logger.log(Level.INFO,"Ajout dans buffer: " + txt );
-        buffer.addContent(txt);
+        if(retourChariot) {
+            buffer.addContent(txt);
+            buffer.addContent("\n");
+        }
+        else
+            buffer.addContent(txt);
 
         //System.out.println(buffer.getContent());
     }
