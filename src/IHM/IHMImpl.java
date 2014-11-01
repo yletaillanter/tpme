@@ -66,10 +66,10 @@ public class IHMImpl<T> extends JFrame implements IHM, Observer<T> {
         mainPanel.setBackground(Color.white);
         mainPanel.setLayout(new BorderLayout(0,0));
 
-        //Lower part
+        //Upper part
         bufferDisplay = new JTextArea();
         bufferDisplay.setEditable(false);
-        bufferDisplay.setRows(7);
+        bufferDisplay.setRows(15);
         bufferDisplay.setBackground(Color.LIGHT_GRAY);
 
         bufferDisplay.getCaret().setVisible(true);
@@ -141,7 +141,7 @@ public class IHMImpl<T> extends JFrame implements IHM, Observer<T> {
 
         //Ajout des boutons
         JPanel buttonPanel = new JPanel();
-        buttonPanel.setLayout(new GridLayout(5,0));
+        buttonPanel.setLayout(new GridLayout(0,5));
         copyButton = new Button("Copy");
         pasteButton = new Button("Paste");
         cutButton = new Button("Cut");
