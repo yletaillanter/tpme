@@ -48,10 +48,10 @@ public class IHMImpl<T> extends JFrame implements IHM, Observer<T> {
     */
 
     private void build(){
-        setTitle("Mini-editor");
+        setTitle("Mini-Editeur");
         setSize(600,600);
         setLocationRelativeTo(null);
-        setResizable(false);
+        setResizable(true);
         setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
         setContentPane(buildContentPane());
         setVisible(true);
@@ -60,11 +60,14 @@ public class IHMImpl<T> extends JFrame implements IHM, Observer<T> {
     private JPanel buildContentPane(){
         JPanel mainPanel = new JPanel();
         mainPanel.setBackground(Color.white);
-        mainPanel.setLayout(new GridLayout(2, 0));
+        mainPanel.setLayout(new BorderLayout(0,0));
 
-        //Upper part
+        //Lower part
         bufferDisplay = new JTextArea();
         bufferDisplay.setEditable(false);
+        bufferDisplay.setRows(7);
+        bufferDisplay.setBackground(Color.LIGHT_GRAY);
+
         bufferDisplay.getCaret().setVisible(true);
         bufferDisplay.getCaret().setSelectionVisible(true);
 
@@ -77,17 +80,17 @@ public class IHMImpl<T> extends JFrame implements IHM, Observer<T> {
             }
         });
 
-        mainPanel.add(bufferDisplay);
+        mainPanel.add(bufferDisplay, BorderLayout.NORTH);
 
         //Bottom part
         JPanel userPanel = new JPanel();
         userPanel.setBackground(Color.white);
-        userPanel.setLayout(new GridLayout(2, 0));
-        mainPanel.add(userPanel);
+        userPanel.setLayout(new BorderLayout());
+        mainPanel.add(userPanel, BorderLayout.CENTER);
 
         //Ajout des boutons
         JPanel buttonPanel = new JPanel();
-        buttonPanel.setLayout(new FlowLayout());
+        buttonPanel.setLayout(new GridLayout(5,0));
         copyButton = new Button("Copy");
         pasteButton = new Button("Paste");
         cutButton = new Button("Cut");
@@ -98,12 +101,12 @@ public class IHMImpl<T> extends JFrame implements IHM, Observer<T> {
         buttonPanel.add(cutButton);
         buttonPanel.add(selectButton);
         buttonPanel.add(insertButton);
-        userPanel.add(buttonPanel);
+        userPanel.add(buttonPanel,BorderLayout.NORTH);
         setButtonAction();
 
         // zone de texte
         userInput = new JTextArea();
-        userPanel.add(userInput);
+        userPanel.add(userInput,BorderLayout.CENTER);
 
         return mainPanel;
     }
