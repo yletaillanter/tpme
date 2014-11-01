@@ -141,7 +141,7 @@ public class IHMImpl<T> extends JFrame implements IHM, Observer<T> {
 
         //Ajout des boutons
         JPanel buttonPanel = new JPanel();
-        buttonPanel.setLayout(new GridLayout(0,5));
+        buttonPanel.setLayout(new GridLayout(0, 5));
         copyButton = new Button("Copy");
         pasteButton = new Button("Paste");
         cutButton = new Button("Cut");
