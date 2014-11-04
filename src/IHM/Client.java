@@ -34,5 +34,7 @@ class Client{
         ihm.addCommand(new CommandeCouperTexte(moteur), "Cut");
         ihm.addCommand(new CommandeInsererTexte(moteur,ihm), "Insert");
         ihm.addCommand(new CommandeSelectionnerTexte(moteur,ihm), "Select");
+        ihm.addCommand(new CommandeSupprimerTexteDroite(moteur), "DeleteRight");
+        ihm.addCommand(new CommandeSupprimerTexteGauche(moteur), "DeleteLeft");
     }
 }

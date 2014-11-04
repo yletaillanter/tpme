@@ -9,6 +9,8 @@ public interface MoteurEdition {
     public void couper();
     public void inserer(String txt,boolean retourChariot);
     public void selectionner(int dot, int mark);
+    public void supprimerDroite();
+    public void supprimerGauche();
     //public PressePapier getPressePapier();
     //public Selection getSelectionImpl();
     public BufferImpl getBuffer();

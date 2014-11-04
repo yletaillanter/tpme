@@ -61,10 +61,27 @@ public class MoteurEditionImpl implements MoteurEdition {
             selection.setDebut(dot);
             selection.setFin(mark);
         }
+    }
+
+    @Override
+    public void supprimerDroite(){
+        buffer.deleteContent(selection.getDebut(),selection.getFin());
+
+        //buffer.deleteContent(selection)
+        //logger.log(Level.INFO,"supprimerDroite");
+    }
+
+    @Override
+    public void supprimerGauche(){
+        buffer.deleteContent(selection.getDebut(),selection.getFin());
+
+        //buffer.deleteContent(selection.getDebut()-1,selection.getDebut());
+        //logger.log(Level.INFO,"supprimerGauche");
+    }
 
         //logger.log(Level.INFO,""+dot);
         //logger.log(Level.INFO,""+mark);
-    }
+
 /* inutile
     @Override
     public PressePapier getPressePapier() {

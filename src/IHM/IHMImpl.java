@@ -25,7 +25,7 @@ public class IHMImpl<T> extends JFrame implements IHM, Observer<T> {
 
     Logger logger = Logger.getLogger("tpme.IHM.IHMImpl");
     private HashMap<String, Commande> commands;
-    private Button copyButton, pasteButton, cutButton, insertButton;
+    private Button copyButton, pasteButton, cutButton, insertButton, deleteRight, deleteLeft;
     private JTextField userInput;
     private int dot;
     private int mark;
@@ -141,24 +141,29 @@ public class IHMImpl<T> extends JFrame implements IHM, Observer<T> {
 
         //Ajout des boutons
         JPanel buttonPanel = new JPanel();
-        buttonPanel.setLayout(new GridLayout(0, 5));
+        buttonPanel.setLayout(new GridLayout(0, 7));
         copyButton = new Button("Copy");
         pasteButton = new Button("Paste");
         cutButton = new Button("Cut");
         insertButton = new Button("Insert");
+        deleteRight = new Button("deleteRight");
+        deleteLeft = new Button("deleteLeft");
         retourChariot = new JCheckBox("retour à la ligne");
         buttonPanel.add(copyButton);
         buttonPanel.add(pasteButton);
         buttonPanel.add(cutButton);
         buttonPanel.add(insertButton);
+        buttonPanel.add(deleteLeft);
+        buttonPanel.add(deleteRight);
         buttonPanel.add(retourChariot);
         userPanel.add(buttonPanel,BorderLayout.NORTH);
         setButtonAction();
 
         // zone de texte
         userInput = new JTextField();
+        userInput.setBackground(Color.WHITE);
         userPanel.add(userInput,BorderLayout.CENTER);
-        userInput = new JTextField();
+
         userInput.addKeyListener(new KeyListener() {
             @Override
             public void keyTyped(KeyEvent e) {}
@@ -172,7 +177,6 @@ public class IHMImpl<T> extends JFrame implements IHM, Observer<T> {
             @Override
             public void keyReleased(KeyEvent e) {}
            });
-        userPanel.add(userInput);
 
         return mainPanel;
     }
@@ -205,6 +209,24 @@ public class IHMImpl<T> extends JFrame implements IHM, Observer<T> {
             @Override
             public void actionPerformed(ActionEvent e) {
                 commands.get("Cut").execute();
+            }
+        });
+        popup.add(menuItem);
+
+        menuItem = new JMenuItem("DeleteRight");
+        menuItem.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                commands.get("DeleteRight").execute();
+            }
+        });
+        popup.add(menuItem);
+
+        menuItem = new JMenuItem("DeleteLeft");
+        menuItem.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                commands.get("DeleteLeft").execute();
             }
         });
         popup.add(menuItem);
@@ -242,6 +264,22 @@ public class IHMImpl<T> extends JFrame implements IHM, Observer<T> {
                 commands.get("Insert").execute();
                 userInput.setText("");
                 //logger.log(Level.INFO, "Insert clicked");
+            }
+        });
+
+        deleteLeft.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                commands.get("DeleteLeft").execute();
+                //logger.log(Level.INFO, "Cut clicked");
+            }
+        });
+
+        deleteRight.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                commands.get("DeleteRight").execute();
+                //logger.log(Level.INFO, "Cut clicked");
             }
         });
 
