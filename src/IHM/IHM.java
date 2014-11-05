@@ -2,6 +2,8 @@ package IHM;
 
 import commandes.Commande;
 
+import java.util.HashMap;
+
 /**
  * Created by Yoann Le Taillanter on 22/10/2014.
  */

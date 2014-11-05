@@ -17,6 +17,7 @@ import commandes.*;
 import javax.swing.*;
 import javax.swing.event.CaretEvent;
 import javax.swing.event.CaretListener;
+import javax.swing.text.Caret;
 
 /**
  * Created by Yoann Le Taillanter on 22/10/2014.
@@ -29,9 +30,9 @@ public class IHMImpl<T> extends JFrame implements IHM, Observer<T> {
     private JTextField userInput;
     private int dot;
     private int mark;
-    private JTextArea bufferDisplay;
-    private JPopupMenu popup;
-    private JMenuItem menuItem;
+    private BufferDisplay bufferDisplay;
+
+
     private JCheckBox retourChariot;
     private boolean retourChariotChecked = false;
 
@@ -67,69 +68,7 @@ public class IHMImpl<T> extends JFrame implements IHM, Observer<T> {
         mainPanel.setLayout(new BorderLayout(0,0));
 
         //Upper part
-        bufferDisplay = new JTextArea();
-        bufferDisplay.setEditable(false);
-        bufferDisplay.setRows(15);
-        bufferDisplay.setBackground(Color.LIGHT_GRAY);
 
-        bufferDisplay.getCaret().setVisible(true);
-        bufferDisplay.getCaret().setSelectionVisible(true);
-
-        bufferDisplay.addCaretListener(new CaretListener() {
-            @Override
-            public void caretUpdate(CaretEvent e) {
-                setDot(e.getDot());
-                setMark(e.getMark());
-                commands.get("Select").execute();
-            }
-        });
-
-        bufferDisplay.addFocusListener(new FocusListener() {
-            @Override
-            public void focusGained(FocusEvent e) {
-                bufferDisplay.getCaret().setVisible(true);
-                //logger.log(Level.INFO,"focus");
-            }
-
-            @Override
-            public void focusLost(FocusEvent e) {
-
-            }
-        });
-
-        bufferDisplay.addMouseListener(new MouseListener() {
-            @Override
-            public void mouseClicked(MouseEvent e) {
-
-            }
-
-            @Override
-            public void mousePressed(MouseEvent e) {
-                maybeShowPopup(e);
-            }
-
-            @Override
-            public void mouseReleased(MouseEvent e) {
-                maybeShowPopup(e);
-            }
-
-            @Override
-            public void mouseEntered(MouseEvent e) {
-
-            }
-
-            @Override
-            public void mouseExited(MouseEvent e) {
-
-            }
-
-            private void maybeShowPopup(MouseEvent e) {
-                if (e.isPopupTrigger()) {
-                    popup.show(e.getComponent(),
-                            e.getX(), e.getY());
-                }
-            }
-        });
 
         mainPanel.add(bufferDisplay, BorderLayout.NORTH);
 
@@ -181,56 +120,7 @@ public class IHMImpl<T> extends JFrame implements IHM, Observer<T> {
         return mainPanel;
     }
 
-    public void createPopupMenu(){
-        // #########################TEST JPOPUP ####################
 
-        //Create the popup menu.
-        popup = new JPopupMenu();
-        menuItem = new JMenuItem("Copy");
-        menuItem.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                commands.get("Copy").execute();
-            }
-        });
-        popup.add(menuItem);
-
-        menuItem = new JMenuItem("Paste");
-        menuItem.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                commands.get("Paste").execute();
-            }
-        });
-        popup.add(menuItem);
-
-        menuItem = new JMenuItem("Cut");
-        menuItem.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                commands.get("Cut").execute();
-            }
-        });
-        popup.add(menuItem);
-
-        menuItem = new JMenuItem("DeleteRight");
-        menuItem.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                commands.get("DeleteRight").execute();
-            }
-        });
-        popup.add(menuItem);
-
-        menuItem = new JMenuItem("DeleteLeft");
-        menuItem.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                commands.get("DeleteLeft").execute();
-            }
-        });
-        popup.add(menuItem);
-    }
 
     public void setButtonAction(){
 
@@ -279,6 +169,8 @@ public class IHMImpl<T> extends JFrame implements IHM, Observer<T> {
             @Override
             public void actionPerformed(ActionEvent e) {
                 commands.get("DeleteRight").execute();
+                // fait réapparaitre le curseur
+                //bufferDisplay.getCaret().setVisible(true);
                 //logger.log(Level.INFO, "Cut clicked");
             }
         });
@@ -324,8 +216,9 @@ public class IHMImpl<T> extends JFrame implements IHM, Observer<T> {
 
     @Override
     public void doUpdate(Subject<T> s) {
-        if(s instanceof BufferImpl){
+        if (s instanceof BufferImpl) {
             bufferDisplay.setText(((BufferImpl) s).getContent());
         }
     }
+
 }
