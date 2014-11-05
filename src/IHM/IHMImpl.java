@@ -58,7 +58,6 @@ public class IHMImpl<T> extends JFrame implements IHM, Observer<T> {
         setResizable(true);
         setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
         setContentPane(buildContentPane());
-        createPopupMenu();
         setVisible(true);
     }
 
@@ -68,7 +67,7 @@ public class IHMImpl<T> extends JFrame implements IHM, Observer<T> {
         mainPanel.setLayout(new BorderLayout(0,0));
 
         //Upper part
-
+        bufferDisplay = new BufferDisplay(this,this.commands);
 
         mainPanel.add(bufferDisplay, BorderLayout.NORTH);
 

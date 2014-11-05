@@ -109,7 +109,6 @@
                     commands.get("DeleteLeft").execute();
             }
 
-
             @Override
             public void keyReleased(KeyEvent e) {
             }
