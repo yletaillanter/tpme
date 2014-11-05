@@ -20,6 +20,6 @@ public class CommandeSelectionnerTexte implements Commande {
 
     public void execute() {
         moteur.selectionner(ihm.getDot(),ihm.getMark());
-        logger.log(Level.INFO,"CommandeSelectionnerTexte: Execute()");
+        //logger.log(Level.INFO,"CommandeSelectionnerTexte: Execute()");
     }
 }

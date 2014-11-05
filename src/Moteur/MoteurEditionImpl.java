@@ -65,23 +65,28 @@ public class MoteurEditionImpl implements MoteurEdition {
 
     @Override
     public void supprimerDroite() {
+        int test = selection.getDebut();
             if (selection.getDebut() == selection.getFin())
                 buffer.deleteContent(selection.getDebut(), selection.getFin() + 1);
             else
                 buffer.deleteContent(selection.getDebut(), selection.getFin());
-            //logger.log(Level.INFO,"supprimerDroite");
+        selection.setDebut(test);
+        //logger.log(Level.INFO,"supprimerDroite");
     }
 
     @Override
     public void supprimerGauche() {
+        int test = selection.getDebut() - 1;
         if (selection.getDebut() > 0 || selection.getFin() > selection.getDebut()) {
             if (selection.getDebut() == selection.getFin())
                 buffer.deleteContent(selection.getDebut() - 1, selection.getFin());
             else
                 buffer.deleteContent(selection.getDebut(), selection.getFin());
-            logger.log(Level.INFO,"supprimerGauche");
+        selection.setDebut(test); selection.setFin(test);
+        //logger.log(Level.INFO,"supprimerGauche");
+        //logger.log(Level.INFO,"début: "+selection.getDebut());
+        //logger.log(Level.INFO,"fin: "+selection.getFin()+"");
         }
-
     }
         //logger.log(Level.INFO,""+dot);
         //logger.log(Level.INFO,""+mark);

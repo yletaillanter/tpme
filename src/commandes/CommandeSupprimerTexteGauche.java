@@ -18,6 +18,6 @@ public class CommandeSupprimerTexteGauche implements Commande {
 
     public void execute (){
         moteur.supprimerGauche();
-        logger.log(Level.INFO,"CommandeSupprimerTexteGauche: Execute()");
+        //logger.log(Level.INFO,"CommandeSupprimerTexteGauche: Execute()");
     }
 }

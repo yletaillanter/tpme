@@ -18,6 +18,6 @@ public class CommandeCopierTexte implements Commande {
 
     public void execute (){
         moteur.copier();
-        logger.log(Level.INFO,"CommandeCopierTexte: Execute()");
+        //logger.log(Level.INFO,"CommandeCopierTexte: Execute()");
     }
 }

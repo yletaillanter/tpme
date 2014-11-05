@@ -18,6 +18,6 @@ public class CommandeCouperTexte implements Commande {
 
     public void execute (){
         moteur.couper();
-        logger.log(Level.INFO,"CommandeCouperTexte: Execute()");
+        //logger.log(Level.INFO,"CommandeCouperTexte: Execute()");
     }
 }

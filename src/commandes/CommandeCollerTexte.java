@@ -18,6 +18,6 @@ public class CommandeCollerTexte implements Commande {
 
     public void execute() {
         moteur.coller();
-        logger.log(Level.INFO,"CommandeCollerTexte: Execute()");
+        //logger.log(Level.INFO,"CommandeCollerTexte: Execute()");
     }
 }

@@ -18,6 +18,6 @@ public class CommandeSupprimerTexteDroite implements Commande {
 
     public void execute (){
         moteur.supprimerDroite();
-        logger.log(Level.INFO,"CommandeSupprimerTexteDroite: Execute()");
+        //logger.log(Level.INFO,"CommandeSupprimerTexteDroite: Execute()");
     }
 }

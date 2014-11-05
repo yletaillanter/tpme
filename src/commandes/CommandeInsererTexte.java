@@ -20,6 +20,6 @@ public class CommandeInsererTexte implements Commande {
 
     public void execute(){
         moteur.inserer(ihm.getInputUser(),ihm.retourChariotIsChecked());
-        logger.log(Level.INFO,"CommandeInsererTexte: Execute()");
+        //logger.log(Level.INFO,"CommandeInsererTexte: Execute()");
     }
 }
