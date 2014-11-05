@@ -1,7 +1,6 @@
 package IHM;
 
 import Moteur.BufferImpl;
-import Moteur.Buffer;
 import Observer.*;
 
 import java.awt.*;
@@ -31,8 +30,6 @@ public class IHMImpl<T> extends JFrame implements IHM, Observer<T> {
     private int dot;
     private int mark;
     private BufferDisplay bufferDisplay;
-
-
     private JCheckBox retourChariot;
     private boolean retourChariotChecked = false;
 
@@ -43,13 +40,6 @@ public class IHMImpl<T> extends JFrame implements IHM, Observer<T> {
         commands = new HashMap<String, Commande>(); // error diamond types are not supported ...
         build();
     }
-
-    /*
-    public IHMImpl(HashMap<String, Commande> commands){
-        this.commands = commands;
-        build();
-    }
-    */
 
     private void build(){
         setTitle("Mini-Editeur");
@@ -68,7 +58,6 @@ public class IHMImpl<T> extends JFrame implements IHM, Observer<T> {
 
         //Upper part
         bufferDisplay = new BufferDisplay(this,this.commands);
-
         mainPanel.add(bufferDisplay, BorderLayout.NORTH);
 
         //Bottom part
@@ -95,6 +84,7 @@ public class IHMImpl<T> extends JFrame implements IHM, Observer<T> {
         buttonPanel.add(deleteRight);
         buttonPanel.add(retourChariot);
         userPanel.add(buttonPanel,BorderLayout.NORTH);
+
         setButtonAction();
 
         // zone de texte
@@ -120,59 +110,17 @@ public class IHMImpl<T> extends JFrame implements IHM, Observer<T> {
     }
 
 
-
+    /**
+     * Definit les actions propres aux boutons + la checkBox.
+     */
     public void setButtonAction(){
 
-        copyButton.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                commands.get("Copy").execute();
-                //logger.log(Level.INFO, "Copy clicked");
-            }
-        });
-
-        pasteButton.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                commands.get("Paste").execute();
-                //logger.log(Level.INFO, "Paste clicked");
-            }
-        });
-
-        cutButton.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                commands.get("Cut").execute();
-                //logger.log(Level.INFO, "Cut clicked");
-            }
-        });
-
-        insertButton.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                commands.get("Insert").execute();
-                userInput.setText("");
-                //logger.log(Level.INFO, "Insert clicked");
-            }
-        });
-
-        deleteLeft.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                commands.get("DeleteLeft").execute();
-                //logger.log(Level.INFO, "Cut clicked");
-            }
-        });
-
-        deleteRight.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                commands.get("DeleteRight").execute();
-                // fait réapparaitre le curseur
-                //bufferDisplay.getCaret().setVisible(true);
-                //logger.log(Level.INFO, "Cut clicked");
-            }
-        });
+        copyButton.addActionListener(new ButtonAction("Copy", this.commands));
+        pasteButton.addActionListener(new ButtonAction("Paste", this.commands));
+        cutButton.addActionListener(new ButtonAction("Cut", this.commands));
+        insertButton.addActionListener(new ButtonAction("Insert", this.commands));
+        deleteLeft.addActionListener(new ButtonAction("DeleteLeft", this.commands));
+        deleteRight.addActionListener(new ButtonAction("DeleteRight", this.commands));
 
         retourChariot.addItemListener(new ItemListener() {
             @Override
@@ -181,6 +129,8 @@ public class IHMImpl<T> extends JFrame implements IHM, Observer<T> {
             }
         });
     }
+
+    // ################ GETTER AND SETTER #########################
 
     public String getInputUser(){
         return userInput.getText();

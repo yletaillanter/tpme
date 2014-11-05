@@ -11,7 +11,7 @@
 
 
     /**
-     * Created by 14007686 on 05/11/2014.
+     * Created by Baptiste Quéré on 05/11/2014.
      */
     public class BufferDisplay extends JTextArea {
 
@@ -115,7 +115,7 @@
             });
 
         }
-        public void createPopupMenu(){
+        private void createPopupMenu(){
 
             //Create the popup menu.
             popup = new JPopupMenu();
