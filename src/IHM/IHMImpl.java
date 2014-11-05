@@ -2,21 +2,15 @@ package IHM;
 
 import Moteur.BufferImpl;
 import Observer.*;
+import commandes.*;
 
 import java.awt.*;
 import java.awt.event.*;
+import javax.swing.*;
 
 import java.util.HashMap;
 import java.util.logging.Level;
 import java.util.logging.Logger;
-
-import Observer.Observer;
-import commandes.*;
-
-import javax.swing.*;
-import javax.swing.event.CaretEvent;
-import javax.swing.event.CaretListener;
-import javax.swing.text.Caret;
 
 /**
  * Created by Yoann Le Taillanter on 22/10/2014.
@@ -146,7 +140,6 @@ public class IHMImpl<T> extends JFrame implements IHM, Observer<T> {
 
     public void setDot(int dot) {
         this.dot = dot;
-        //logger.log(Level.INFO,"dot:"+dot);
     }
 
     public int getMark() {
@@ -154,12 +147,10 @@ public class IHMImpl<T> extends JFrame implements IHM, Observer<T> {
     }
 
     public void setMark(int mark) {
-        //logger.log(Level.INFO,"mark:"+mark);
         this.mark = mark;
     }
 
     public boolean retourChariotIsChecked(){
-       logger.log(Level.INFO,"retour Chariot state: "+retourChariotChecked);
        return retourChariotChecked;
     }
 
@@ -169,5 +160,4 @@ public class IHMImpl<T> extends JFrame implements IHM, Observer<T> {
             bufferDisplay.setText(((BufferImpl) s).getContent());
         }
     }
-
 }
