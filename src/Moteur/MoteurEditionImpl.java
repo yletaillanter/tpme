@@ -67,7 +67,8 @@ public class MoteurEditionImpl implements MoteurEdition {
     public void supprimerDroite() {
             if (selection.getDebut() == selection.getFin())
                 buffer.deleteContent(selection.getDebut(), selection.getFin() + 1);
-            buffer.deleteContent(selection.getDebut(), selection.getFin());
+            else
+                buffer.deleteContent(selection.getDebut(), selection.getFin());
             //logger.log(Level.INFO,"supprimerDroite");
     }
 
@@ -76,9 +77,11 @@ public class MoteurEditionImpl implements MoteurEdition {
         if (selection.getDebut() > 0 || selection.getFin() > selection.getDebut()) {
             if (selection.getDebut() == selection.getFin())
                 buffer.deleteContent(selection.getDebut() - 1, selection.getFin());
-            buffer.deleteContent(selection.getDebut(), selection.getFin());
-            //logger.log(Level.INFO,"supprimerGauche");
+            else
+                buffer.deleteContent(selection.getDebut(), selection.getFin());
+            logger.log(Level.INFO,"supprimerGauche");
         }
+
     }
         //logger.log(Level.INFO,""+dot);
         //logger.log(Level.INFO,""+mark);
