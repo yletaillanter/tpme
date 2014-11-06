@@ -11,12 +11,29 @@ import java.util.List;
  */
 public class BufferImpl<T> implements Buffer, Subject<T> {
 
+    /**
+     * Contient la liste des Observers du BufferImpl.
+     *
+     * @see Observer
+     */
     private ArrayList<Observer<T>> registeredObservers;
+
+    /**
+     * bufferImpl static pour le singleton.
+     *
+     * @see Moteur.Buffer
+     */
     private static BufferImpl buffer;
+
+    /**
+     * StringBuilder, le vrai buffer.
+     */
     private StringBuilder innerBuffer;
 
     /**
-     * Private Constructor
+     * Constructeur privé du bufferImpl.
+     *
+     * Le StringBuilder et l'ArrayList d'Observer sont instanciés.     *
      */
     private BufferImpl(){
         innerBuffer = new StringBuilder();
@@ -24,7 +41,7 @@ public class BufferImpl<T> implements Buffer, Subject<T> {
     }
 
     /**
-     * Create an instance of BufferImpl
+     * Retourne l'instance de bufferImpl, la créer si elle n'existe pas.
      * @return instance of BufferImpl
      */
     public static BufferImpl getBufferInstance(){
@@ -34,26 +51,31 @@ public class BufferImpl<T> implements Buffer, Subject<T> {
     }
 
     /**
+     * Permet de récupérer le contenu du buffer
      *
-     * @return the whole buffer
+     * @return le contenu du buffer
      */
     public String getContent(){
         return innerBuffer.toString();
     }
 
+
     /**
+     * Permet de récupérer le contenu du buffer situé entre debut et fin.
      *
      * @param deb
      * @param fin
-     * @return String from buffer between 'deb' and 'fin'
+     * @return le contenu du buffer entre debut et fin.
      */
     public String getContentAt(int deb, int fin){
             return innerBuffer.substring(deb, fin);
     }
 
     /**
-     * Add 'txt' to the buffer
+     * Permet d'ajouter une chaine de caractère au buffer
+     *
      * @param txt
+     *      String à ajouter au buffer
      */
     public void addContent(String txt){
         innerBuffer.append(txt);
@@ -63,9 +85,11 @@ public class BufferImpl<T> implements Buffer, Subject<T> {
     }
 
     /**
-     * Add 'txt' to the buffer at 'position'
+     * Permet d'ajouter une chaine de caractère au buffer, à une position précise
      * @param txt
+     *      String à ajouter au buffer
      * @param position
+     *      Position à laquelle le String est inséré.
      */
     public void addContentAtPosition(String txt, int position){
         innerBuffer.insert(position,txt);
@@ -75,6 +99,14 @@ public class BufferImpl<T> implements Buffer, Subject<T> {
         }
     }
 
+    /**
+     * Permet de supprimer le contenu du buffer entre debut et fin
+     *
+     * @param deb
+     *      Début de la séléction
+     * @param fin
+     *      Fin de la séléction
+     */
     public void deleteContent(int deb,int fin){
         innerBuffer.delete(deb,fin);
         for (Observer<T> o : registeredObservers) {
@@ -82,6 +114,11 @@ public class BufferImpl<T> implements Buffer, Subject<T> {
         }
     }
 
+    /**
+     * Permet d'obtenir la taille du buffer.
+     *
+     * @return taille du buffer
+     */
     @Override
     public int getLength() {
         return innerBuffer.capacity();

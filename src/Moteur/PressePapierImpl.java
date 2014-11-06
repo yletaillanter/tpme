@@ -5,16 +5,26 @@ package Moteur;
  */
 public class PressePapierImpl implements PressePapier {
 
+
+    /**
+     * bufferImpl static pour le singleton.
+     *
+     * @see Moteur.Buffer
+     */
     private static PressePapier pp;
+
+    /**
+     * La chaine de caractère du presse-papier
+     */
     private String pressePapier;
 
     /**
-     * Private Constructor
+     * Constructeur privé du PressePapierImpl.
      */
     private PressePapierImpl(){}
 
     /**
-     * Create an instance of PressePapier
+     * Retourne l'instance de PressePapier, la créer si elle n'existe pas.     *
      * @return instance of PressePapier
      */
     public static PressePapier getPressePapierInstance(){
@@ -24,7 +34,7 @@ public class PressePapierImpl implements PressePapier {
     }
 
     /**
-     * Set content to pressePapier
+     * Permet de définir le contenu du presse-papier.
      * @param content
      */
     @Override
@@ -33,8 +43,8 @@ public class PressePapierImpl implements PressePapier {
     }
 
     /**
-     * get the content of the pressePapier
-     * @return String
+     * Permet de récupérer le contenu du presse-papier.
+     * @return contenu du presse-papier
      */
     @Override
     public String getPressePapierContent(){
