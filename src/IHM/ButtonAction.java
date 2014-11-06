@@ -11,14 +11,35 @@ import java.util.HashMap;
  */
 public class ButtonAction implements ActionListener {
 
+    /**
+     * HashMap de Commandes et de leur nom
+     */
     private HashMap<String, Commande> commands;
+
+    /**
+     * Nom de la commande
+     */
     private String commandName;
 
+    /**
+     * Constructeur du ButtonAction
+     *
+     * @param commandName
+     *      Le nom de la commande sur laquelle l'actionListener sera créé
+     * @param commands
+     *      La HashMap de commandes
+     */
     public ButtonAction(String commandName, HashMap commands){
         this.commandName = commandName;
         this.commands = commands;
     }
 
+    /**
+     * Appel de l'execute de la commande
+     * @param e
+     *
+     * @see commandes.Commande#execute()
+     */
     @Override
     public void actionPerformed(ActionEvent e) {
         commands.get(this.commandName).execute();

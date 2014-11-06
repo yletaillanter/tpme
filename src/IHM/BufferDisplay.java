@@ -15,10 +15,27 @@
      */
     public class BufferDisplay extends JTextPane {
 
+        /**
+         * L'ihm du mini-éditeur
+         * Référence vers l'ihm
+         */
         private IHMImpl ihmAssocie;
+
+        /**
+         * La Hashmap de commandes/nom
+         */
         private HashMap<String, Commande> commands;
+
+        /**
+         * JPopupMenu pour le clic droit
+         */
         private JPopupMenu popup;
+
+        /**
+         * JMenuItem pour le JPopupMenu du clic droit
+         */
         private JMenuItem menuItem;
+
 
         public BufferDisplay(IHMImpl ihm, HashMap commands){
             ihmAssocie = ihm;
