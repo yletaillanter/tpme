@@ -13,7 +13,7 @@
     /**
      * Created by Baptiste Quéré on 05/11/2014.
      */
-    public class BufferDisplay extends JTextArea {
+    public class BufferDisplay extends JTextPane {
 
         private IHMImpl ihmAssocie;
         private HashMap<String, Commande> commands;
@@ -24,7 +24,6 @@
             ihmAssocie = ihm;
             this.commands = commands;
             setEditable(false);
-            setRows(15);
             setBackground(Color.LIGHT_GRAY);
             getCaret().setVisible(true);
             getCaret().setSelectionVisible(true);

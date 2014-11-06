@@ -7,6 +7,7 @@ import commandes.*;
 import java.awt.*;
 import java.awt.event.*;
 import javax.swing.*;
+import javax.swing.border.Border;
 
 import java.util.HashMap;
 import java.util.logging.Level;
@@ -21,6 +22,7 @@ public class IHMImpl<T> extends JFrame implements IHM, Observer<T> {
     private HashMap<String, Commande> commands;
     private Button copyButton, pasteButton, cutButton, insertButton, deleteRight, deleteLeft;
     private JTextField userInput;
+    private JEditorPane informationLine;
     private int dot;
     private int mark;
     private BufferDisplay bufferDisplay;
@@ -37,9 +39,9 @@ public class IHMImpl<T> extends JFrame implements IHM, Observer<T> {
 
     private void build(){
         setTitle("Mini-Editeur");
-        setSize(600, 600);
+        setSize(800, 600);
         setLocationRelativeTo(null);
-        setResizable(true);
+        setResizable(false);
         setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
         setContentPane(buildContentPane());
         setVisible(true);
@@ -48,21 +50,18 @@ public class IHMImpl<T> extends JFrame implements IHM, Observer<T> {
     private JPanel buildContentPane(){
         JPanel mainPanel = new JPanel();
         mainPanel.setBackground(Color.white);
-        mainPanel.setLayout(new BorderLayout(0,0));
+        mainPanel.setLayout(new BorderLayout());
 
         //Upper part
         bufferDisplay = new BufferDisplay(this,this.commands);
-        mainPanel.add(bufferDisplay, BorderLayout.NORTH);
 
-        //Bottom part
-        JPanel userPanel = new JPanel();
-        userPanel.setBackground(Color.white);
-        userPanel.setLayout(new BorderLayout());
-        mainPanel.add(userPanel, BorderLayout.CENTER);
+        JPanel UpperPanel = new JPanel();
+        UpperPanel.setLayout(new BorderLayout());
+        mainPanel.add(UpperPanel, BorderLayout.CENTER);
+
 
         //Ajout des boutons
-        JPanel buttonPanel = new JPanel();
-        buttonPanel.setLayout(new GridLayout(0, 7));
+        JToolBar buttonToolbar = new JToolBar();
         copyButton = new Button("Copy");
         pasteButton = new Button("Paste");
         cutButton = new Button("Cut");
@@ -70,21 +69,35 @@ public class IHMImpl<T> extends JFrame implements IHM, Observer<T> {
         deleteRight = new Button("deleteRight");
         deleteLeft = new Button("deleteLeft");
         retourChariot = new JCheckBox("retour à la ligne");
-        buttonPanel.add(copyButton);
-        buttonPanel.add(pasteButton);
-        buttonPanel.add(cutButton);
-        buttonPanel.add(insertButton);
-        buttonPanel.add(deleteLeft);
-        buttonPanel.add(deleteRight);
-        buttonPanel.add(retourChariot);
-        userPanel.add(buttonPanel,BorderLayout.NORTH);
+        buttonToolbar.add(copyButton);
+        buttonToolbar.add(pasteButton);
+        buttonToolbar.add(cutButton);
+        buttonToolbar.add(insertButton);
+        buttonToolbar.add(deleteLeft);
+        buttonToolbar.add(deleteRight);
+        buttonToolbar.add(retourChariot);
+
+        UpperPanel.add(buttonToolbar,BorderLayout.NORTH);
+        UpperPanel.add(bufferDisplay,BorderLayout.CENTER);
 
         setButtonAction();
+
+        //Bottom part
+        JPanel bottomPanel = new JPanel();
+        bottomPanel.setLayout(new GridLayout(2, 0));
 
         // zone de texte
         userInput = new JTextField();
         userInput.setBackground(Color.WHITE);
-        userPanel.add(userInput,BorderLayout.CENTER);
+
+        informationLine = new JEditorPane();
+        informationLine.setEditable(false);
+        informationLine.setBackground(Color.LIGHT_GRAY);
+
+        bottomPanel.add(userInput);
+        bottomPanel.add(informationLine);
+
+        mainPanel.add(bottomPanel,BorderLayout.SOUTH);
 
         userInput.addKeyListener(new KeyListener() {
             @Override
