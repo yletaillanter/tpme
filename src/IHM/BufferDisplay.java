@@ -36,81 +36,113 @@
          */
         private JMenuItem menuItem;
 
-
+        /**
+         * Constructeur de BufferDisplay
+         *
+         * <ul>
+         *     <li>initialise l'ihm et la HashMap</li>
+         *     <li>rend la fenêtre non éditable</li>
+         *     <li>définit la couleur du BG</li>
+         *     <li>rend le curseur visible</li>
+         *     <li>appel de la méthode implementListener()</li>
+         *     <li>appel de la méthode createPopupMenu()</li>
+         * </ul>
+         *
+         * @param ihm
+         *      ihm du mini-éditeur
+         * @param commands
+         *      hashmap de commandes
+         *
+         * @see #implementListener()
+         * @see #createPopupMenu()
+         */
         public BufferDisplay(IHMImpl ihm, HashMap commands){
             ihmAssocie = ihm;
             this.commands = commands;
             setEditable(false);
             setBackground(Color.LIGHT_GRAY);
             getCaret().setVisible(true);
-            getCaret().setSelectionVisible(true);
+            //getCaret().setSelectionVisible(true);
 
             implementListener();
             createPopupMenu();
         }
 
 
+        /**
+         * Définit les différents Listener présent sur le bufferDisplay
+         */
         private void implementListener(){
 
-        // #################### CARET LISTENER #################### //
+                /**
+                 * Met à jour la selection à chaque utilisation du Caret (Curseur)
+                 *
+                 * @see IHM#setDot(int)
+                 * @see IHM#setMark(int)
+                 */
             addCaretListener(new CaretListener() {
-            @Override
-            public void caretUpdate(CaretEvent e) {
-                ihmAssocie.setDot(e.getDot());
-                ihmAssocie.setMark(e.getMark());
-                commands.get("Select").execute();
-            }
+                @Override
+                public void caretUpdate(CaretEvent e) {
+                    ihmAssocie.setDot(e.getDot());
+                    ihmAssocie.setMark(e.getMark());
+                    commands.get("Select").execute();
+                }
             });
-        // #################### FOCUS LISTENER #################### //
+
+                /**
+                 * FocusListener qui fait réapparaitre le curseur lorsque le bufferDisplay récupère le focus
+                 */
             addFocusListener(new FocusListener() {
-            @Override
-            public void focusGained(FocusEvent e) {
-                getCaret().setVisible(true);
-                //logger.log(Level.INFO,"focus");
-            }
+                @Override
+                public void focusGained(FocusEvent e) {
+                    getCaret().setVisible(true);
+                    //logger.log(Level.INFO,"focus");
+                }
 
-            @Override
-            public void focusLost(FocusEvent e) {
+                @Override
+                public void focusLost(FocusEvent e) {
 
-            }
-                });
+                }
+                    });
 
-        // #################### MOUSE LISTENER #################### //
+
             addMouseListener(new MouseAdapter() {
-            @Override
-            public void mouseClicked(MouseEvent e) {
+                @Override
+                public void mouseClicked(MouseEvent e) {
+
+                }
+
+                @Override
+                public void mousePressed(MouseEvent e) {
+                    maybeShowPopup(e);
+                }
+
+                @Override
+                public void mouseReleased(MouseEvent e) {
+                    maybeShowPopup(e);
+                }
+
+                @Override
+                public void mouseEntered(MouseEvent e) {
+
+                }
+
+                @Override
+                public void mouseExited(MouseEvent e) {
 
             }
 
-            @Override
-            public void mousePressed(MouseEvent e) {
-                maybeShowPopup(e);
-            }
+                private void maybeShowPopup(MouseEvent e) {
+                    if (e.isPopupTrigger()) {
+                        popup.show(e.getComponent(),
+                                e.getX(), e.getY());
+                    }
+                }
+            });
 
-            @Override
-            public void mouseReleased(MouseEvent e) {
-                maybeShowPopup(e);
-            }
-
-            @Override
-            public void mouseEntered(MouseEvent e) {
-
-            }
-
-            @Override
-            public void mouseExited(MouseEvent e) {
-
-            }
-
-        private void maybeShowPopup(MouseEvent e) {
-            if (e.isPopupTrigger()) {
-                popup.show(e.getComponent(),
-                        e.getX(), e.getY());
-            }
-        }
-    });
-
-    // #################### KEY LISTENER #################### //
+            /**
+             * Detecte les touches appuyés sur le BufferDisplay
+             */
         addKeyListener(new KeyListener() {
             @Override
             public void keyTyped(KeyEvent e) {
@@ -118,9 +150,11 @@
 
             @Override
             public void keyPressed(KeyEvent e) {
+                // touche del appel supprimerDroite
                 if(e.getKeyChar() == Event.DELETE)
                     commands.get("DeleteRight").execute();
 
+                // Touche backspace appel supprimergauche
                 if (e.getKeyChar() == Event.BACK_SPACE)
                     commands.get("DeleteLeft").execute();
             }
@@ -131,11 +165,16 @@
             });
 
         }
+
+        /**
+         * Créer le menu JPopupMenu du clic droit
+         */
         private void createPopupMenu(){
 
-            //Create the popup menu.
             popup = new JPopupMenu();
+            // Ajout l'item copy au popup menu
             menuItem = new JMenuItem("Copy");
+            // Action Listener de l'item = execture la commande
             menuItem.addActionListener(new ActionListener() {
                 @Override
                 public void actionPerformed(ActionEvent e) {
@@ -178,6 +217,7 @@
                     commands.get("DeleteLeft").execute();
                 }
             });
+            //Ajoute le menuItem au JPopupMenu
             popup.add(menuItem);
         }
     }
