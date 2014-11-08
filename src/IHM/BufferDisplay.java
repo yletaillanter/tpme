@@ -143,7 +143,35 @@
             /**
              * Detecte les touches appuyés sur le BufferDisplay
              */
-        addKeyListener(new KeyListener() {
+            addKeyListener(new KeyAdapter() {
+                @Override
+                public void keyPressed(KeyEvent e) {
+                    InputMap inputMap = getInputMap();
+                    ActionMap actionMap = getActionMap();
+                    KeyStroke keyStroke = KeyStroke.getKeyStrokeForEvent(e);
+                    inputMap.put(keyStroke, "doNothing");
+                    actionMap.put("doNothing", new AbstractAction() {
+
+                        @Override
+                        public void actionPerformed(ActionEvent ae) {
+                            //Do Nothing
+                        }
+                    });
+
+                    // touche del appel supprimerDroite
+                    if (e.getKeyChar() == Event.DELETE)
+                        commands.get("DeleteRight").execute();
+
+                    // Touche backspace appel supprimergauche
+                    if (e.getKeyChar() == Event.BACK_SPACE)
+                        commands.get("DeleteLeft").execute();
+                }
+            });
+
+            /**
+             * Detecte les touches appuyés sur le BufferDisplay
+             */
+      /*  addKeyListener(new KeyListener() {
             @Override
             public void keyTyped(KeyEvent e) {
             }
@@ -163,7 +191,7 @@
             public void keyReleased(KeyEvent e) {
             }
             });
-
+*/
         }
 
         /**
