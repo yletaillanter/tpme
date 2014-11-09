@@ -52,5 +52,4 @@ public interface Buffer {
      * @return taille du buffer
      */
     public int getLength();
-
 }

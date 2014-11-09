@@ -7,10 +7,8 @@ import commandes.*;
 import java.awt.*;
 import java.awt.event.*;
 import javax.swing.*;
-import javax.swing.border.Border;
 
 import java.util.HashMap;
-import java.util.logging.Level;
 import java.util.logging.Logger;
 
 /**
@@ -120,8 +118,7 @@ public class IHMImpl<T> extends JFrame implements IHM, Observer<T> {
     /**
      * Definit les actions propres aux boutons + la checkBox.
      */
-    public void setButtonAction(){
-
+    private void setButtonAction(){
         copyButton.addActionListener(new ButtonAction("Copy", this.commands));
         pasteButton.addActionListener(new ButtonAction("Paste", this.commands));
         cutButton.addActionListener(new ButtonAction("Cut", this.commands));

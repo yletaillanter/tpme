@@ -1,5 +1,6 @@
 package Moteur;
 
+import javax.swing.text.Caret;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
@@ -137,7 +138,8 @@ public class MoteurEditionImpl implements MoteurEdition {
                 buffer.deleteContent(selection.getDebut(), selection.getFin() + 1);
             else
                 buffer.deleteContent(selection.getDebut(), selection.getFin());
-        selection.setDebut(test);
+
+        selection.setDebut(test);selection.setFin(test);
         //logger.log(Level.INFO,"supprimerDroite");
     }
 
@@ -157,14 +159,12 @@ public class MoteurEditionImpl implements MoteurEdition {
     public void supprimerGauche() {
         int test = selection.getDebut() - 1;
         if (selection.getDebut() > 0 || selection.getFin() > selection.getDebut()) {
-            if (selection.getDebut() == selection.getFin())
+            if (selection.getDebut() == selection.getFin()){
                 buffer.deleteContent(selection.getDebut() - 1, selection.getFin());
+                selection.setDebut(test); selection.setFin(test);
+            }
             else
                 buffer.deleteContent(selection.getDebut(), selection.getFin());
-        selection.setDebut(test); selection.setFin(test);
-        //logger.log(Level.INFO,"supprimerGauche");
-        //logger.log(Level.INFO,"début: "+selection.getDebut());
-        //logger.log(Level.INFO,"fin: "+selection.getFin()+"");
         }
     }
         //logger.log(Level.INFO,""+dot);

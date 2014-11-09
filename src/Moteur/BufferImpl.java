@@ -4,7 +4,6 @@ import Observer.Observer;
 import Observer.Subject;
 
 import java.util.ArrayList;
-import java.util.List;
 
 /**
  * Created by Yoann Le Taillanter on 22/10/2014.
@@ -79,9 +78,7 @@ public class BufferImpl<T> implements Buffer, Subject<T> {
      */
     public void addContent(String txt){
         innerBuffer.append(txt);
-        for (Observer<T> o : registeredObservers) {
-            o.doUpdate(this);
-        }
+        update();
     }
 
     /**
@@ -93,10 +90,7 @@ public class BufferImpl<T> implements Buffer, Subject<T> {
      */
     public void addContentAtPosition(String txt, int position){
         innerBuffer.insert(position,txt);
-
-        for (Observer<T> o : registeredObservers) {
-            o.doUpdate(this);
-        }
+        update();
     }
 
     /**
@@ -109,9 +103,7 @@ public class BufferImpl<T> implements Buffer, Subject<T> {
      */
     public void deleteContent(int deb,int fin){
         innerBuffer.delete(deb,fin);
-        for (Observer<T> o : registeredObservers) {
-            o.doUpdate(this);
-        }
+        update();
     }
 
     /**
@@ -146,6 +138,12 @@ public class BufferImpl<T> implements Buffer, Subject<T> {
             throw new IllegalArgumentException("o is null");
         }
         return registeredObservers.contains(o);
+    }
+
+    private void update(){
+        for (Observer<T> o : registeredObservers) {
+            o.doUpdate(this);
+        }
     }
 /*
     @Override

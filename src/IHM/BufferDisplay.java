@@ -1,5 +1,6 @@
     package IHM;
 
+    import Moteur.Selection;
     import commandes.Commande;
 
     import javax.swing.*;
@@ -57,12 +58,12 @@
          * @see #createPopupMenu()
          */
         public BufferDisplay(IHMImpl ihm, HashMap commands){
-            ihmAssocie = ihm;
+            this.ihmAssocie = ihm;
             this.commands = commands;
             setEditable(false);
             setBackground(Color.LIGHT_GRAY);
-            getCaret().setVisible(true);
-            //getCaret().setSelectionVisible(true);
+            //getCaret().setVisible(true);
+            getCaret().setSelectionVisible(true);
 
             implementListener();
             createPopupMenu();
@@ -95,13 +96,12 @@
             addFocusListener(new FocusListener() {
                 @Override
                 public void focusGained(FocusEvent e) {
-                    getCaret().setVisible(true);
+                    //getCaret().setVisible(true);
                     //logger.log(Level.INFO,"focus");
                 }
 
                 @Override
                 public void focusLost(FocusEvent e) {
-
                 }
                     });
 
@@ -146,6 +146,7 @@
             addKeyListener(new KeyAdapter() {
                 @Override
                 public void keyPressed(KeyEvent e) {
+                    // Supprime le son système
                     InputMap inputMap = getInputMap();
                     ActionMap actionMap = getActionMap();
                     KeyStroke keyStroke = KeyStroke.getKeyStrokeForEvent(e);
@@ -157,7 +158,6 @@
                             //Do Nothing
                         }
                     });
-
                     // touche del appel supprimerDroite
                     if (e.getKeyChar() == Event.DELETE)
                         commands.get("DeleteRight").execute();
@@ -168,9 +168,7 @@
                 }
             });
 
-            /**
-             * Detecte les touches appuyés sur le BufferDisplay
-             */
+        // ANCIEN KEY LISTENER
       /*  addKeyListener(new KeyListener() {
             @Override
             public void keyTyped(KeyEvent e) {

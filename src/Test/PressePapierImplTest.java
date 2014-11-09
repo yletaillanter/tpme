@@ -1,5 +1,6 @@
 package Test;
 
+import Moteur.PressePapier;
 import Moteur.PressePapierImpl;
 import junit.framework.Assert;
 import org.junit.Before;
@@ -11,16 +12,16 @@ import org.junit.Test;
 @SuppressWarnings( "deprecation" )
 public class PressePapierImplTest {
 
-    PressePapierImpl pp;
+    PressePapier pp;
 
     @Before
     public void setUp() throws Exception {
-    //pp = PressePapierImpl.getPressePapierInstance();
+    pp = PressePapierImpl.getPressePapierInstance();
     }
 
 
     @Test
-    public void testSetPressePapierContent() throws Exception {
+    public void testSetAndGetPressePapierContent() throws Exception {
 
         //Affectation d'un String au presse papier
         pp.setPressePapierContent("Hello world!");
@@ -52,7 +53,4 @@ public class PressePapierImplTest {
         Assert.assertEquals(txt,pp.getPressePapierContent());
     }
 
-    @Test
-    public void testGetPressePapierContent() throws Exception {
-    }
 }

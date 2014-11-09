@@ -4,6 +4,8 @@ import commandes.*;
 import Moteur.MoteurEdition;
 import Moteur.MoteurEditionImpl;
 
+import javax.swing.*;
+
 /**
  * Created by Yoann Le Taillanter on 22/10/2014.
  */

@@ -1,5 +1,7 @@
 package Moteur;
 
+import javax.swing.text.Caret;
+
 /**
  * Created by Yoann Le Taillanter on 22/10/2014.
  */

@@ -3,7 +3,7 @@ package Moteur;
 /**
  * Created by Yoann Le Taillanter on 22/10/2014.
  */
-interface Selection {
+public interface Selection {
 
     /**
      * Permet de récupérer la position de début de la sélection

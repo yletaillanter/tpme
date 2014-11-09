@@ -3,7 +3,7 @@ package Moteur;
 /**
  * Created by Yoann Le Taillanter on 22/10/2014.
  */
-interface PressePapier {
+public interface PressePapier {
     /**
      * Permet de définir le contenu du presse-papier.
      * @param content
