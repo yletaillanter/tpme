@@ -66,8 +66,8 @@ public class MoteurEditionImpl implements MoteurEdition {
     public void inserer(String txt, boolean retourChariot){
         //logger.log(Level.INFO,"Ajout dans buffer: " + txt );
         if(retourChariot) {
-            buffer.addContent(txt);
             buffer.addContent("\n");
+            buffer.addContent(txt);
         }
         else
             buffer.addContent(txt);
@@ -182,4 +182,6 @@ public class MoteurEditionImpl implements MoteurEdition {
         return buffer;
     }
 
+    @Override
+    public PressePapier getPressePapier() { return pp; }
 }

@@ -69,6 +69,6 @@ public interface MoteurEdition {
      */
     public BufferImpl getBuffer();
 
-    //public PressePapier getPressePapier();
+    public PressePapier getPressePapier();
     //public Selection getSelectionImpl();
 }
