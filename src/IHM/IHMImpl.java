@@ -20,6 +20,8 @@ public class IHMImpl<T> extends JFrame implements IHM, Observer<T> {
     private HashMap<String, Commande> commands;
     private Button copyButton, pasteButton, cutButton, insertButton, deleteRight, deleteLeft;
     private JTextField userInput;
+    private JTextField numberOfCharacter;
+    private JTextField cursorPosition;
     private JEditorPane informationLine;
     private int dot;
     private int mark;
@@ -89,8 +91,23 @@ public class IHMImpl<T> extends JFrame implements IHM, Observer<T> {
         userInput.setBackground(Color.WHITE);
 
         informationLine = new JEditorPane();
+        informationLine.setLayout(new GridLayout());
         informationLine.setEditable(false);
         informationLine.setBackground(Color.LIGHT_GRAY);
+
+        numberOfCharacter = new JTextField();
+        numberOfCharacter.setEditable(false);
+        numberOfCharacter.setText("Nombre de Caractère : ");
+        numberOfCharacter.setBackground(Color.LIGHT_GRAY);
+        informationLine.add(numberOfCharacter);
+
+        cursorPosition = new JTextField();
+        cursorPosition.setEditable(false);
+        cursorPosition.setText("Position du Curseur : ");
+        cursorPosition.setBackground(Color.LIGHT_GRAY);
+        informationLine.add(cursorPosition);
+
+
 
         bottomPanel.add(userInput);
         bottomPanel.add(informationLine);
@@ -164,10 +181,19 @@ public class IHMImpl<T> extends JFrame implements IHM, Observer<T> {
        return retourChariotChecked;
     }
 
+    public void setNumberOfCharacter(String infoSelection){
+        numberOfCharacter.setText("Nombre de Caractères : " + infoSelection);
+    }
+
+    public void setCursorPosition(String infoSelection){
+        cursorPosition.setText("Position du Curseur : " + infoSelection);
+    }
+
     @Override
     public void doUpdate(Subject<T> s) {
         if (s instanceof BufferImpl) {
             bufferDisplay.setText(((BufferImpl) s).getContent());
         }
     }
+
 }
