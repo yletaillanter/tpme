@@ -170,10 +170,6 @@
                     // Touche backspace appel supprimergauche
                     if (e.getKeyChar() == Event.BACK_SPACE)
                         commands.get("DeleteLeft").execute();
-
-                    if(e.getKeyChar() == Event.ENTER)
-                        commands.get("Insert").execute();
-
                 }
             });
 
