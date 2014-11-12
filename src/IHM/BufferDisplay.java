@@ -65,6 +65,8 @@
             getCaret().setVisible(true);
             getCaret().setSelectionVisible(true);
 
+
+
             implementListener();
             createPopupMenu();
         }
@@ -87,6 +89,9 @@
                     ihmAssocie.setDot(e.getDot());
                     ihmAssocie.setMark(e.getMark());
                     commands.get("Select").execute();
+                    ihmAssocie.setCursorPosition((""+e.getDot()));
+                    ihmAssocie.setNumberOfCharacter(""+e.getDot());
+
                 }
             });
 
