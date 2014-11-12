@@ -66,11 +66,11 @@ public class MoteurEditionImpl implements MoteurEdition {
     public void inserer(String txt, boolean retourChariot){
         //logger.log(Level.INFO,"Ajout dans buffer: " + txt );
         if(retourChariot) {
-            buffer.addContent("\n");
-            buffer.addContent(txt);
+            buffer.addContentAtPosition("\n", selection.getDebut());
+            buffer.addContentAtPosition(txt, selection.getDebut());
         }
         else
-            buffer.addContent(txt);
+            buffer.addContentAtPosition(txt, selection.getDebut());
 
         //System.out.println(buffer.getContent());
     }

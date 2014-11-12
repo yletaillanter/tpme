@@ -61,8 +61,8 @@
             this.ihmAssocie = ihm;
             this.commands = commands;
             setEditable(false);
-            setBackground(Color.LIGHT_GRAY);
-            //getCaret().setVisible(true);
+            setBackground(Color.WHITE);
+            getCaret().setVisible(true);
             getCaret().setSelectionVisible(true);
 
             implementListener();
@@ -96,7 +96,7 @@
             addFocusListener(new FocusListener() {
                 @Override
                 public void focusGained(FocusEvent e) {
-                    //getCaret().setVisible(true);
+                    getCaret().setVisible(true);
                     //logger.log(Level.INFO,"focus");
                 }
 
@@ -165,6 +165,10 @@
                     // Touche backspace appel supprimergauche
                     if (e.getKeyChar() == Event.BACK_SPACE)
                         commands.get("DeleteLeft").execute();
+
+                    if(e.getKeyChar() == Event.ENTER)
+                        commands.get("Insert").execute();
+
                 }
             });
 
