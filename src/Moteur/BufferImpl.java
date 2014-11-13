@@ -113,7 +113,7 @@ public class BufferImpl<T> implements Buffer, Subject<T> {
      */
     @Override
     public int getLength() {
-        return innerBuffer.capacity();
+        return innerBuffer.length();
     }
 
     @Override

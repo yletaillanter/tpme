@@ -90,8 +90,6 @@
                     ihmAssocie.setMark(e.getMark());
                     commands.get("Select").execute();
                     ihmAssocie.setCursorPosition((""+e.getDot()));
-                    ihmAssocie.setNumberOfCharacter(""+e.getDot());
-
                 }
             });
 

@@ -97,7 +97,7 @@ public class IHMImpl<T> extends JFrame implements IHM, Observer<T> {
 
         numberOfCharacter = new JTextField();
         numberOfCharacter.setEditable(false);
-        numberOfCharacter.setText("Nombre de Caractère : ");
+        numberOfCharacter.setText("Nombre de Caractères : ");
         numberOfCharacter.setBackground(Color.LIGHT_GRAY);
         informationLine.add(numberOfCharacter);
 
@@ -106,8 +106,6 @@ public class IHMImpl<T> extends JFrame implements IHM, Observer<T> {
         cursorPosition.setText("Position du Curseur : ");
         cursorPosition.setBackground(Color.LIGHT_GRAY);
         informationLine.add(cursorPosition);
-
-
 
         bottomPanel.add(userInput);
         bottomPanel.add(informationLine);
@@ -181,10 +179,6 @@ public class IHMImpl<T> extends JFrame implements IHM, Observer<T> {
        return retourChariotChecked;
     }
 
-    public void setNumberOfCharacter(String infoSelection){
-        numberOfCharacter.setText("Nombre de Caractères : " + infoSelection);
-    }
-
     public void setCursorPosition(String infoSelection){
         cursorPosition.setText("Position du Curseur : " + infoSelection);
     }
@@ -193,6 +187,7 @@ public class IHMImpl<T> extends JFrame implements IHM, Observer<T> {
     public void doUpdate(Subject<T> s) {
         if (s instanceof BufferImpl) {
             bufferDisplay.setText(((BufferImpl) s).getContent());
+            numberOfCharacter.setText("Nombre de Caractères : " + ((BufferImpl) s).getLength());
         }
     }
 
