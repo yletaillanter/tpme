@@ -66,7 +66,6 @@
             getCaret().setSelectionVisible(true);
 
 
-
             implementListener();
             createPopupMenu();
         }

@@ -4,7 +4,7 @@ import Moteur.BufferImpl;
 
 import java.util.List;
 
-import static org.mockito.Mockito.*;
+//import static org.mockito.Mockito.*;
 
 /**
  * Created by Yoann on 09/11/2014.
