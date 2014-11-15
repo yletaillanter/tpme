@@ -1,5 +1,7 @@
 package commandes;
 
+import Memento.Memento;
+
 import java.util.logging.Logger;
 
 /**
@@ -9,4 +11,6 @@ import java.util.logging.Logger;
  */
 public interface Commande {
     public void execute();
+    public Memento getMemento();
+    public void setMemento(Memento memento);
 }

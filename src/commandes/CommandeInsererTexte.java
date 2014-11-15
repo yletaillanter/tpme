@@ -1,5 +1,6 @@
 package commandes;
 
+import Memento.*;
 import Moteur.*;
 import IHM.*;
 
@@ -29,6 +30,13 @@ public class CommandeInsererTexte implements Commande {
     private IHM ihm;
 
     /**
+     * L'enregistreur.
+     * Référence vers l'enregistreur du memento (Caretaker).
+     *
+     */
+    private Enregistreur enregistreur;
+
+    /**
      * Constructeur de <i>CommandeInsererTexte</i>
      *
      * @param moteur
@@ -36,9 +44,10 @@ public class CommandeInsererTexte implements Commande {
      * @param ihm
      *      L'IHM du mini-éditeur
      */
-    public CommandeInsererTexte(MoteurEdition moteur, IHM ihm) {
+    public CommandeInsererTexte(MoteurEdition moteur, IHM ihm, Enregistreur enregistreur) {
         this.moteur = moteur;
         this.ihm = ihm;
+        this.enregistreur = enregistreur;
     }
 
     /**
@@ -53,5 +62,15 @@ public class CommandeInsererTexte implements Commande {
      */
     public void execute(){
         moteur.inserer(ihm.getInputUser(),ihm.retourChariotIsChecked());
+    }
+
+    @Override
+    public Memento getMemento() {
+        return null;
+    }
+
+    @Override
+    public void setMemento(Memento memento) {
+
     }
 }

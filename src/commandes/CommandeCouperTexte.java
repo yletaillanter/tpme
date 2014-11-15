@@ -1,5 +1,6 @@
 package commandes;
 
+import Memento.*;
 import Moteur.MoteurEdition;
 
 import java.util.logging.Level;
@@ -22,13 +23,21 @@ public class CommandeCouperTexte implements Commande {
     private MoteurEdition moteur;
 
     /**
+     * L'enregistreur.
+     * Référence vers l'enregistreur du memento (Caretaker).
+     *
+     */
+    private Enregistreur enregistreur;
+
+    /**
      * Constructeur de <i>CommandeCouperTexte</i>
      *
      * @param moteur
      *      Le moteur du mini éditeur
      */
-    public CommandeCouperTexte(MoteurEdition moteur) {
+    public CommandeCouperTexte(MoteurEdition moteur, Enregistreur enregistreur) {
         this.moteur = moteur;
+        this.enregistreur = enregistreur;
     }
 
     /**
@@ -39,5 +48,15 @@ public class CommandeCouperTexte implements Commande {
      */
     public void execute (){
         moteur.couper();
+    }
+
+    @Override
+    public Memento getMemento() {
+        return null;
+    }
+
+    @Override
+    public void setMemento(Memento memento) {
+
     }
 }

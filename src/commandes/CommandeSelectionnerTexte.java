@@ -1,5 +1,7 @@
 package commandes;
 
+import Memento.Enregistreur;
+import Memento.Memento;
 import Moteur.MoteurEdition;
 import IHM.*;
 
@@ -29,6 +31,13 @@ public class CommandeSelectionnerTexte implements Commande {
      */
     private IHM ihm;
 
+    /**
+     * L'enregistreur.
+     * Référence vers l'enregistreur du memento (Caretaker).
+     *
+     */
+    private Enregistreur enregistreur;
+
 
     /**
      * Constructeur de <i>CommandeSelectionnerTexte</i>
@@ -38,9 +47,10 @@ public class CommandeSelectionnerTexte implements Commande {
      * @param ihm
      *      L'IHM du mini-éditeur
      */
-    public CommandeSelectionnerTexte(MoteurEdition moteur,IHM ihm) {
+    public CommandeSelectionnerTexte(MoteurEdition moteur,IHM ihm, Enregistreur enregistreur) {
         this.ihm = ihm;
         this.moteur = moteur;
+        this.enregistreur = enregistreur;
     }
 
     /**
@@ -55,5 +65,15 @@ public class CommandeSelectionnerTexte implements Commande {
      */
     public void execute() {
         moteur.selectionner(ihm.getDot(),ihm.getMark());
+    }
+
+    @Override
+    public Memento getMemento() {
+        return null;
+    }
+
+    @Override
+    public void setMemento(Memento memento) {
+
     }
 }

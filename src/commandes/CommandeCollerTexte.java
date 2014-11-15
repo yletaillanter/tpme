@@ -1,5 +1,6 @@
 package commandes;
 
+import Memento.*;
 import Moteur.MoteurEdition;
 
 import java.util.logging.Level;
@@ -21,13 +22,21 @@ public class CommandeCollerTexte implements Commande {
     private MoteurEdition moteur;
 
     /**
+     * L'enregistreur.
+     * Référence vers l'enregistreur du memento (Caretaker).
+     *
+     */
+    private Enregistreur enregistreur;
+
+    /**
      * Constructeur de <i>CommandeCollerTexte</i>
      *
      * @param moteur
      *      Le moteur du mini éditeur
      */
-    public CommandeCollerTexte(MoteurEdition moteur) {
+    public CommandeCollerTexte(MoteurEdition moteur, Enregistreur enregistreur) {
         this.moteur = moteur;
+        this.enregistreur = enregistreur;
     }
 
     /**
@@ -37,6 +46,21 @@ public class CommandeCollerTexte implements Commande {
      * @see Moteur.MoteurEditionImpl#coller()
      */
     public void execute() {
+        enregistreur.save(this);
         moteur.coller();
+    }
+
+    @Override
+    public Memento getMemento() {
+        return null;
+    }
+
+    @Override
+    public void setMemento(Memento memento) {
+    }
+
+    private class mementoColler {
+
+
     }
 }

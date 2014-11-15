@@ -1,5 +1,7 @@
 package commandes;
 
+import Memento.Enregistreur;
+import Memento.Memento;
 import Moteur.MoteurEdition;
 
 import java.util.logging.Level;
@@ -22,14 +24,21 @@ public class CommandeSupprimerTexteGauche implements Commande {
     private MoteurEdition moteur;
 
     /**
+     * L'enregistreur.
+     * Référence vers l'enregistreur du memento (Caretaker).
+     *
+     */
+    private Enregistreur enregistreur;
+
+    /**
      * Constructeur de <i>CommandeSupprimerTexteGauche</i>
      *
      * @param moteur
      *      Le moteur du mini éditeur
      */
-    public CommandeSupprimerTexteGauche(MoteurEdition moteur) {
-
+    public CommandeSupprimerTexteGauche(MoteurEdition moteur, Enregistreur enregistreur) {
         this.moteur = moteur;
+        this.enregistreur = enregistreur;
     }
 
     /**
@@ -40,5 +49,15 @@ public class CommandeSupprimerTexteGauche implements Commande {
      */
     public void execute (){
         moteur.supprimerGauche();
+    }
+
+    @Override
+    public Memento getMemento() {
+        return null;
+    }
+
+    @Override
+    public void setMemento(Memento memento) {
+
     }
 }

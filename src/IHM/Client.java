@@ -1,5 +1,7 @@
 package IHM;
 
+import Memento.Enregistreur;
+import Memento.EnregistreurImpl;
 import commandes.*;
 import Moteur.MoteurEdition;
 import Moteur.MoteurEditionImpl;
@@ -12,6 +14,7 @@ import javax.swing.*;
 class Client{
     public IHMImpl ihm;
     MoteurEdition moteur;
+    Enregistreur enregistreur;
 
     public static void main(String[] Args) {
         Client client = new Client();
@@ -23,6 +26,7 @@ class Client{
         moteur = new MoteurEditionImpl();
         ihm = new IHMImpl();
         moteur.getBuffer().register(ihm);
+        enregistreur = new EnregistreurImpl();
         this.configureCommand();
 
         /*
@@ -31,12 +35,12 @@ class Client{
         */
     }
     private void configureCommand() {
-        ihm.addCommand(new CommandeCopierTexte(moteur), "Copy");
-        ihm.addCommand(new CommandeCollerTexte(moteur), "Paste");
-        ihm.addCommand(new CommandeCouperTexte(moteur), "Cut");
-        ihm.addCommand(new CommandeInsererTexte(moteur,ihm), "Insert");
-        ihm.addCommand(new CommandeSelectionnerTexte(moteur,ihm), "Select");
-        ihm.addCommand(new CommandeSupprimerTexteDroite(moteur), "DeleteRight");
-        ihm.addCommand(new CommandeSupprimerTexteGauche(moteur), "DeleteLeft");
+        ihm.addCommand(new CommandeCopierTexte(moteur,enregistreur), "Copy");
+        ihm.addCommand(new CommandeCollerTexte(moteur,enregistreur), "Paste");
+        ihm.addCommand(new CommandeCouperTexte(moteur,enregistreur), "Cut");
+        ihm.addCommand(new CommandeInsererTexte(moteur,ihm,enregistreur), "Insert");
+        ihm.addCommand(new CommandeSelectionnerTexte(moteur,ihm,enregistreur), "Select");
+        ihm.addCommand(new CommandeSupprimerTexteDroite(moteur,enregistreur), "DeleteRight");
+        ihm.addCommand(new CommandeSupprimerTexteGauche(moteur,enregistreur), "DeleteLeft");
     }
 }

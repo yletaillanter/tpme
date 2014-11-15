@@ -14,7 +14,7 @@
     /**
      * Created by Baptiste Quéré on 05/11/2014.
      */
-    public class BufferDisplay extends JTextPane {
+    public class BufferDisplay extends JTextArea {
 
         /**
          * L'ihm du mini-éditeur
@@ -64,7 +64,6 @@
             setBackground(Color.WHITE);
             getCaret().setVisible(true);
             getCaret().setSelectionVisible(true);
-
 
             implementListener();
             createPopupMenu();

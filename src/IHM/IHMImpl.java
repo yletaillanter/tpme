@@ -25,7 +25,7 @@ public class IHMImpl<T> extends JFrame implements IHM, Observer<T> {
     private JEditorPane informationLine;
     private int dot;
     private int mark;
-    private BufferDisplay bufferDisplay;
+    private JTextArea bufferDisplay;
     private JCheckBox retourChariot;
     private boolean retourChariotChecked = false;
 
@@ -53,12 +53,10 @@ public class IHMImpl<T> extends JFrame implements IHM, Observer<T> {
         mainPanel.setLayout(new BorderLayout());
 
         //Upper part
-        bufferDisplay = new BufferDisplay(this,this.commands);
-
         JPanel UpperPanel = new JPanel();
         UpperPanel.setLayout(new BorderLayout());
-        mainPanel.add(UpperPanel, BorderLayout.CENTER);
 
+        bufferDisplay = new BufferDisplay(this,this.commands);
 
         //Ajout des boutons
         JToolBar buttonToolbar = new JToolBar();
@@ -77,10 +75,13 @@ public class IHMImpl<T> extends JFrame implements IHM, Observer<T> {
         buttonToolbar.add(deleteRight);
         buttonToolbar.add(retourChariot);
 
+        setButtonAction();
+
         UpperPanel.add(buttonToolbar,BorderLayout.NORTH);
         UpperPanel.add(bufferDisplay,BorderLayout.CENTER);
 
-        setButtonAction();
+        mainPanel.add(UpperPanel, BorderLayout.CENTER);
+
 
         //Bottom part
         JPanel bottomPanel = new JPanel();
