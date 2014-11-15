@@ -84,7 +84,7 @@ public class MoteurEditionImpl implements MoteurEdition {
     @Override
     public void coller(){
         buffer.addContentAtPosition(pp.getPressePapierContent(), selection.getDebut());
-        logger.log(Level.INFO,"coller : "+selection.getDebut());
+        logger.log(Level.INFO,"coller : "+selection.getDebut() + " le texte : "+ (pp.getPressePapierContent() ));
     }
 
     /**

@@ -41,7 +41,6 @@ public class EnregistreurImpl implements Enregistreur {
         while(it.hasNext()){
             Couple couple = it.next();
             couple.getCommande().setMemento(couple.getMemento());
-            couple.toString();
             couple.getCommande().execute();
             System.err.print("Play execute() ");
         }

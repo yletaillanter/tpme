@@ -1,10 +1,14 @@
 package Moteur;
 
+import java.util.logging.Level;
+import java.util.logging.Logger;
+
 /**
  * Created by Yoann Le Taillanter on 22/10/2014.
  */
 public class PressePapierImpl implements PressePapier {
 
+    Logger logger = Logger.getLogger("tpme.Moteur.PressePapier");
 
     /**
      * bufferImpl static pour le singleton.
@@ -40,6 +44,7 @@ public class PressePapierImpl implements PressePapier {
     @Override
     public void setPressePapierContent(String content) {
         pressePapier=content;
+        //logger.log(Level.INFO,"contenu du PP : " + content);
     }
 
     /**
