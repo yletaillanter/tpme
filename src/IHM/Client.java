@@ -42,5 +42,9 @@ class Client{
         ihm.addCommand(new CommandeSelectionnerTexte(moteur,ihm,enregistreur), "Select");
         ihm.addCommand(new CommandeSupprimerTexteDroite(moteur,enregistreur), "DeleteRight");
         ihm.addCommand(new CommandeSupprimerTexteGauche(moteur,enregistreur), "DeleteLeft");
+        ihm.addCommand(new CommandeStart(enregistreur), "Start");
+        ihm.addCommand(new CommandeStop(enregistreur), "Stop");
+        ihm.addCommand(new CommandePlay(enregistreur), "Play");
+
     }
 }

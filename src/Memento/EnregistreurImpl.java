@@ -6,6 +6,8 @@ import java.util.AbstractCollection;
 import java.util.AbstractList;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 /**
  * Created by Yoann on 15/11/2014.
@@ -14,6 +16,7 @@ public class EnregistreurImpl implements Enregistreur {
 
     private List<Memento> listMemento;
     public boolean rec;
+    Logger logger = Logger.getLogger("tpme.Memento.EnregistreurImpl");
 
     public EnregistreurImpl() {
         this.listMemento = new ArrayList<Memento>();
@@ -22,11 +25,13 @@ public class EnregistreurImpl implements Enregistreur {
     @Override
     public void rec() {
         setRec(true);
+        logger.log(Level.INFO,"rec is called");
     }
 
     @Override
     public void stop() {
         setRec(false);
+        logger.log(Level.INFO,"stop is called");
     }
 
     @Override

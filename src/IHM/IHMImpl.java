@@ -18,7 +18,7 @@ public class IHMImpl<T> extends JFrame implements IHM, Observer<T> {
 
     Logger logger = Logger.getLogger("tpme.IHM.IHMImpl");
     private HashMap<String, Commande> commands;
-    private Button copyButton, pasteButton, cutButton, insertButton, deleteRight, deleteLeft;
+    private Button copyButton, pasteButton, cutButton, insertButton, deleteRight, deleteLeft, start, stop, play;
     private JTextField userInput;
     private JTextField numberOfCharacter;
     private JTextField cursorPosition;
@@ -64,8 +64,11 @@ public class IHMImpl<T> extends JFrame implements IHM, Observer<T> {
         pasteButton = new Button("Paste");
         cutButton = new Button("Cut");
         insertButton = new Button("Insert");
-        deleteRight = new Button("deleteRight");
-        deleteLeft = new Button("deleteLeft");
+        deleteRight = new Button("Suppr");
+        deleteLeft = new Button("Backspace");
+        start = new Button("Start");
+        stop = new Button("Stop");
+        play = new Button("Play");
         retourChariot = new JCheckBox("retour à la ligne");
         buttonToolbar.add(copyButton);
         buttonToolbar.add(pasteButton);
@@ -73,6 +76,9 @@ public class IHMImpl<T> extends JFrame implements IHM, Observer<T> {
         buttonToolbar.add(insertButton);
         buttonToolbar.add(deleteLeft);
         buttonToolbar.add(deleteRight);
+        buttonToolbar.add(start);
+        buttonToolbar.add(stop);
+        buttonToolbar.add(play);
         buttonToolbar.add(retourChariot);
 
         setButtonAction();
@@ -141,6 +147,9 @@ public class IHMImpl<T> extends JFrame implements IHM, Observer<T> {
         insertButton.addActionListener(new ButtonAction("Insert", this.commands));
         deleteLeft.addActionListener(new ButtonAction("DeleteLeft", this.commands));
         deleteRight.addActionListener(new ButtonAction("DeleteRight", this.commands));
+        start.addActionListener(new ButtonAction("Start", this.commands));
+        stop.addActionListener(new ButtonAction("Stop", this.commands));
+        play.addActionListener(new ButtonAction("Play", this.commands));
 
         retourChariot.addItemListener(new ItemListener() {
             @Override
