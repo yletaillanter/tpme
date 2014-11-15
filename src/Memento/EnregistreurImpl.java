@@ -2,10 +2,7 @@ package Memento;
 
 import commandes.Commande;
 
-import java.util.AbstractCollection;
-import java.util.AbstractList;
-import java.util.ArrayList;
-import java.util.List;
+import java.util.*;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
@@ -14,12 +11,12 @@ import java.util.logging.Logger;
  */
 public class EnregistreurImpl implements Enregistreur {
 
-    private List<Memento> listMemento;
+    private List<Couple> listMementos;
     public boolean rec;
     Logger logger = Logger.getLogger("tpme.Memento.EnregistreurImpl");
 
     public EnregistreurImpl() {
-        this.listMemento = new ArrayList<Memento>();
+        this.listMementos = new ArrayList<Couple>();
     }
 
     @Override
@@ -36,20 +33,30 @@ public class EnregistreurImpl implements Enregistreur {
 
     @Override
     public void play() {
-        for(Memento memento : listMemento){
-            //executer l'action
+        if(isRec())
+            setRec(false);
+
+        Iterator<Couple> it = listMementos.iterator();
+
+        while(it.hasNext()){
+            Couple couple = it.next();
+            couple.getCommande().setMemento(couple.getMemento());
+            couple.toString();
+            couple.getCommande().execute();
+            System.err.print("Play execute() ");
         }
     }
 
     @Override
     public void clear() {
-        listMemento.clear();
+        listMementos.clear();
     }
 
     @Override
     public void save(Commande commande) {
-        if(isRec())
-            this.listMemento.add(commande.getMemento());
+        if(isRec()){
+            this.listMementos.add(new Couple(commande.getMemento(), commande));
+        }
     }
 
     public boolean isRec() {
@@ -58,5 +65,9 @@ public class EnregistreurImpl implements Enregistreur {
 
     public void setRec(boolean rec) {
         this.rec = rec;
+        if(rec)
+            System.err.print("rec is true");
+        else
+            System.err.print("rec is false");
     }
 }

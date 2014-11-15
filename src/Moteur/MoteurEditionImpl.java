@@ -9,7 +9,7 @@ import java.util.logging.Logger;
  */
 public class MoteurEditionImpl implements MoteurEdition {
 
-    //Logger logger = Logger.getLogger("tpme.Moteur.MoteurEditionImpl");
+    Logger logger = Logger.getLogger("tpme.Moteur.MoteurEditionImpl");
 
     /**
      * Le buffer.
@@ -84,7 +84,7 @@ public class MoteurEditionImpl implements MoteurEdition {
     @Override
     public void coller(){
         buffer.addContentAtPosition(pp.getPressePapierContent(), selection.getDebut());
-        //logger.log(Level.INFO,"coller");
+        logger.log(Level.INFO,"coller : "+selection.getDebut());
     }
 
     /**

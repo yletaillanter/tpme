@@ -42,25 +42,28 @@ public class CommandeCollerTexte implements Commande {
     /**
      * Appel de la méthode <i>coller</i> sur le moteur.
      *
-     * @see Moteur.MoteurEditionImpl
      * @see Moteur.MoteurEditionImpl#coller()
      */
     public void execute() {
-        enregistreur.save(this);
+        enregistreur.save( this );
         moteur.coller();
     }
 
     @Override
     public Memento getMemento() {
-        return null;
+        return new mementoColler();
     }
 
     @Override
     public void setMemento(Memento memento) {
+        // Pas d'état à restaurer
     }
 
-    private class mementoColler {
+    private class mementoColler implements Memento{
 
+        // Pas d'état à sauvegarder.
 
+        public mementoColler(){
+        }
     }
 }

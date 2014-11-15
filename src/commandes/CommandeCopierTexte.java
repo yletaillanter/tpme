@@ -42,20 +42,28 @@ public class CommandeCopierTexte implements Commande {
     /**
      * Appel de la méthode copier sur le moteur.
      *
-     * @see Moteur.MoteurEditionImpl
      * @see Moteur.MoteurEditionImpl#copier()
      */
     public void execute (){
+        enregistreur.save( this );
         moteur.copier();
     }
 
     @Override
     public Memento getMemento() {
-        return null;
+        return new mementoCopier();
     }
 
     @Override
     public void setMemento(Memento memento) {
+        // Pas d'état à restaurer
+    }
 
+    private class mementoCopier implements Memento{
+
+        // Pas d'état à sauvegarder.
+
+        public mementoCopier(){
+        }
     }
 }

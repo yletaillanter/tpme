@@ -92,7 +92,6 @@ public class IHMImpl<T> extends JFrame implements IHM, Observer<T> {
 
         mainPanel.add(UpperPanel, BorderLayout.CENTER);
 
-
         //Bottom part
         JPanel bottomPanel = new JPanel();
         bottomPanel.setLayout(new GridLayout(2, 0));

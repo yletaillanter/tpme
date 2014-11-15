@@ -16,7 +16,7 @@ public class CommandePlay implements Commande {
 
     @Override
     public void execute() {
-
+        enregistreur.play();
     }
 
     @Override
