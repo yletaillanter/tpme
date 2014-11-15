@@ -6,8 +6,10 @@ import commandes.*;
 
 import java.awt.*;
 import java.awt.event.*;
+import javax.imageio.ImageIO;
 import javax.swing.*;
 
+import java.io.IOException;
 import java.util.HashMap;
 import java.util.logging.Logger;
 
@@ -18,7 +20,8 @@ public class IHMImpl<T> extends JFrame implements IHM, Observer<T> {
 
     Logger logger = Logger.getLogger("tpme.IHM.IHMImpl");
     private HashMap<String, Commande> commands;
-    private Button copyButton, pasteButton, cutButton, insertButton, deleteRight, deleteLeft, start, stop, play;
+    private JButton copyButton, pasteButton, cutButton, insertButton, deleteRight, deleteLeft, start, stop, play;
+    Image recIcon;
     private JTextField userInput;
     private JTextField numberOfCharacter;
     private JTextField cursorPosition;
@@ -60,15 +63,16 @@ public class IHMImpl<T> extends JFrame implements IHM, Observer<T> {
 
         //Ajout des boutons
         JToolBar buttonToolbar = new JToolBar();
-        copyButton = new Button("Copy");
-        pasteButton = new Button("Paste");
-        cutButton = new Button("Cut");
-        insertButton = new Button("Insert");
-        deleteRight = new Button("Suppr");
-        deleteLeft = new Button("Backspace");
-        start = new Button("Start");
-        stop = new Button("Stop");
-        play = new Button("Play");
+        copyButton = new JButton("Copy");
+        pasteButton = new JButton("Paste");
+        cutButton = new JButton("Cut");
+        insertButton = new JButton("Insert");
+        deleteRight = new JButton("Suppr");
+        deleteLeft = new JButton("Backspace");
+        //Icon warnIcon = new ImageIcon("Icons/recorder.png");
+        start = new JButton("Rec");//,warnIcon);
+        stop = new JButton("Stop");
+        play = new JButton("Play");
         retourChariot = new JCheckBox("retour à la ligne");
         buttonToolbar.add(copyButton);
         buttonToolbar.add(pasteButton);
