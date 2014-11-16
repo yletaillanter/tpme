@@ -47,16 +47,25 @@ public class CommandeCouperTexte implements Commande {
      * @see Moteur.MoteurEditionImpl#couper()
      */
     public void execute (){
+        enregistreur.save( this );
         moteur.couper();
     }
 
     @Override
     public Memento getMemento() {
-        return null;
+        return new mementoCouper();
     }
 
     @Override
     public void setMemento(Memento memento) {
+        // Pas d'état à restaurer
+    }
 
+    private class mementoCouper implements Memento{
+
+        // Pas d'état à sauvegarder.
+
+        public mementoCouper(){
+        }
     }
 }
