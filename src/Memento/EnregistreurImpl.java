@@ -64,9 +64,5 @@ public class EnregistreurImpl implements Enregistreur {
 
     public void setRec(boolean rec) {
         this.rec = rec;
-        if(rec)
-            System.err.print("rec is true");
-        else
-            System.err.print("rec is false");
     }
 }

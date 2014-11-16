@@ -4,8 +4,6 @@ import Memento.*;
 import Moteur.*;
 import IHM.*;
 
-import java.util.logging.Level;
-
 /**
  *  <b>CommandeInsererTexte</b> est la classe qui définit la commande concrète <i>insérer</i>.
  *
@@ -61,16 +59,42 @@ public class CommandeInsererTexte implements Commande {
      * @see Moteur.MoteurEditionImpl#inserer(String, boolean)
      */
     public void execute(){
+        enregistreur.save( this );
         moteur.inserer(ihm.getInputUser(),ihm.retourChariotIsChecked());
+    }
+
+    // Surcharge d'execute pour que le memento utilise l'état sauvegardé.
+    public void execute(String texteAInserer){
+        moteur.inserer(texteAInserer,ihm.retourChariotIsChecked());
     }
 
     @Override
     public Memento getMemento() {
-        return null;
+        return new MementoInserer(ihm.getInputUser());
     }
+
 
     @Override
     public void setMemento(Memento memento) {
+        // Restaure l'état de en remplacant l'input user.
+        MementoInserer mem = (MementoInserer) memento;
+        execute(mem.getTexteAInserer());
+    }
 
+    public class MementoInserer implements Memento{
+
+        String texteAInserer;
+
+        public MementoInserer(String texteAInserer){
+            this.texteAInserer = texteAInserer;
+        }
+
+        public void setTexteAInserer(String texteAInserer){
+            this.texteAInserer = texteAInserer;
+        }
+
+        public String getTexteAInserer() {
+            return texteAInserer;
+        }
     }
 }
