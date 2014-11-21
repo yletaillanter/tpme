@@ -6,15 +6,14 @@ import commandes.*;
 import Moteur.MoteurEdition;
 import Moteur.MoteurEditionImpl;
 
-import javax.swing.*;
 
 /**
  * Created by Yoann Le Taillanter on 22/10/2014.
  */
 class Client{
-    public IHMImpl ihm;
-    MoteurEdition moteur;
-    Enregistreur enregistreur;
+    private IHM ihm;
+    private MoteurEdition moteur;
+    private Enregistreur enregistreur;
 
     public static void main(String[] Args) {
         Client client = new Client();

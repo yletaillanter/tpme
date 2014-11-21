@@ -3,8 +3,6 @@ package commandes;
 import Memento.*;
 import Moteur.MoteurEdition;
 
-import java.util.logging.Level;
-
 /**
  *  <b>CommandeCopierTexte</b> est la classe qui définit la commande concrète <i>copier</i>.
  *
@@ -51,7 +49,7 @@ public class CommandeCopierTexte implements Commande {
 
     @Override
     public Memento getMemento() {
-        return new mementoCopier();
+        return new MementoCopier();
     }
 
     @Override
@@ -59,11 +57,11 @@ public class CommandeCopierTexte implements Commande {
         // Pas d'état à restaurer
     }
 
-    private class mementoCopier implements Memento{
+    private class MementoCopier implements Memento{
 
         // Pas d'état à sauvegarder.
 
-        public mementoCopier(){
+        public MementoCopier(){
         }
     }
 }
