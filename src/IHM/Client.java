@@ -11,7 +11,7 @@ import Moteur.MoteurEditionImpl;
  * Created by Yoann Le Taillanter on 22/10/2014.
  */
 class Client{
-    private IHM ihm;
+    private IHMImpl ihm;
     private MoteurEdition moteur;
     private Enregistreur enregistreur;
 
@@ -24,7 +24,7 @@ class Client{
     private void run() {
         moteur = new MoteurEditionImpl();
         ihm = new IHMImpl();
-        moteur.getBuffer().register(ihm);
+        moteur.getBuffer(). register(ihm);
         enregistreur = new EnregistreurImpl();
         this.configureCommand();
 

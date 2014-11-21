@@ -67,7 +67,7 @@ public interface MoteurEdition {
      *
      * @see Moteur.Buffer
      */
-    public Buffer getBuffer();
+    public BufferImpl getBuffer();
     public PressePapier getPressePapier();
     //public Selection getSelectionImpl();
 }
