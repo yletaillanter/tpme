@@ -11,6 +11,7 @@ import java.util.logging.Level;
  *  @see commandes.Commande
  *
  *  @author Yoann Le Taillanter
+ *
  */
 public class CommandeCouperTexte implements Commande {
 
