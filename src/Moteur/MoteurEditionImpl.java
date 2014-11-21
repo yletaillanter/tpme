@@ -15,7 +15,7 @@ public class MoteurEditionImpl implements MoteurEdition {
      * Le buffer.
      * @see Moteur.BufferImpl
      */
-    private Buffer buffer;
+    private BufferImpl buffer;
 
     /**
      * La séléction
@@ -185,7 +185,7 @@ public class MoteurEditionImpl implements MoteurEdition {
      * @see Moteur.BufferImpl
      */
     @Override
-    public Buffer getBuffer() {
+    public BufferImpl getBuffer() {
         return buffer;
     }
 

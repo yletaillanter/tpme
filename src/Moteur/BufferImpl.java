@@ -23,7 +23,7 @@ public class BufferImpl<T> implements Buffer, Subject<T> {
      *
      * @see Moteur.Buffer
      */
-    private static Buffer buffer;
+    private static BufferImpl buffer;
 
     /**
      * StringBuilder, le vrai buffer.
@@ -44,7 +44,7 @@ public class BufferImpl<T> implements Buffer, Subject<T> {
      * Retourne l'instance de bufferImpl, la créer si elle n'existe pas.
      * @return instance of BufferImpl
      */
-    public static Buffer getBufferInstance(){
+    public static BufferImpl getBufferInstance() {
         if(buffer == null)
             buffer = new BufferImpl();
         return buffer;
