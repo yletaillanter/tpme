@@ -15,7 +15,7 @@ public interface IHM {
      * @param key
      *      Le nom de la commande
      */
-    public void addCommand(Commande command,String key );
+    public void addCommand(Commande command,String key);
 
     /**
      * Récupère le contenu du JTextField de l'inputUser

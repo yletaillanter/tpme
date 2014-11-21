@@ -6,11 +6,11 @@ import commandes.*;
 
 import java.awt.*;
 import java.awt.event.*;
-import javax.imageio.ImageIO;
 import javax.swing.*;
 
-import java.io.IOException;
 import java.util.HashMap;
+import java.util.Hashtable;
+import java.util.Map;
 import java.util.logging.Logger;
 
 /**
@@ -18,10 +18,10 @@ import java.util.logging.Logger;
  */
 public class IHMImpl<T> extends JFrame implements IHM, Observer<T> {
 
-    Logger logger = Logger.getLogger("tpme.IHM.IHMImpl");
-    private HashMap<String, Commande> commands;
+    private Logger logger = Logger.getLogger("tpme.IHM.IHMImpl");
+    private Map<String, Commande> commands;
     private JButton copyButton, pasteButton, cutButton, insertButton, deleteRight, deleteLeft, start, stop, play;
-    Image recIcon;
+    private Image recIcon;
     private JTextField userInput;
     private JTextField numberOfCharacter;
     private JTextField cursorPosition;
@@ -32,11 +32,16 @@ public class IHMImpl<T> extends JFrame implements IHM, Observer<T> {
     private JCheckBox retourChariot;
     private boolean retourChariotChecked = false;
 
+    private JPanel  mainPanel;
+    private JPanel upperPanel;
+    private JToolBar buttonToolbar;
+    private JPanel  bottomPanel;
+
     /**
      * Constructors
      */
     public IHMImpl(){
-        commands = new HashMap<String, Commande>(); // error diamond types are not supported ...
+        commands = new Hashtable<String, Commande>(); // error diamond types are not supported ...
         build();
     }
 
@@ -51,18 +56,18 @@ public class IHMImpl<T> extends JFrame implements IHM, Observer<T> {
     }
 
     private JPanel buildContentPane(){
-        JPanel mainPanel = new JPanel();
+        mainPanel = new JPanel();
         mainPanel.setBackground(Color.white);
         mainPanel.setLayout(new BorderLayout());
 
         //Upper part
-        JPanel UpperPanel = new JPanel();
-        UpperPanel.setLayout(new BorderLayout());
+        upperPanel = new JPanel();
+        upperPanel.setLayout(new BorderLayout());
 
         bufferDisplay = new BufferDisplay(this,this.commands);
 
         //Ajout des boutons
-        JToolBar buttonToolbar = new JToolBar();
+        buttonToolbar = new JToolBar();
         copyButton = new JButton("Copy");
         pasteButton = new JButton("Paste");
         cutButton = new JButton("Cut");
@@ -87,13 +92,13 @@ public class IHMImpl<T> extends JFrame implements IHM, Observer<T> {
 
         setButtonAction();
 
-        UpperPanel.add(buttonToolbar,BorderLayout.NORTH);
-        UpperPanel.add(bufferDisplay,BorderLayout.CENTER);
+        upperPanel.add(buttonToolbar, BorderLayout.NORTH);
+        upperPanel.add(bufferDisplay, BorderLayout.CENTER);
 
-        mainPanel.add(UpperPanel, BorderLayout.CENTER);
+        mainPanel.add(upperPanel, BorderLayout.CENTER);
 
         //Bottom part
-        JPanel bottomPanel = new JPanel();
+        bottomPanel = new JPanel();
         bottomPanel.setLayout(new GridLayout(2, 0));
 
         // zone de texte

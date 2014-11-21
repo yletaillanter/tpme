@@ -12,8 +12,8 @@ import java.util.logging.Logger;
 public class EnregistreurImpl implements Enregistreur {
 
     private List<Couple> listMementos;
-    public boolean rec;
-    Logger logger = Logger.getLogger("tpme.Memento.EnregistreurImpl");
+    private boolean rec;
+    private Logger logger = Logger.getLogger("tpme.Memento.EnregistreurImpl");
 
     public EnregistreurImpl() {
         this.listMementos = new ArrayList<Couple>();

@@ -8,7 +8,7 @@
     import javax.swing.event.CaretListener;
     import java.awt.*;
     import java.awt.event.*;
-    import java.util.HashMap;
+    import java.util.Map;
 
 
     /**
@@ -23,9 +23,9 @@
         private IHMImpl ihmAssocie;
 
         /**
-         * La Hashmap de commandes/nom
+         * La Hashtable de commandes/nom
          */
-        private HashMap<String, Commande> commands;
+        private Map<String, Commande> commands;
 
         /**
          * JPopupMenu pour le clic droit
@@ -57,7 +57,7 @@
          * @see #implementListener()
          * @see #createPopupMenu()
          */
-        public BufferDisplay(IHMImpl ihm, HashMap commands){
+        public BufferDisplay(IHMImpl ihm, Map commands){
             this.ihmAssocie = ihm;
             this.commands = commands;
             setEditable(false);

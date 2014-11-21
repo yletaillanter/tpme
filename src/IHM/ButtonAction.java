@@ -5,6 +5,7 @@ import commandes.Commande;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.HashMap;
+import java.util.Map;
 
 /**
  * Created by Yoann Le Taillanter on 05/11/2014.
@@ -12,9 +13,9 @@ import java.util.HashMap;
 public class ButtonAction implements ActionListener {
 
     /**
-     * HashMap de Commandes et de leur nom
+     * Map de Commandes et de leur nom
      */
-    private HashMap<String, Commande> commands;
+    private Map<String, Commande> commands;
 
     /**
      * Nom de la commande
@@ -29,7 +30,7 @@ public class ButtonAction implements ActionListener {
      * @param commands
      *      La HashMap de commandes
      */
-    public ButtonAction(String commandName, HashMap commands){
+    public ButtonAction(String commandName, Map<String, Commande> commands){
         this.commandName = commandName;
         this.commands = commands;
     }

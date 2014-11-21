@@ -6,15 +6,14 @@ import commandes.*;
 import Moteur.MoteurEdition;
 import Moteur.MoteurEditionImpl;
 
-import javax.swing.*;
 
 /**
  * Created by Yoann Le Taillanter on 22/10/2014.
  */
 class Client{
-    public IHMImpl ihm;
-    MoteurEdition moteur;
-    Enregistreur enregistreur;
+    private IHMImpl ihm;
+    private MoteurEdition moteur;
+    private Enregistreur enregistreur;
 
     public static void main(String[] Args) {
         Client client = new Client();
@@ -25,7 +24,7 @@ class Client{
     private void run() {
         moteur = new MoteurEditionImpl();
         ihm = new IHMImpl();
-        moteur.getBuffer().register(ihm);
+        moteur.getBuffer(). register(ihm);
         enregistreur = new EnregistreurImpl();
         this.configureCommand();
 

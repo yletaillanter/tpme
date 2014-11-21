@@ -51,7 +51,7 @@ public class CommandeCollerTexte implements Commande {
 
     @Override
     public Memento getMemento() {
-        return new mementoColler();
+        return new MementoColler();
     }
 
     @Override
@@ -59,11 +59,11 @@ public class CommandeCollerTexte implements Commande {
         // Pas d'état à restaurer
     }
 
-    private class mementoColler implements Memento{
+    private class MementoColler implements Memento{
 
         // Pas d'état à sauvegarder.
 
-        public mementoColler(){
+        public MementoColler(){
         }
     }
 }

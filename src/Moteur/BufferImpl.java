@@ -4,6 +4,7 @@ import Observer.Observer;
 import Observer.Subject;
 
 import java.util.ArrayList;
+import java.util.List;
 
 /**
  * Created by Yoann Le Taillanter on 22/10/2014.
@@ -15,10 +16,10 @@ public class BufferImpl<T> implements Buffer, Subject<T> {
      *
      * @see Observer
      */
-    private ArrayList<Observer<T>> registeredObservers;
+    private List<Observer<T>> registeredObservers;
 
     /**
-     * bufferImpl static pour le singleton.
+     * buffer static pour le singleton.
      *
      * @see Moteur.Buffer
      */
@@ -43,7 +44,7 @@ public class BufferImpl<T> implements Buffer, Subject<T> {
      * Retourne l'instance de bufferImpl, la créer si elle n'existe pas.
      * @return instance of BufferImpl
      */
-    public static BufferImpl getBufferInstance(){
+    public static BufferImpl getBufferInstance() {
         if(buffer == null)
             buffer = new BufferImpl();
         return buffer;
@@ -145,15 +146,4 @@ public class BufferImpl<T> implements Buffer, Subject<T> {
             o.doUpdate(this);
         }
     }
-/*
-    @Override
-    public T getValue() {
-        return null;
-    }
-
-    @Override
-    public void setValue(T v) {
-
-    }
-    */
 }

@@ -51,8 +51,11 @@ public class MoteurEditionImpl implements MoteurEdition {
      */
     @Override
     public void copier() {
-        //if(buffer.getLength()>)
-        pp.setPressePapierContent(buffer.getContentAt(selection.getDebut(),selection.getFin()));
+        pp.setPressePapierContent(
+                buffer.getContentAt(
+                        selection.getDebut(),selection.getFin()
+                )
+        );
     }
 
     /**
@@ -84,7 +87,7 @@ public class MoteurEditionImpl implements MoteurEdition {
     @Override
     public void coller(){
         buffer.addContentAtPosition(pp.getPressePapierContent(), selection.getDebut());
-        logger.log(Level.INFO,"coller : "+selection.getDebut() + " le texte : "+ (pp.getPressePapierContent() ));
+        //logger.log(Level.INFO,"coller : "+selection.getDebut());
     }
 
     /**
@@ -95,7 +98,11 @@ public class MoteurEditionImpl implements MoteurEdition {
      */
     @Override
     public void couper(){
-        pp.setPressePapierContent(buffer.getContentAt(selection.getDebut(),selection.getFin()));
+        pp.setPressePapierContent(
+                buffer.getContentAt(
+                        selection.getDebut(),selection.getFin()
+                )
+        );
         buffer.deleteContent(selection.getDebut(),selection.getFin());
         //logger.log(Level.INFO,"couper");
     }
