@@ -25,13 +25,26 @@ public class SelectionImplTest {
 
     @Test
     public void setTest() {
-        int[] valuesTest = {0, 1, 2, 3, 100, -5, -50};
+        int[] valuesTest = {0, 1, 2, 3, 100, 1000};
 
         for (int i = 0; i < valuesTest.length; i++) {
-            selection.setDebut(i);
-            Assert.assertEquals(i, selection.getDebut());
-            selection.setFin(i);
-            Assert.assertEquals(i, selection.getFin());
+            selection.setDebut(valuesTest[i]);
+            Assert.assertEquals(valuesTest[i], selection.getDebut());
+
+            selection.setFin(valuesTest[i]);
+            Assert.assertEquals(valuesTest[i], selection.getFin());
         }
     }
+
+    @Test(expected = IllegalArgumentException.class)
+    public void setTestDebutnegative() {
+        selection.setDebut(-5);
+    }
+
+    @Test(expected = IllegalArgumentException.class)
+    public void setTestFinnegative() {
+        selection.setFin(-10);
+    }
+
+
 }
