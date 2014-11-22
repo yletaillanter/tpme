@@ -3,7 +3,7 @@ package Observer;
 /**
  * Created by Yoann on 31/10/2014.
  */
-public interface Subject<T> {
+public interface Subject {
     /******** Observers' management ********/
 
     /**
@@ -12,7 +12,7 @@ public interface Subject<T> {
      * @param o the observer to add to the set
      * @throws IllegalArgumentException if o is null or already registered
      */
-    void register(Observer<T> o) throws IllegalArgumentException;
+    void register(Observer o) throws IllegalArgumentException;
 
     /**
      * Removes an observer from the registered observers set in this
@@ -20,7 +20,7 @@ public interface Subject<T> {
      * @param o the observer to remove
      * @throws IllegalArgumentException if o is null or unregistered
      */
-    void unregister(Observer<T> o) throws IllegalArgumentException;
+    void unregister(Observer o) throws IllegalArgumentException;
 
     /**
      * Checks whether an observer is registered
@@ -29,7 +29,7 @@ public interface Subject<T> {
      * @return true iff o is already in the registered observers' set of this
      * @throws IllegalArgumentException if o is null
      */
-    boolean isRegistered(Observer<T> o);
+    boolean isRegistered(Observer o);
 
     /******** Value management ********/
 

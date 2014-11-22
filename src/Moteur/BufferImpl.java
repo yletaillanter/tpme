@@ -9,14 +9,14 @@ import java.util.List;
 /**
  * Created by Yoann Le Taillanter on 22/10/2014.
  */
-public class BufferImpl<T> implements Buffer, Subject<T> {
+public class BufferImpl implements Buffer, Subject {
 
     /**
      * Contient la liste des Observers du BufferImpl.
      *
      * @see Observer
      */
-    private List<Observer<T>> registeredObservers;
+    private List<Observer> registeredObservers;
 
     /**
      * buffer static pour le singleton.
@@ -37,7 +37,7 @@ public class BufferImpl<T> implements Buffer, Subject<T> {
      */
     private BufferImpl(){
         innerBuffer = new StringBuilder();
-        registeredObservers = new ArrayList<Observer<T>>();
+        registeredObservers = new ArrayList<Observer>();
     }
 
     /**
@@ -118,7 +118,7 @@ public class BufferImpl<T> implements Buffer, Subject<T> {
     }
 
     @Override
-    public void register(Observer<T> o) throws IllegalArgumentException {
+    public void register(Observer o) throws IllegalArgumentException {
         if (registeredObservers.contains(o)) {
             throw new IllegalArgumentException("o is registered already");
         }
@@ -126,7 +126,7 @@ public class BufferImpl<T> implements Buffer, Subject<T> {
     }
 
     @Override
-    public void unregister(Observer<T> o) throws IllegalArgumentException {
+    public void unregister(Observer o) throws IllegalArgumentException {
         if (!registeredObservers.contains(o)) {
             throw new IllegalArgumentException("o is not registered");
         }
@@ -134,7 +134,7 @@ public class BufferImpl<T> implements Buffer, Subject<T> {
     }
 
     @Override
-    public boolean isRegistered(Observer<T> o) {
+    public boolean isRegistered(Observer o) {
         if (o == null) {
             throw new IllegalArgumentException("o is null");
         }
@@ -142,7 +142,7 @@ public class BufferImpl<T> implements Buffer, Subject<T> {
     }
 
     private void update(){
-        for (Observer<T> o : registeredObservers) {
+        for (Observer o : registeredObservers) {
             o.doUpdate(this);
         }
     }
