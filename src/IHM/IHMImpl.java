@@ -16,7 +16,7 @@ import java.util.logging.Logger;
 /**
  * Created by Yoann Le Taillanter on 22/10/2014.
  */
-public class IHMImpl<T> extends JFrame implements IHM, Observer<T> {
+public class IHMImpl extends JFrame implements IHM, Observer {
 
     private Logger logger = Logger.getLogger("tpme.IHM.IHMImpl");
     private Map<String, Commande> commands;
@@ -202,7 +202,7 @@ public class IHMImpl<T> extends JFrame implements IHM, Observer<T> {
     }
 
     @Override
-    public void doUpdate(Subject<T> s) {
+    public void doUpdate(Subject s) {
         if (s instanceof BufferImpl) {
             bufferDisplay.setText(((BufferImpl) s).getContent());
             numberOfCharacter.setText("Nombre de Caractères : " + ((BufferImpl) s).getLength());
