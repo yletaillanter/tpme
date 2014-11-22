@@ -20,6 +20,7 @@ public class IHMImpl extends JFrame implements IHM, Observer {
 
     private Logger logger = Logger.getLogger("tpme.IHM.IHMImpl");
     private Map<String, Commande> commands;
+    private Map<String, Commande> commandsCopy;
     private JButton copyButton, pasteButton, cutButton, insertButton, deleteRight, deleteLeft, start, stop, play;
     private Image recIcon;
     private JTextField userInput;
@@ -64,7 +65,8 @@ public class IHMImpl extends JFrame implements IHM, Observer {
         upperPanel = new JPanel();
         upperPanel.setLayout(new BorderLayout());
 
-        bufferDisplay = new BufferDisplay(this,this.commands);
+        commandsCopy = commands;
+        bufferDisplay = new BufferDisplay(this, this.commandsCopy);
 
         //Ajout des boutons
         buttonToolbar = new JToolBar();
