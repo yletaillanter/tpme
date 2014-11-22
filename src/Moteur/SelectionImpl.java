@@ -43,6 +43,8 @@ public class SelectionImpl implements Selection {
      */
     @Override
     public void setDebut(int debut) {
+        if (debut < 0)
+            throw new IllegalArgumentException("can't be < 0");
         this.debut = debut;
     }
 
@@ -61,6 +63,8 @@ public class SelectionImpl implements Selection {
      */
     @Override
     public void setFin(int fin) {
+        if (fin < 0)
+            throw new IllegalArgumentException("can't be < 0");
         this.fin = fin;
     }
 }
