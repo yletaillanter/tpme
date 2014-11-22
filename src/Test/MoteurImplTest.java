@@ -84,9 +84,9 @@ static MoteurEdition moteur;
         moteur.copier();
         Assert.assertEquals(moteur.getBuffer().getContentAt(4, 10), moteur.getPressePapier().getPressePapierContent());
 
-        //moteur.selectionner(-1, 5);
-        //moteur.copier();
-        //Assert.assertEquals(moteur.getBuffer().getContentAt(0,5),moteur.getPressePapier().getPressePapierContent());
+        moteur.selectionner(-1, 5);
+        moteur.copier();
+        Assert.assertEquals(moteur.getBuffer().getContentAt(0, 5), moteur.getPressePapier().getPressePapierContent());
     }
 
 

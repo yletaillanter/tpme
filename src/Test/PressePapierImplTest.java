@@ -16,7 +16,7 @@ public class PressePapierImplTest {
 
     @Before
     public void setUp() throws Exception {
-    pp = PressePapierImpl.getPressePapierInstance();
+        pp = new PressePapierImpl();
     }
 
 
