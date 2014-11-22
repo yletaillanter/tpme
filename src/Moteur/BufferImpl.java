@@ -18,12 +18,6 @@ public class BufferImpl implements Buffer, Subject {
      */
     private List<Observer> registeredObservers;
 
-    /**
-     * buffer static pour le singleton.
-     *
-     * @see Moteur.Buffer
-     */
-    private static BufferImpl buffer;
 
     /**
      * StringBuilder, le vrai buffer.
@@ -33,21 +27,11 @@ public class BufferImpl implements Buffer, Subject {
     /**
      * Constructeur privé du bufferImpl.
      *
-     * Le StringBuilder et l'ArrayList d'Observer sont instanciés.     *
+     * Le StringBuilder et l'ArrayList d'Observer sont instanciés.
      */
-    private BufferImpl(){
+    public BufferImpl() {
         innerBuffer = new StringBuilder();
         registeredObservers = new ArrayList<Observer>();
-    }
-
-    /**
-     * Retourne l'instance de bufferImpl, la créer si elle n'existe pas.
-     * @return instance of BufferImpl
-     */
-    public static BufferImpl getBufferInstance() {
-        if(buffer == null)
-            buffer = new BufferImpl();
-        return buffer;
     }
 
     /**

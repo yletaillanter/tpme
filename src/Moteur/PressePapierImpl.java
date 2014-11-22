@@ -23,18 +23,9 @@ public class PressePapierImpl implements PressePapier {
     private String pressePapier;
 
     /**
-     * Constructeur privé du PressePapierImpl.
+     * Constructeur du PressePapierImpl.
      */
-    private PressePapierImpl(){}
-
-    /**
-     * Retourne l'instance de PressePapier, la créer si elle n'existe pas.     *
-     * @return instance of PressePapier
-     */
-    public static PressePapier getPressePapierInstance(){
-        if(pp == null)
-            pp = new PressePapierImpl();
-        return pp;
+    public PressePapierImpl() {
     }
 
     /**

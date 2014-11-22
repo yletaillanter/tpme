@@ -6,13 +6,6 @@ package Moteur;
 public class SelectionImpl implements Selection {
 
     /**
-     * Selection static pour le singleton.
-     *
-     * @see Moteur.SelectionImpl
-     */
-    private static Selection select;
-
-    /**
      * début de la sélection
      */
     private int debut;
@@ -24,23 +17,13 @@ public class SelectionImpl implements Selection {
 
 
     /**
-     * Constructeur privé de la SelectionImpl.
+     * Constructeur de la SelectionImpl.
      *
      * debut et fin sont initialisé à 0.
      */
-    private SelectionImpl(){
+    public SelectionImpl() {
         this.debut = 0;
         this.fin = 0;
-    }
-
-    /**
-     * Retourne l'instance de SelectionImpl, la créer si elle n'existe pas.
-     * @return instance of SelectionImpl
-     */
-    public static Selection getSelectionInstance(){
-        if(select == null)
-            select = new SelectionImpl();
-        return select;
     }
 
     //******* Getters and setters ***********

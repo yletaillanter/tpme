@@ -38,9 +38,9 @@ public class MoteurEditionImpl implements MoteurEdition {
      * @see Moteur.PressePapierImpl
      */
     public MoteurEditionImpl(){
-        this.buffer = BufferImpl.getBufferInstance();
-        this.selection = SelectionImpl.getSelectionInstance() ;
-        this.pp = PressePapierImpl.getPressePapierInstance();
+        this.buffer = new BufferImpl();
+        this.selection = new SelectionImpl();
+        this.pp = new PressePapierImpl();
     }
 
     /**
