@@ -175,7 +175,9 @@ public class IHMImpl extends JFrame implements IHM, Observer {
         return userInput.getText();
     }
 
-    public void addCommand(Commande command,String key ){
+    public void addCommand(Commande command, String key) {
+        if (commands.containsValue(command))
+            throw new IllegalArgumentException("command is added already");
         this.commands.put(key,command);
     }
 
