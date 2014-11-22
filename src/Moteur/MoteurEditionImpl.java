@@ -117,6 +117,10 @@ public class MoteurEditionImpl implements MoteurEdition {
      */
     @Override
     public void selectionner(int dot, int mark){
+        if (dot < 0)
+            dot = 0;
+        if (mark < 0)
+            mark = 0;
         if(dot>=mark){
             selection.setDebut(mark);
             selection.setFin(dot);
