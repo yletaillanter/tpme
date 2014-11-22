@@ -61,6 +61,7 @@ public class CommandeInsererTexte implements Commande {
     public void execute(){
         enregistreur.save( this );
         moteur.inserer(ihm.getInputUser(),ihm.retourChariotIsChecked());
+        ihm.setInputUser("");
     }
 
     // Surcharge d'execute pour que le memento utilise l'état sauvegardé.

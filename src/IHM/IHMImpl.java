@@ -151,15 +151,16 @@ public class IHMImpl extends JFrame implements IHM, Observer {
      * Definit les actions propres aux boutons + la checkBox.
      */
     private void setButtonAction(){
-        copyButton.addActionListener(new ButtonAction("Copy", this.commands));
-        pasteButton.addActionListener(new ButtonAction("Paste", this.commands));
-        cutButton.addActionListener(new ButtonAction("Cut", this.commands));
-        insertButton.addActionListener(new ButtonAction("Insert", this.commands));
-        deleteLeft.addActionListener(new ButtonAction("DeleteLeft", this.commands));
-        deleteRight.addActionListener(new ButtonAction("DeleteRight", this.commands));
-        start.addActionListener(new ButtonAction("Start", this.commands));
-        stop.addActionListener(new ButtonAction("Stop", this.commands));
-        play.addActionListener(new ButtonAction("Play", this.commands));
+        commandsCopy = commands;
+        copyButton.addActionListener(new ButtonAction("Copy", this.commandsCopy));
+        pasteButton.addActionListener(new ButtonAction("Paste", this.commandsCopy));
+        cutButton.addActionListener(new ButtonAction("Cut", this.commandsCopy));
+        insertButton.addActionListener(new ButtonAction("Insert", this.commandsCopy));
+        deleteLeft.addActionListener(new ButtonAction("DeleteLeft", this.commandsCopy));
+        deleteRight.addActionListener(new ButtonAction("DeleteRight", this.commandsCopy));
+        start.addActionListener(new ButtonAction("Start", this.commandsCopy));
+        stop.addActionListener(new ButtonAction("Stop", this.commandsCopy));
+        play.addActionListener(new ButtonAction("Play", this.commandsCopy));
 
         retourChariot.addItemListener(new ItemListener() {
             @Override
@@ -173,6 +174,10 @@ public class IHMImpl extends JFrame implements IHM, Observer {
 
     public String getInputUser(){
         return userInput.getText();
+    }
+
+    public void setInputUser(String content) {
+        userInput.setText(content);
     }
 
     public void addCommand(Commande command, String key) {

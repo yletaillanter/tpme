@@ -23,6 +23,8 @@ public interface IHM {
      */
     public String getInputUser();
 
+    public void setInputUser(String content);
+
     /**
      *
      * @param dot
