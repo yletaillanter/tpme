@@ -87,6 +87,10 @@ public class BufferImpl implements Buffer, Subject {
      *      Fin de la séléction
      */
     public void deleteContent(int deb,int fin){
+        if (deb < 0)
+            deb = 0;
+        if (fin < 0)
+            fin = 0;
         innerBuffer.delete(deb,fin);
         update();
     }

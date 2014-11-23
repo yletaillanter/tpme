@@ -1,7 +1,6 @@
 package Test;
-import Moteur.Buffer;
 import Moteur.BufferImpl;
-import junit.framework.Assert;
+import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
 
@@ -11,7 +10,7 @@ import org.junit.Test;
  * Created by Yoann on 09/11/2014.
  */
 public class BufferImplTest {
-    private Buffer buffer;
+    private BufferImpl buffer;
     private String stringTest;
 
     @Before
@@ -47,14 +46,28 @@ public class BufferImplTest {
         Assert.assertEquals("TEST", buffer.getContentAt(73, (73 + stringTest.length())));
     }
 
+    @Test
+    public void deleteContentTest() {
+        buffer.addContent(stringTest);
+        buffer.deleteContent(11, buffer.getLength());
+        Assert.assertEquals("Lorem ipsum", buffer.getContent());
+
+        buffer.deleteContent(-150, 150);
+        Assert.assertEquals("", buffer.getContent());
+    }
+
+    @Test
+    public void getLengthTest() {
+        Assert.assertEquals(0, buffer.getLength());
+        buffer.addContent("Lorem ipsum");
+        Assert.assertEquals(11, buffer.getLength());
+        buffer.deleteContent(1, 11);
+        Assert.assertEquals(1, buffer.getLength());
+    }
+/*
     @Test(expected = IllegalArgumentException.class)
     public void registerTest() {
     }
 
-
-
-
-
-
-
+*/
 }
