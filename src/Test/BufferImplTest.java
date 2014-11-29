@@ -40,6 +40,7 @@ public class BufferImplTest {
 
     @Test
     public void addContentAtPositionTest() {
+        buffer.addContent(stringTest);
         stringTest = "TEST";
 
         buffer.addContentAtPosition("TEST", 73);
