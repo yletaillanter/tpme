@@ -2,6 +2,8 @@ package IHM;
 
 import Memento.Enregistreur;
 import Memento.EnregistreurImpl;
+import UndoRedo.UndoRedoManager;
+import UndoRedo.UndoRedoManagerImpl;
 import commandes.*;
 import Moteur.MoteurEdition;
 import Moteur.MoteurEditionImpl;
@@ -14,6 +16,7 @@ class Client {
     private IHMImpl ihm;
     private MoteurEdition moteur;
     private Enregistreur enregistreur;
+    private UndoRedoManager manager;
 
     public static void main(String[] Args) {
         Client client = new Client();
@@ -32,6 +35,7 @@ class Client {
         }
 
         enregistreur = new EnregistreurImpl();
+        manager = new UndoRedoManagerImpl();
         this.configureCommand();
 
         /*
@@ -52,6 +56,8 @@ class Client {
             ihm.addCommand(new CommandeStart(enregistreur), "Start");
             ihm.addCommand(new CommandeStop(enregistreur), "Stop");
             ihm.addCommand(new CommandePlay(enregistreur), "Play");
+            ihm.addCommand(new CommandeUndo(manager), "Undo");
+            ihm.addCommand(new CommandeRedo(manager), "Redo");
         } catch (IllegalArgumentException e) {
             e.printStackTrace();
         }

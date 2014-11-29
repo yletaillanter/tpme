@@ -21,7 +21,7 @@ public class IHMImpl extends JFrame implements IHM, Observer {
     private Logger logger = Logger.getLogger("tpme.IHM.IHMImpl");
     private Map<String, Commande> commands;
     private Map<String, Commande> commandsCopy;
-    private JButton copyButton, pasteButton, cutButton, insertButton, deleteRight, deleteLeft, start, stop, play;
+    private JButton copyButton, pasteButton, cutButton, insertButton, deleteRight, deleteLeft, start, stop, play, undo, redo;
     private Image recIcon;
     private JTextField userInput;
     private JTextField numberOfCharacter;
@@ -90,6 +90,8 @@ public class IHMImpl extends JFrame implements IHM, Observer {
         buttonToolbar.add(start);
         buttonToolbar.add(stop);
         buttonToolbar.add(play);
+        buttonToolbar.add(undo);
+        buttonToolbar.add(redo);
         buttonToolbar.add(retourChariot);
 
         setButtonAction();
@@ -165,6 +167,8 @@ public class IHMImpl extends JFrame implements IHM, Observer {
         start.addActionListener(new ButtonAction("Start", this.commandsCopy));
         stop.addActionListener(new ButtonAction("Stop", this.commandsCopy));
         play.addActionListener(new ButtonAction("Play", this.commandsCopy));
+        undo.addActionListener(new ButtonAction("Undo", this.commandsCopy));
+        redo.addActionListener(new ButtonAction("Redo", this.commandsCopy));
 
         retourChariot.addItemListener(new ItemListener() {
             @Override
