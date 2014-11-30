@@ -52,11 +52,16 @@ public class PressePapierImpl implements PressePapier {
     }
 
     @Override
-    public Memento getMemento() {
+    public PressePapierMemento getMemento() {
         return new PressePapierMemento(pressePapier);
     }
 
-    private class PressePapierMemento implements Memento {
+    @Override
+    public void setMemento(PressePapierMemento memento) {
+        setPressePapierContent(memento.getPressePapierMemento());
+    }
+
+    public class PressePapierMemento implements Memento {
 
         private String pressePapierMemento;
 
@@ -64,6 +69,13 @@ public class PressePapierImpl implements PressePapier {
             this.pressePapierMemento = pressePapierMemento;
         }
 
+        public void setPressePapierMemento(String pressePapierMemento) {
+            this.pressePapierMemento = pressePapierMemento;
+        }
+
+        public String getPressePapierMemento() {
+            return pressePapierMemento;
+        }
     }
 
 }

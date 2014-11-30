@@ -59,7 +59,6 @@ public class MoteurEditionImpl implements MoteurEdition {
         buffer = new BufferImpl();
         selection = new SelectionImpl();
         pp = new PressePapierImpl();
-        undoRedoManager = new UndoRedoManagerImpl();
         counter = 0;
     }
 
@@ -230,17 +229,32 @@ public class MoteurEditionImpl implements MoteurEdition {
         return pp;
     }
 
+    public void setUndoRedoManager(UndoRedoManager undoRedoManager) {
+        this.undoRedoManager = undoRedoManager;
+    }
+
     public void save(){
         if(counter%5 == 0)
             undoRedoManager.save(this);
     }
 
+    /**
+     * Retourne un objet contenant l'état du moteur (de ses composants)
+     * @return MoteurEditionMemento contenant Selection, buffer et pressePapier Memento
+     */
     public MoteurEditionMemento getMemento(){
-        return new MoteurEditionMemento(
-                selection.getMemento(),
-                pp.getMemento(),
-                buffer.getMemento()
-        );
+        return new MoteurEditionMemento(selection.getMemento(),buffer.getMemento(),pp.getMemento());
     }
+
+    /**
+     *
+     */
+    public void setMemento(MoteurEditionMemento memento){
+        selection.setMemento(memento.getSelectionMemento());
+        pp.setMemento(memento.getPressePapierMemento());
+        buffer.setMemento(memento.getBufferMemento());
+    }
+
+
 
 }

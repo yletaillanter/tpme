@@ -13,10 +13,14 @@ import java.util.logging.Logger;
 public class UndoRedoManagerImpl implements UndoRedoManager {
 
     private Stack<MoteurEditionMemento> pileDeMemento;
+    private Stack<MoteurEditionMemento> pileDeMementoRedo;
     Logger logger = Logger.getLogger("UndoRedo.UndoRedoManagerImpl");
+    private MoteurEdition moteur;
 
-    public UndoRedoManagerImpl(){
+    public UndoRedoManagerImpl(MoteurEdition moteur){
+        this.moteur = moteur;
         pileDeMemento = new Stack<MoteurEditionMemento>();
+        pileDeMementoRedo = new Stack<MoteurEditionMemento>();
     }
 
     @Override
@@ -27,7 +31,8 @@ public class UndoRedoManagerImpl implements UndoRedoManager {
 
     @Override
     public void undo() {
-
+        pileDeMementoRedo.push(moteur.getMemento());
+        moteur.setMemento(pileDeMemento.pop());
     }
 
     @Override

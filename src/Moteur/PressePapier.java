@@ -20,5 +20,7 @@ public interface PressePapier {
      */
     public String getPressePapierContent();
 
-    public Memento getMemento();
+    public PressePapierImpl.PressePapierMemento getMemento();
+
+    public void setMemento(PressePapierImpl.PressePapierMemento memento);
 }

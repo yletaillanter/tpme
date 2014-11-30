@@ -35,7 +35,8 @@ class Client {
         }
 
         enregistreur = new EnregistreurImpl();
-        manager = new UndoRedoManagerImpl();
+        manager = new UndoRedoManagerImpl(moteur);
+        moteur.setUndoRedoManager(manager);
         this.configureCommand();
 
         /*

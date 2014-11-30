@@ -1,6 +1,8 @@
 package Moteur;
 
 import Memento.Memento;
+import UndoRedo.MoteurEditionMemento;
+
 /**
  * Created by Yoann Le Taillanter on 22/10/2014.
  */
@@ -34,5 +36,6 @@ public interface Selection {
      */
     public void setFin(int fin);
 
-    public Memento getMemento();
+    public SelectionImpl.SelectionMemento getMemento();
+    public void setMemento(SelectionImpl.SelectionMemento memento);
 }

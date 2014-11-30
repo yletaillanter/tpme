@@ -133,11 +133,16 @@ public class BufferImpl implements Buffer, Subject {
     }
 
     @Override
-    public Memento getMemento() {
+    public BufferImpl.BufferMemento getMemento() {
         return new BufferMemento(innerBuffer);
     }
 
-    private class BufferMemento implements Memento {
+    @Override
+    public void setMemento(BufferMemento memento) {
+
+    }
+
+    public class BufferMemento implements Memento {
 
         StringBuilder innerBufferMemento;
 
@@ -145,6 +150,13 @@ public class BufferImpl implements Buffer, Subject {
             this.innerBufferMemento = innerBufferMemento;
         }
 
+        public StringBuilder getInnerBufferMemento() {
+            return innerBufferMemento;
+        }
+
+        public void setInnerBufferMemento(StringBuilder innerBufferMemento) {
+            this.innerBufferMemento = innerBufferMemento;
+        }
     }
 
 }

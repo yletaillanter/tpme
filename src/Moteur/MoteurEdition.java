@@ -1,6 +1,7 @@
 package Moteur;
 
 import UndoRedo.MoteurEditionMemento;
+import UndoRedo.UndoRedoManager;
 
 import javax.swing.text.Caret;
 
@@ -72,4 +73,8 @@ public interface MoteurEdition {
     //public Selection getSelectionImpl();
 
     public MoteurEditionMemento getMemento();
+
+    public void setMemento(MoteurEditionMemento memento);
+
+    public void setUndoRedoManager(UndoRedoManager undoRedoManager);
 }

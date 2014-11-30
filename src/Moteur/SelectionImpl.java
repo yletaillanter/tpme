@@ -1,6 +1,7 @@
 package Moteur;
 
 import Memento.Memento;
+import UndoRedo.MoteurEditionMemento;
 
 /**
  * Created by Yoann Le Taillanter on 22/10/2014.
@@ -75,22 +76,38 @@ public class SelectionImpl implements Selection {
     }
 
     @Override
-    public Memento getMemento() {
+    public SelectionMemento getMemento() {
         return new SelectionMemento(debut,fin);
     }
 
-    public void setMemento(Memento memento) {
+    public void setMemento(SelectionMemento memento) {
         // Restaure l'état  en remplacant l'input user.
-        SelectionMemento selectionMemento = (SelectionMemento) memento;
-
+        setDebut(memento.getDebut());
+        setFin(memento.getFin());
     }
 
-    private class SelectionMemento implements Memento{
+    public class SelectionMemento implements Memento{
         private int debut;
         private int fin;
 
         public SelectionMemento(int debut, int fin){
             this.debut = debut;
+            this.fin = fin;
+        }
+
+        public int getDebut() {
+            return debut;
+        }
+
+        public void setDebut(int debut) {
+            this.debut = debut;
+        }
+
+        public int getFin() {
+            return fin;
+        }
+
+        public void setFin(int fin) {
             this.fin = fin;
         }
     }

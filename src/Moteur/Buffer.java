@@ -52,6 +52,8 @@ public interface Buffer {
      */
     public int getLength();
 
-    public Memento getMemento();
+    public BufferImpl.BufferMemento getMemento();
+
+    public void setMemento(BufferImpl.BufferMemento memento);
 
 }
