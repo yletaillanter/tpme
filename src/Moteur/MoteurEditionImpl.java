@@ -59,7 +59,7 @@ public class MoteurEditionImpl implements MoteurEdition {
         buffer = new BufferImpl();
         selection = new SelectionImpl();
         pp = new PressePapierImpl();
-        counter = 0;
+        counter = 1;
     }
 
     /**
@@ -154,7 +154,7 @@ public class MoteurEditionImpl implements MoteurEdition {
             selection.setDebut(dot);
             selection.setFin(mark);
         }
-        counter++;
+        //counter++;
         save();
     }
 
@@ -254,7 +254,5 @@ public class MoteurEditionImpl implements MoteurEdition {
         pp.setMemento(memento.getPressePapierMemento());
         buffer.setMemento(memento.getBufferMemento());
     }
-
-
 
 }

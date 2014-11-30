@@ -92,6 +92,16 @@ public class BufferImpl implements Buffer, Subject {
         update();
     }
 
+    public void setInnerBuffer(StringBuilder innerBuffer) {
+        this.innerBuffer = innerBuffer;
+        update();
+    }
+
+    @Override
+    public void clear() {
+        innerBuffer.delete(0, innerBuffer.length());
+    }
+
     /**
      * Permet d'obtenir la taille du buffer.
      *
@@ -139,6 +149,7 @@ public class BufferImpl implements Buffer, Subject {
 
     @Override
     public void setMemento(BufferMemento memento) {
+        setInnerBuffer(memento.getInnerBufferMemento());
 
     }
 
@@ -147,7 +158,8 @@ public class BufferImpl implements Buffer, Subject {
         StringBuilder innerBufferMemento;
 
         public BufferMemento(StringBuilder innerBufferMemento){
-            this.innerBufferMemento = innerBufferMemento;
+            this.innerBufferMemento = new StringBuilder();
+            this.innerBufferMemento.append(innerBufferMemento.toString());
         }
 
         public StringBuilder getInnerBufferMemento() {
