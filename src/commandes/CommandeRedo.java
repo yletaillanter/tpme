@@ -16,7 +16,7 @@ public class CommandeRedo implements Commande {
 
     @Override
     public void execute() {
-
+        manager.redo();
     }
 
     @Override

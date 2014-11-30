@@ -1,5 +1,7 @@
 package Moteur;
 
+import Memento.Memento;
+
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
@@ -48,4 +50,20 @@ public class PressePapierImpl implements PressePapier {
     public String getPressePapierContent() {
         return pressePapier;
     }
+
+    @Override
+    public Memento getMemento() {
+        return new PressePapierMemento(pressePapier);
+    }
+
+    private class PressePapierMemento implements Memento {
+
+        private String pressePapierMemento;
+
+        public PressePapierMemento(String pressePapierMemento){
+            this.pressePapierMemento = pressePapierMemento;
+        }
+
+    }
+
 }

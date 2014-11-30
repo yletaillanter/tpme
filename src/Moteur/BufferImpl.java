@@ -1,5 +1,6 @@
 package Moteur;
 
+import Memento.Memento;
 import Observer.Observer;
 import Observer.Subject;
 
@@ -130,4 +131,20 @@ public class BufferImpl implements Buffer, Subject {
             o.doUpdate(this);
         }
     }
+
+    @Override
+    public Memento getMemento() {
+        return new BufferMemento(innerBuffer);
+    }
+
+    private class BufferMemento implements Memento {
+
+        StringBuilder innerBufferMemento;
+
+        public BufferMemento(StringBuilder innerBufferMemento){
+            this.innerBufferMemento = innerBufferMemento;
+        }
+
+    }
+
 }

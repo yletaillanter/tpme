@@ -1,5 +1,7 @@
 package Moteur;
 
+import Memento.Memento;
+
 /**
  * Created by Yoann Le Taillanter on 22/10/2014.
  */
@@ -17,4 +19,6 @@ public interface PressePapier {
      * @return contenu du presse-papier
      */
     public String getPressePapierContent();
+
+    public Memento getMemento();
 }

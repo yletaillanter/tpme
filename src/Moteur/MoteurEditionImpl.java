@@ -1,6 +1,7 @@
 package Moteur;
 
 import Memento.Memento;
+import UndoRedo.MoteurEditionMemento;
 import UndoRedo.UndoRedoManager;
 import UndoRedo.UndoRedoManagerImpl;
 
@@ -42,6 +43,11 @@ public class MoteurEditionImpl implements MoteurEdition {
     private UndoRedoManager undoRedoManager;
 
     /**
+     *  Comteur d'action pour l'Undo/Redo
+     */
+    private int counter;
+
+    /**
      * Constructeur du <i>MoteurEditionImpl</i>
      * Créer le moteur puis initialise les buffer, selection et presse-papier.
      *
@@ -50,10 +56,11 @@ public class MoteurEditionImpl implements MoteurEdition {
      * @see Moteur.PressePapierImpl
      */
     public MoteurEditionImpl() {
-        this.buffer = new BufferImpl();
-        this.selection = new SelectionImpl();
-        this.pp = new PressePapierImpl();
-        this.undoRedoManager = new UndoRedoManagerImpl();
+        buffer = new BufferImpl();
+        selection = new SelectionImpl();
+        pp = new PressePapierImpl();
+        undoRedoManager = new UndoRedoManagerImpl();
+        counter = 0;
     }
 
     /**
@@ -69,6 +76,8 @@ public class MoteurEditionImpl implements MoteurEdition {
                         selection.getDebut(), selection.getFin()
                 )
         );
+        counter++;
+        save();
     }
 
     /**
@@ -86,6 +95,9 @@ public class MoteurEditionImpl implements MoteurEdition {
         } else
             buffer.addContentAtPosition(txt, selection.getDebut());
 
+        counter++;
+        save();
+        logger.log(Level.INFO,"cuonter = " + counter );
         //System.out.println(buffer.getContent());
     }
 
@@ -98,6 +110,8 @@ public class MoteurEditionImpl implements MoteurEdition {
     @Override
     public void coller() {
         buffer.addContentAtPosition(pp.getPressePapierContent(), selection.getDebut());
+        counter++;
+        save();
         //logger.log(Level.INFO,"coller : "+selection.getDebut());
     }
 
@@ -115,6 +129,9 @@ public class MoteurEditionImpl implements MoteurEdition {
                 )
         );
         buffer.deleteContent(selection.getDebut(), selection.getFin());
+        counter++;
+        save();
+
         //logger.log(Level.INFO,"couper");
     }
 
@@ -138,6 +155,8 @@ public class MoteurEditionImpl implements MoteurEdition {
             selection.setDebut(dot);
             selection.setFin(mark);
         }
+        counter++;
+        save();
     }
 
     /**
@@ -161,6 +180,8 @@ public class MoteurEditionImpl implements MoteurEdition {
 
         selection.setDebut(test);
         selection.setFin(test);
+        counter++;
+        save();
         //logger.log(Level.INFO,"supprimerDroite");
     }
 
@@ -187,6 +208,8 @@ public class MoteurEditionImpl implements MoteurEdition {
             } else
                 buffer.deleteContent(selection.getDebut(), selection.getFin());
         }
+        counter++;
+        save();
     }
     //logger.log(Level.INFO,""+dot);
     //logger.log(Level.INFO,""+mark);
@@ -208,7 +231,8 @@ public class MoteurEditionImpl implements MoteurEdition {
     }
 
     public void save(){
-        undoRedoManager.save(this);
+        if(counter%5 == 0)
+            undoRedoManager.save(this);
     }
 
     public MoteurEditionMemento getMemento(){
@@ -217,37 +241,6 @@ public class MoteurEditionImpl implements MoteurEdition {
                 pp.getMemento(),
                 buffer.getMemento()
         );
-    }
-
-
-
-
-    // ############################ MEMENTO ################################################################ //
-    public class MoteurEditionMemento implements Memento {
-
-        private Memento selectionMemento;
-        private Memento bufferMemento;
-        private Memento pressePapierMemento;
-
-
-        public MoteurEditionMemento(Memento selectionMemento, Memento bufferMemento, Memento pressePapierMemento){
-            this.selectionMemento = selectionMemento;
-            this.bufferMemento = bufferMemento;
-            this.pressePapierMemento = pressePapierMemento;
-        }
-
-        public void setSelectionMemento(Memento selectionMemento){
-            this.selectionMemento = selectionMemento;
-        }
-
-        public void setBufferMemento(Memento bufferMemento){
-            this.bufferMemento = bufferMemento;
-        }
-
-        public void setPressePapierMemento(Memento pressePapierMemento){
-            this.pressePapierMemento = pressePapierMemento;
-        }
-
     }
 
 }

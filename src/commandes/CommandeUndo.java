@@ -18,7 +18,7 @@ public class CommandeUndo implements Commande {
 
     @Override
     public void execute() {
-
+        manager.undo();
     }
 
     @Override

@@ -8,4 +8,6 @@ import Moteur.MoteurEditionImpl;
  */
 public interface UndoRedoManager {
     void save(MoteurEdition moteurEdition);
+    void undo();
+    void redo();
 }

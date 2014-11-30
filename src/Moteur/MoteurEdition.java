@@ -1,5 +1,7 @@
 package Moteur;
 
+import UndoRedo.MoteurEditionMemento;
+
 import javax.swing.text.Caret;
 
 /**
@@ -69,5 +71,5 @@ public interface MoteurEdition {
     public PressePapier getPressePapier();
     //public Selection getSelectionImpl();
 
-    public MoteurEditionImpl.MoteurEditionMemento getMemento();
+    public MoteurEditionMemento getMemento();
 }

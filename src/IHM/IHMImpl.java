@@ -80,6 +80,8 @@ public class IHMImpl extends JFrame implements IHM, Observer {
         start = new JButton("Rec");//,warnIcon);
         stop = new JButton("Stop");
         play = new JButton("Play");
+        undo = new JButton("Undo");
+        redo = new JButton("redo");
         retourChariot = new JCheckBox("retour à la ligne");
         buttonToolbar.add(copyButton);
         buttonToolbar.add(pasteButton);

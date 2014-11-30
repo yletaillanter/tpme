@@ -1,5 +1,7 @@
 package Moteur;
 
+import Memento.Memento;
+
 /**
  * Created by Yoann Le Taillanter on 22/10/2014.
  */
@@ -49,4 +51,7 @@ public interface Buffer {
      * @return taille du buffer
      */
     public int getLength();
+
+    public Memento getMemento();
+
 }
