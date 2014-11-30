@@ -68,4 +68,6 @@ public interface MoteurEdition {
 
     public PressePapier getPressePapier();
     //public Selection getSelectionImpl();
+
+    public MoteurEditionImpl.MoteurEditionMemento getMemento();
 }

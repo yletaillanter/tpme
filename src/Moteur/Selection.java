@@ -1,5 +1,6 @@
 package Moteur;
 
+import Memento.Memento;
 /**
  * Created by Yoann Le Taillanter on 22/10/2014.
  */
@@ -32,4 +33,6 @@ public interface Selection {
      * @param fin
      */
     public void setFin(int fin);
+
+    public Memento getMemento();
 }

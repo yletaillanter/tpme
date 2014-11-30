@@ -1,5 +1,7 @@
 package Moteur;
 
+import Memento.Memento;
+
 /**
  * Created by Yoann Le Taillanter on 22/10/2014.
  */
@@ -71,4 +73,26 @@ public class SelectionImpl implements Selection {
             throw new IllegalArgumentException("can't be < 0");
         this.fin = fin;
     }
+
+    @Override
+    public Memento getMemento() {
+        return new SelectionMemento(debut,fin);
+    }
+
+    public void setMemento(Memento memento) {
+        // Restaure l'état  en remplacant l'input user.
+        SelectionMemento selectionMemento = (SelectionMemento) memento;
+
+    }
+
+    private class SelectionMemento implements Memento{
+        private int debut;
+        private int fin;
+
+        public SelectionMemento(int debut, int fin){
+            this.debut = debut;
+            this.fin = fin;
+        }
+    }
+
 }

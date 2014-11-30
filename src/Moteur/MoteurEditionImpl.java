@@ -1,5 +1,9 @@
 package Moteur;
 
+import Memento.Memento;
+import UndoRedo.UndoRedoManager;
+import UndoRedo.UndoRedoManagerImpl;
+
 import javax.swing.text.Caret;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -33,6 +37,11 @@ public class MoteurEditionImpl implements MoteurEdition {
     private PressePapier pp;
 
     /**
+     *  Gestion des Ctrl Z / Ctrl Y
+     */
+    private UndoRedoManager undoRedoManager;
+
+    /**
      * Constructeur du <i>MoteurEditionImpl</i>
      * Créer le moteur puis initialise les buffer, selection et presse-papier.
      *
@@ -44,6 +53,7 @@ public class MoteurEditionImpl implements MoteurEdition {
         this.buffer = new BufferImpl();
         this.selection = new SelectionImpl();
         this.pp = new PressePapierImpl();
+        this.undoRedoManager = new UndoRedoManagerImpl();
     }
 
     /**
@@ -196,4 +206,48 @@ public class MoteurEditionImpl implements MoteurEdition {
     public PressePapier getPressePapier() {
         return pp;
     }
+
+    public void save(){
+        undoRedoManager.save(this);
+    }
+
+    public MoteurEditionMemento getMemento(){
+        return new MoteurEditionMemento(
+                selection.getMemento(),
+                pp.getMemento(),
+                buffer.getMemento()
+        );
+    }
+
+
+
+
+    // ############################ MEMENTO ################################################################ //
+    public class MoteurEditionMemento implements Memento {
+
+        private Memento selectionMemento;
+        private Memento bufferMemento;
+        private Memento pressePapierMemento;
+
+
+        public MoteurEditionMemento(Memento selectionMemento, Memento bufferMemento, Memento pressePapierMemento){
+            this.selectionMemento = selectionMemento;
+            this.bufferMemento = bufferMemento;
+            this.pressePapierMemento = pressePapierMemento;
+        }
+
+        public void setSelectionMemento(Memento selectionMemento){
+            this.selectionMemento = selectionMemento;
+        }
+
+        public void setBufferMemento(Memento bufferMemento){
+            this.bufferMemento = bufferMemento;
+        }
+
+        public void setPressePapierMemento(Memento pressePapierMemento){
+            this.pressePapierMemento = pressePapierMemento;
+        }
+
+    }
+
 }

@@ -74,12 +74,12 @@ public class CommandeInsererTexte implements Commande {
 
     @Override
     public void setMemento(Memento memento) {
-        // Restaure l'état de en remplacant l'input user.
+        // Restaure l'état  en remplacant l'input user.
         MementoInserer mem = (MementoInserer) memento;
         execute(mem.getTexteAInserer());
     }
 
-    public class MementoInserer implements Memento {
+    private class MementoInserer implements Memento {
 
         String texteAInserer;
 
