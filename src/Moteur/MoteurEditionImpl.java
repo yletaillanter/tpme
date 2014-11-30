@@ -1,11 +1,8 @@
 package Moteur;
 
-import Memento.Memento;
 import UndoRedo.MoteurEditionMemento;
 import UndoRedo.UndoRedoManager;
-import UndoRedo.UndoRedoManagerImpl;
 
-import javax.swing.text.Caret;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
@@ -76,7 +73,7 @@ public class MoteurEditionImpl implements MoteurEdition {
                 )
         );
         counter++;
-        save();
+        actionSave();
     }
 
     /**
@@ -95,8 +92,8 @@ public class MoteurEditionImpl implements MoteurEdition {
             buffer.addContentAtPosition(txt, selection.getDebut());
 
         counter++;
-        save();
-        logger.log(Level.INFO,"cuonter = " + counter );
+        actionSave();
+        logger.log(Level.INFO,"counter = " + counter );
         //System.out.println(buffer.getContent());
     }
 
@@ -110,7 +107,7 @@ public class MoteurEditionImpl implements MoteurEdition {
     public void coller() {
         buffer.addContentAtPosition(pp.getPressePapierContent(), selection.getDebut());
         counter++;
-        save();
+        actionSave();
         //logger.log(Level.INFO,"coller : "+selection.getDebut());
     }
 
@@ -129,7 +126,7 @@ public class MoteurEditionImpl implements MoteurEdition {
         );
         buffer.deleteContent(selection.getDebut(), selection.getFin());
         counter++;
-        save();
+        actionSave();
 
         //logger.log(Level.INFO,"couper");
     }
@@ -155,7 +152,7 @@ public class MoteurEditionImpl implements MoteurEdition {
             selection.setFin(mark);
         }
         //counter++;
-        save();
+        actionSave();
     }
 
     /**
@@ -180,7 +177,7 @@ public class MoteurEditionImpl implements MoteurEdition {
         selection.setDebut(test);
         selection.setFin(test);
         counter++;
-        save();
+        actionSave();
         //logger.log(Level.INFO,"supprimerDroite");
     }
 
@@ -208,7 +205,7 @@ public class MoteurEditionImpl implements MoteurEdition {
                 buffer.deleteContent(selection.getDebut(), selection.getFin());
         }
         counter++;
-        save();
+        actionSave();
     }
     //logger.log(Level.INFO,""+dot);
     //logger.log(Level.INFO,""+mark);
@@ -231,9 +228,14 @@ public class MoteurEditionImpl implements MoteurEdition {
 
     public void setUndoRedoManager(UndoRedoManager undoRedoManager) {
         this.undoRedoManager = undoRedoManager;
+        save();
     }
 
-    public void save(){
+    public void save() {
+        undoRedoManager.save(this);
+    }
+
+    public void actionSave(){
         if(counter%5 == 0)
             undoRedoManager.save(this);
     }
