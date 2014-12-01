@@ -151,7 +151,7 @@ public class MoteurEditionImpl implements MoteurEdition {
             selection.setFin(mark);
         }
         //counter++;
-        actionSave();
+        //actionSave();
     }
 
     /**
