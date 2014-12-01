@@ -53,17 +53,17 @@ public class CommandeInsererTexte implements Commande {
      * </p>
      *
      * @see Moteur.MoteurEditionImpl
-     * @see Moteur.MoteurEditionImpl#inserer(String, boolean)
+     * @see Moteur.MoteurEditionImpl#inserer(String, boolean,Buffer)
      */
     public void execute() {
         enregistreur.save(this);
-        moteur.inserer(ihm.getInputUser(), ihm.retourChariotIsChecked());
+        moteur.inserer(ihm.getInputUser(), ihm.retourChariotIsChecked(),moteur.getBuffer());
         ihm.setInputUser("");
     }
 
     // Surcharge d'execute pour que le memento utilise l'état sauvegardé.
     public void execute(String texteAInserer) {
-        moteur.inserer(texteAInserer, ihm.retourChariotIsChecked());
+        moteur.inserer(texteAInserer, ihm.retourChariotIsChecked(), moteur.getBuffer());
     }
 
     @Override
@@ -77,22 +77,5 @@ public class CommandeInsererTexte implements Commande {
         // Restaure l'état  en remplacant l'input user.
         MementoInserer mem = (MementoInserer) memento;
         execute(mem.getTexteAInserer());
-    }
-
-    private class MementoInserer implements Memento {
-
-        String texteAInserer;
-
-        public MementoInserer(String texteAInserer) {
-            this.texteAInserer = texteAInserer;
-        }
-
-        public void setTexteAInserer(String texteAInserer) {
-            this.texteAInserer = texteAInserer;
-        }
-
-        public String getTexteAInserer() {
-            return texteAInserer;
-        }
     }
 }
