@@ -93,7 +93,6 @@ public class MoteurEditionImpl implements MoteurEdition {
 
         counter++;
         actionSave();
-        logger.log(Level.INFO,"counter = " + counter );
         //System.out.println(buffer.getContent());
     }
 
@@ -228,14 +227,11 @@ public class MoteurEditionImpl implements MoteurEdition {
 
     public void setUndoRedoManager(UndoRedoManager undoRedoManager) {
         this.undoRedoManager = undoRedoManager;
-        save();
-    }
-
-    public void save() {
         undoRedoManager.save(this);
     }
 
     public void actionSave(){
+        logger.log(Level.INFO,"counter = " + counter + " %5 = " + counter%5 );
         if(counter%5 == 0)
             undoRedoManager.save(this);
     }
@@ -246,6 +242,10 @@ public class MoteurEditionImpl implements MoteurEdition {
      */
     public MoteurEditionMemento getMemento(){
         return new MoteurEditionMemento(selection.getMemento(),buffer.getMemento(),pp.getMemento());
+    }
+
+    public MoteurEditionMemento getInitialMemento(){
+        return new MoteurEditionMemento(selection.getInitialMemento(),buffer.getInitialMemento(), pp.getInitialMemento());
     }
 
     /**

@@ -57,6 +57,11 @@ public class PressePapierImpl implements PressePapier {
     }
 
     @Override
+    public PressePapierMemento getInitialMemento() {
+        return new PressePapierMemento("");
+    }
+
+    @Override
     public void setMemento(PressePapierMemento memento) {
         setPressePapierContent(memento.getPressePapierMemento());
     }

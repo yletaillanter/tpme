@@ -80,6 +80,11 @@ public class SelectionImpl implements Selection {
         return new SelectionMemento(debut,fin);
     }
 
+    @Override
+    public SelectionMemento getInitialMemento() {
+        return new SelectionMemento(0,0);
+    }
+
     public void setMemento(SelectionMemento memento) {
         // Restaure l'état  en remplacant l'input user.
         setDebut(memento.getDebut());

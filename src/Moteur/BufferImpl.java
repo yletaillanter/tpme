@@ -148,6 +148,11 @@ public class BufferImpl implements Buffer, Subject {
     }
 
     @Override
+    public BufferMemento getInitialMemento() {
+        return new BufferMemento(new StringBuilder());
+    }
+
+    @Override
     public void setMemento(BufferMemento memento) {
         setInnerBuffer(memento.getInnerBufferMemento());
 

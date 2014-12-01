@@ -25,7 +25,11 @@ public class UndoRedoManagerImpl implements UndoRedoManager {
 
     @Override
     public void save(MoteurEdition moteurEdition) {
-        pileDeMemento.push(moteurEdition.getMemento());
+        if(pileDeMemento.size()==0)
+            pileDeMemento.push(moteurEdition.getInitialMemento());
+        else
+            pileDeMemento.push(moteurEdition.getMemento());
+
         logger.log(Level.INFO,"Ajout d'un memento dans la pile");
     }
 
@@ -34,6 +38,8 @@ public class UndoRedoManagerImpl implements UndoRedoManager {
         pileDeMementoRedo.push(moteur.getMemento());
         if(!pileDeMemento.isEmpty())
             moteur.setMemento(pileDeMemento.pop());
+        if(pileDeMemento.isEmpty())
+            pileDeMemento.push(moteur.getInitialMemento());
     }
 
     @Override

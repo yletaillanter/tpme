@@ -37,5 +37,6 @@ public interface Selection {
     public void setFin(int fin);
 
     public SelectionImpl.SelectionMemento getMemento();
+    public SelectionImpl.SelectionMemento getInitialMemento();
     public void setMemento(SelectionImpl.SelectionMemento memento);
 }

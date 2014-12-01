@@ -54,6 +54,8 @@ public interface Buffer {
 
     public BufferImpl.BufferMemento getMemento();
 
+    public BufferImpl.BufferMemento getInitialMemento();
+
     public void setMemento(BufferImpl.BufferMemento memento);
 
     public void clear();
