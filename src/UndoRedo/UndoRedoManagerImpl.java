@@ -34,7 +34,7 @@ public class UndoRedoManagerImpl implements UndoRedoManager {
     @Override
     public void save(MoteurEdition moteur) {
         if(isModeUndo()){
-            pileDeMementoRedo.empty();
+            clearStack(pileDeMementoRedo);
             setModeUndo(false);
         }
         if(pileDeMemento.size()==0){
@@ -81,5 +81,11 @@ public class UndoRedoManagerImpl implements UndoRedoManager {
 
     public void setModeUndo(boolean modeUndo) {
         this.modeUndo = modeUndo;
+    }
+
+    public void clearStack(Stack stack){
+        while(!stack.empty()){
+            stack.pop();
+        }
     }
 }
