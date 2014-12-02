@@ -142,6 +142,7 @@ public class BufferImpl implements Buffer, Subject {
         }
     }
 
+
     @Override
     public BufferImpl.BufferMemento getMemento() {
         return new BufferMemento(innerBuffer);

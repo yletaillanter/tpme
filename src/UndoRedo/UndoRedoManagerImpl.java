@@ -52,12 +52,6 @@ public class UndoRedoManagerImpl implements UndoRedoManager {
             pileDeMementoRedo.push(moteur.getMemento());
             moteur.setMemento(pileDeMemento.pop());
         }
-
-        /*
-        if(pileDeMemento.isEmpty()) { // Si la pile est vide on remet un mementoinitial (vide)
-            pileDeMemento.push(moteur.getInitialMemento());
-        }*/
-
     }
 
     @Override

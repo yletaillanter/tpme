@@ -93,8 +93,8 @@ public class MoteurEditionImpl implements MoteurEdition {
      */
     @Override
     public void coller() {
-        buffer.addContentAtPosition(pp.getPressePapierContent(), selection.getDebut());
         actionSave();
+        buffer.addContentAtPosition(pp.getPressePapierContent(), selection.getDebut());
         //logger.log(Level.INFO,"coller : "+selection.getDebut());
     }
 
@@ -106,14 +106,13 @@ public class MoteurEditionImpl implements MoteurEdition {
      */
     @Override
     public void couper() {
+        actionSave();
         pp.setPressePapierContent(
                 buffer.getContentAt(
                         selection.getDebut(), selection.getFin()
                 )
         );
         buffer.deleteContent(selection.getDebut(), selection.getFin());
-        actionSave();
-
         //logger.log(Level.INFO,"couper");
     }
 
@@ -153,6 +152,7 @@ public class MoteurEditionImpl implements MoteurEdition {
      */
     @Override
     public void supprimerDroite() {
+        actionSave();
         int test = selection.getDebut();
         if (selection.getDebut() == selection.getFin())
             buffer.deleteContent(selection.getDebut(), selection.getFin() + 1);
@@ -161,7 +161,7 @@ public class MoteurEditionImpl implements MoteurEdition {
 
         selection.setDebut(test);
         selection.setFin(test);
-        actionSave();
+
         //logger.log(Level.INFO,"supprimerDroite");
     }
 
@@ -179,6 +179,7 @@ public class MoteurEditionImpl implements MoteurEdition {
      */
     @Override
     public void supprimerGauche() {
+        actionSave();
         int test = selection.getDebut() - 1;
         if (selection.getDebut() > 0 || selection.getFin() > selection.getDebut()) {
             if (selection.getDebut() == selection.getFin()) {
@@ -188,7 +189,7 @@ public class MoteurEditionImpl implements MoteurEdition {
             } else
                 buffer.deleteContent(selection.getDebut(), selection.getFin());
         }
-        actionSave();
+
     }
     //logger.log(Level.INFO,""+dot);
     //logger.log(Level.INFO,""+mark);
@@ -224,10 +225,6 @@ public class MoteurEditionImpl implements MoteurEdition {
      */
     public MoteurEditionMemento getMemento(){
         return new MoteurEditionMemento(selection.getMemento(),buffer.getMemento(),pp.getMemento());
-    }
-
-    public MoteurEditionMemento getInitialMemento(){
-        return new MoteurEditionMemento(selection.getInitialMemento(),buffer.getInitialMemento(), pp.getInitialMemento());
     }
 
     /**
