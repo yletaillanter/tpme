@@ -81,7 +81,7 @@ public class MoteurEditionImpl implements MoteurEdition {
             buffer.addContentAtPosition(txt, selection.getDebut());
         } else
             buffer.addContentAtPosition(txt, selection.getDebut());
-        undoRedoManager.save(this,new MementoInserer("txt"));
+        actionSave();
     }
 
     /**
@@ -214,7 +214,7 @@ public class MoteurEditionImpl implements MoteurEdition {
     }
 
     public void actionSave(){
-        //undoRedoManager.save(this);
+        undoRedoManager.save(this);
     }
 
     /**

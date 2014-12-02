@@ -8,7 +8,7 @@ import Moteur.MoteurEditionImpl;
  * Created by yoannlt on 29/11/14.
  */
 public interface UndoRedoManager {
-    void save(MoteurEdition moteurEdition, Memento memento);
+    void save(MoteurEdition moteurEdition);
     void undo();
     void redo();
 }
