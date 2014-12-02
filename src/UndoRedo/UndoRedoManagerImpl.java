@@ -37,14 +37,8 @@ public class UndoRedoManagerImpl implements UndoRedoManager {
             clearStack(pileDeMementoRedo);
             setModeUndo(false);
         }
-        if(pileDeMemento.size()==0){
-            pileDeMemento.push(moteur.getInitialMemento());
-            logger.log(Level.INFO, "Ajout d'un memento initial dans la liste");
-        }
-        else {
-            pileDeMemento.push(moteur.getMemento());
-            logger.log(Level.INFO, "Ajout d'un memento Moteur dans la pile");
-        }
+        pileDeMemento.push(moteur.getMemento());
+        logger.log(Level.INFO, "Ajout d'un memento Moteur dans la pile");
     }
 
     @Override
@@ -52,9 +46,10 @@ public class UndoRedoManagerImpl implements UndoRedoManager {
 
         //Sauvegarde de l'état actuel pour redo.
         pileDeMementoRedo.push(moteur.getMemento());
+        setModeUndo(true);
         if(!pileDeMemento.isEmpty()){
             moteur.setMemento(pileDeMemento.pop());
-            setModeUndo(true);
+
             if(pileDeMemento.isEmpty()) { // Si la pile est vide on remet un mementoinitial (vide)
                 pileDeMemento.push(moteur.getInitialMemento());
 
@@ -65,14 +60,13 @@ public class UndoRedoManagerImpl implements UndoRedoManager {
 
     @Override
     public void redo() {
-        pileDeMemento.push(moteur.getMemento());
         if(!pileDeMementoRedo.isEmpty()){
             moteur.setMemento(pileDeMementoRedo.pop()); logger.log(Level.INFO,"Appel du redo");
+            pileDeMemento.push(moteur.getMemento());
         }
         else{
             setModeUndo(false);
         }
-
     }
 
     public boolean isModeUndo() {
