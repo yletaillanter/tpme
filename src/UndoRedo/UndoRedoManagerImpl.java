@@ -29,45 +29,48 @@ public class UndoRedoManagerImpl implements UndoRedoManager {
         pileDeMemento = new Stack<MoteurEditionMemento>();
         pileDeMementoRedo = new Stack<MoteurEditionMemento>();
         modeUndo = false;
+        //pileDeMemento.push(moteur.getInitialMemento());
     }
 
     @Override
     public void save(MoteurEdition moteur) {
         if(isModeUndo()){
+            //Si mode undo activé, on vide la pile de redo car cette dernière n'est plus valable
             clearStack(pileDeMementoRedo);
             setModeUndo(false);
         }
+
         pileDeMemento.push(moteur.getMemento());
         logger.log(Level.INFO, "Ajout d'un memento Moteur dans la pile");
     }
 
     @Override
     public void undo() {
-
-        //Sauvegarde de l'état actuel pour redo.
-        pileDeMementoRedo.push(moteur.getMemento());
         setModeUndo(true);
+
         if(!pileDeMemento.isEmpty()){
+            pileDeMementoRedo.push(moteur.getMemento());
             moteur.setMemento(pileDeMemento.pop());
-
-            if(pileDeMemento.isEmpty()) { // Si la pile est vide on remet un mementoinitial (vide)
-                pileDeMemento.push(moteur.getInitialMemento());
-
-            }
         }
+
+        /*
+        if(pileDeMemento.isEmpty()) { // Si la pile est vide on remet un mementoinitial (vide)
+            pileDeMemento.push(moteur.getInitialMemento());
+        }*/
 
     }
 
     @Override
     public void redo() {
-        if(!pileDeMementoRedo.isEmpty()){
-            moteur.setMemento(pileDeMementoRedo.pop()); logger.log(Level.INFO,"Appel du redo");
+        if(isModeUndo()){
             pileDeMemento.push(moteur.getMemento());
+            moteur.setMemento(pileDeMementoRedo.pop());
+            //logger.log(Level.INFO,"Appel du redo");
+
+            if(pileDeMementoRedo.isEmpty())
+                setModeUndo(false);
+            }
         }
-        else{
-            setModeUndo(false);
-        }
-    }
 
     public boolean isModeUndo() {
         return modeUndo;
