@@ -5,12 +5,9 @@ import static org.mockito.Mockito.*;
 import Memento.Enregistreur;
 import Memento.EnregistreurImpl;
 import Moteur.*;
-import commandes.CommandeInsererTexte;
 import org.junit.Assert;
-import org.junit.Before;
 import org.junit.Test;
 import IHM.*;
-import org.junit.rules.ExpectedException;
 import org.mockito.Mockito;
 
 /**
@@ -22,15 +19,8 @@ public class ObserverTest {
     Enregistreur mockitoEnregistreur = Mockito.mock(EnregistreurImpl.class);
     MoteurEdition moteur = new MoteurEditionImpl();
 
-    @Before
-    public void setUp(){
-
-        //ajout de la commande insérer
-        mockitoIHM.addCommand(new CommandeInsererTexte(moteur,mockitoIHM,mockitoEnregistreur),"Insert");
-    }
-
     @Test(expected = IllegalArgumentException.class)
-    public void test1(){
+    public void testRegister(){
         Assert.assertFalse(moteur.getBuffer().isRegistered(mockitoIHM));
         try{
             moteur.getBuffer().register(mockitoIHM);
@@ -52,12 +42,25 @@ public class ObserverTest {
     }
 
     @Test
-    public void test2(){
+    public void testUpdate(){
+        //Enregistrement de l'ihm comme observer
+        try{
+            moteur.getBuffer().register(mockitoIHM);
+        } catch (IllegalArgumentException e){
+            e.printStackTrace();
+        }
+        Assert.assertTrue(moteur.getBuffer().isRegistered(mockitoIHM));
 
-
-
-
-
+        //init des variables
+        String testString = "MOCKITOOOOOO";
+        StringBuilder testStringBuilder = new StringBuilder();
+        // appel des méthodes qui déclanche un update.
+        moteur.getBuffer().addContent(testString);
+        moteur.getBuffer().addContentAtPosition(testString, testString.length());
+        moteur.getBuffer().deleteContent(0, testString.length());
+        moteur.getBuffer().setInnerBuffer(testStringBuilder);
+        //vérification de l'appel de l'update.
+        verify(mockitoIHM, times(4)).doUpdate(moteur.getBuffer());
     }
 
 
