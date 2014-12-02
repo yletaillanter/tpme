@@ -75,7 +75,7 @@ public class MoteurEditionImpl implements MoteurEdition {
      * @param retourChariot
      */
     @Override
-    public void inserer(String txt, boolean retourChariot, Buffer buffer) {
+    public void inserer(String txt, boolean retourChariot) {
         actionSave();
         if (retourChariot) {
             buffer.addContentAtPosition("\n", selection.getDebut());

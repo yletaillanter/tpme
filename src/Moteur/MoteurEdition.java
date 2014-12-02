@@ -40,7 +40,7 @@ public interface MoteurEdition {
      * @param txt           Texte à ajouter dans le buffer
      * @param retourChariot
      */
-    public void inserer(String txt, boolean retourChariot, Buffer buffer);
+    public void inserer(String txt, boolean retourChariot);
 
     /**
      * Met à jour la selection

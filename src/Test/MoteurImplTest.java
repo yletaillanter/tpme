@@ -37,7 +37,7 @@ static MoteurEdition moteur;
         stringTest = "Bacon ipsum.";
         curseur += stringTest.length();
         bufferTest.append(stringTest);
-        moteur.inserer(stringTest, false,moteur.getBuffer());
+        moteur.inserer(stringTest, false);
         moteur.selectionner(curseur, curseur);
         Assert.assertEquals(stringTest, moteur.getBuffer().getContent());
         Assert.assertEquals(bufferTest.toString(), moteur.getBuffer().getContent());
@@ -47,7 +47,7 @@ static MoteurEdition moteur;
         stringTest = " Tenderloin bacon swine boudin.";
         curseur += stringTest.length();
         bufferTest.append(stringTest);
-        moteur.inserer(stringTest, false,moteur.getBuffer());
+        moteur.inserer(stringTest, false);
         moteur.selectionner(curseur, curseur);
         Assert.assertEquals(bufferTest.toString(), moteur.getBuffer().getContent());
 
@@ -55,7 +55,7 @@ static MoteurEdition moteur;
         stringTest = "\n";
         curseur += stringTest.length();
         bufferTest.append(stringTest);
-        moteur.inserer("", true,moteur.getBuffer());
+        moteur.inserer("", true);
         moteur.selectionner(curseur, curseur);
         Assert.assertEquals(bufferTest.toString(), moteur.getBuffer().getContent());
 
@@ -63,7 +63,7 @@ static MoteurEdition moteur;
         stringTest = "test";
         curseur += stringTest.length();
         bufferTest.append(stringTest);
-        moteur.inserer(stringTest, false,moteur.getBuffer());
+        moteur.inserer(stringTest, false);
         moteur.selectionner(curseur, curseur);
         Assert.assertEquals(bufferTest.toString(), moteur.getBuffer().getContent());
     }
@@ -72,7 +72,7 @@ static MoteurEdition moteur;
     @Test
     public void copierTest() {
         stringTest = "Bacon ipsum. Tenderloin bacon swine boudin.";
-        moteur.inserer(stringTest, false,moteur.getBuffer());
+        moteur.inserer(stringTest, false);
         curseur += stringTest.length();
 
         moteur.selectionner(7, 25);
@@ -94,7 +94,7 @@ static MoteurEdition moteur;
         //init
         stringTest = "Bacon ipsum. Tenderloin bacon swine boudin.";
         bufferTest.append(stringTest);
-        moteur.inserer(stringTest, false,moteur.getBuffer());
+        moteur.inserer(stringTest, false);
         curseur += stringTest.length();
 
         //TEST
@@ -116,7 +116,7 @@ static MoteurEdition moteur;
         stringTest = "Alcatra ham tenderloin salami.";
         curseur += stringTest.length();
         bufferTest.append(stringTest);
-        moteur.inserer(stringTest, false,moteur.getBuffer());
+        moteur.inserer(stringTest, false);
         Assert.assertEquals(bufferTest.toString(), moteur.getBuffer().getContent());
 
         //TEST
