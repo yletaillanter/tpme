@@ -2,10 +2,8 @@ package UndoRedo;
 
 import Memento.*;
 import Moteur.MoteurEdition;
-import Moteur.MoteurEditionImpl;
 
-import java.util.ArrayList;
-import java.util.Stack;
+import java.util.LinkedList;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
@@ -14,11 +12,13 @@ import java.util.logging.Logger;
  */
 public class UndoRedoManagerImpl implements UndoRedoManager {
 
-    private Stack<MoteurEditionMemento> pileDeMemento;
-    private Stack<MoteurEditionMemento> pileDeMementoRedo;
+    //private Stack<MoteurEditionMemento> pileDeMemento;
+    //private Stack<MoteurEditionMemento> pileDeMementoRedo;
+
     Logger logger = Logger.getLogger("UndoRedo.UndoRedoManagerImpl");
-    private ArrayList<Memento> listeCommande;
+    private LinkedList<Memento> listeCommande;
     private MoteurEdition moteur;
+    int indiceListe;
 
     /**
      *  Compteur d'action pour l'Undo/Redo
@@ -27,34 +27,65 @@ public class UndoRedoManagerImpl implements UndoRedoManager {
 
     public UndoRedoManagerImpl(MoteurEdition moteur){
         this.moteur = moteur;
-        pileDeMemento = new Stack<MoteurEditionMemento>();
-        pileDeMementoRedo = new Stack<MoteurEditionMemento>();
-        listeCommande = new ArrayList<Memento>();
-        counter = 0;
+        //pileDeMemento = new Stack<MoteurEditionMemento>();
+        //pileDeMementoRedo = new Stack<MoteurEditionMemento>();
+        listeCommande = new LinkedList<Memento>();
+        //listeCommande.add(moteur.getInitialMemento());
+        counter = -1;
     }
 
     @Override
-    public void save(MoteurEdition moteurEdition, Memento memento) {
+    public void save(MoteurEdition moteur, Memento memento) {
+        counter++;
+        if(counter%5 == 0 ){
+            listeCommande.add(moteur.getMemento());
+            logger.log(Level.INFO, "Ajout d'un memento Moteur dans la liste");
+        }
+        else{
+            listeCommande.add(memento);
+            logger.log(Level.INFO, "Ajout d'un memento commande dans la liste");
+        }
+        indiceListe = listeCommande.size();
+
+
+        /*
         counter++;
         if(counter%5 == 0 ) { // sauvegarde du moteur complet
-            if(pileDeMemento.size()==0){
-                pileDeMemento.push(moteurEdition.getInitialMemento());
-                logger.log(Level.INFO, "Ajout d'un memento Moteur initial dans la pile");
+            if(listeCommande.size()==0){
+                listeCommande.add(moteurEdition.getInitialMemento());
+                logger.log(Level.INFO, "Ajout d'un memento Moteur initial dans la liste");
             }
             else {
-                pileDeMemento.push(moteurEdition.getMemento());
+                listeCommande.add(moteurEdition.getMemento());
                 logger.log(Level.INFO, "Ajout d'un memento Moteur dans la pile");
             }
         }
         else{ // sauvegarde de l'action
             listeCommande.add(memento);
             logger.log(Level.INFO, "Ajout d'un memento Commande dans la liste");
-        }
 
+        }
+*/
     }
 
     @Override
     public void undo() {
+
+        //logger.log(Level.INFO, ""+ listeCommande.);
+        if(indiceListe < listeCommande.size())
+            if(listeCommande.size() % 5 == 0){
+                indiceListe = (Math.abs(listeCommande.size() / 5)*5)-5; // -5 sinon dernier état identique
+            }
+            else
+                indiceListe = (Math.abs(listeCommande.size() / 5)*5);
+
+            try {
+                moteur.setMemento((MoteurEditionMemento)listeCommande.get(indiceListe));
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+
+        /*
         //Sauvegarde de l'état actuel si redo.
         pileDeMementoRedo.push(moteur.getMemento());
         if(!pileDeMemento.isEmpty()){
@@ -67,7 +98,7 @@ public class UndoRedoManagerImpl implements UndoRedoManager {
             MementoInserer commandeMemento = listeCommande.get(i);
             commandeMemento.
         }
-
+        */
 
     }
 

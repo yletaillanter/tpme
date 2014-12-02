@@ -66,7 +66,6 @@ public class MoteurEditionImpl implements MoteurEdition {
                         selection.getDebut(), selection.getFin()
                 )
         );
-        actionSave();
     }
 
     /**
