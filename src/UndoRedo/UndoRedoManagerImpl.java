@@ -56,13 +56,15 @@ public class UndoRedoManagerImpl implements UndoRedoManager {
 
     @Override
     public void redo() {
-        if(isModeUndo()){
-            pileDeMemento.push(moteur.getMemento());
-            moteur.setMemento(pileDeMementoRedo.pop());
-            //logger.log(Level.INFO,"Appel du redo");
+        if(!pileDeMementoRedo.isEmpty()){
+            if(isModeUndo()){
+                pileDeMemento.push(moteur.getMemento());
+                moteur.setMemento(pileDeMementoRedo.pop());
+                //logger.log(Level.INFO,"Appel du redo");
 
-            if(pileDeMementoRedo.isEmpty())
-                setModeUndo(false);
+                if(pileDeMementoRedo.isEmpty())
+                    setModeUndo(false);
+                }
             }
         }
 

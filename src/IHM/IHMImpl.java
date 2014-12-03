@@ -39,8 +39,6 @@ public class IHMImpl extends JFrame implements IHM, Observer {
 
     private ImageIcon copyImage, pasteImage, cutImage, undoImage, redoImage, playImage, stopImage, recImage, backImage, supImage, frameImage;
 
-
-
     /**
      * Constructors
      */
