@@ -5,6 +5,7 @@ import Memento.Memento;
 import Moteur.MoteurEdition;
 import IHM.*;
 
+import java.util.Optional;
 import java.util.logging.Level;
 
 /**
@@ -37,6 +38,10 @@ public class CommandeSelectionnerTexte implements Commande {
      */
     private Enregistreur enregistreur;
 
+    int dot;
+
+    int mark;
+
 
     /**
      * Constructeur de <i>CommandeSelectionnerTexte</i>
@@ -50,6 +55,28 @@ public class CommandeSelectionnerTexte implements Commande {
         this.enregistreur = enregistreur;
     }
 
+
+
+    public int getDot() {
+        return dot;
+    }
+
+    public void setDot(int dot) {
+        this.dot = dot;
+    }
+
+    public int getMark() {
+        return mark;
+    }
+
+    public void setMark(int mark) {
+        this.mark = mark;
+    }
+
+    boolean test;
+
+
+
     /**
      * Appel de la méthode <i>selectionner</i> sur le moteur.
      * <p>
@@ -61,16 +88,52 @@ public class CommandeSelectionnerTexte implements Commande {
      * @see Moteur.MoteurEditionImpl#selectionner(int, int)
      */
     public void execute() {
-        moteur.selectionner(ihm.getDot(), ihm.getMark());
+        if(!test){ // si mode memento
+            dot = ihm.getDot();
+            mark = ihm.getMark();
+        }
+        test=false;
+        moteur.selectionner(dot,mark);
+        enregistreur.save(this);
     }
 
     @Override
     public Memento getMemento() {
-        return null;
+        return new MementoSelection(dot,mark);
     }
 
     @Override
     public void setMemento(Memento memento) {
+        MementoSelection mementoSelection = (MementoSelection) memento;
+        dot = mementoSelection.getDot();
+        mark = mementoSelection.getMark();
+        test = true;
+    }
 
+    private class MementoSelection implements Memento {
+
+        private int dot;
+        private int mark;
+
+        public MementoSelection(int dot, int mark) {
+            this.dot = dot;
+            this.mark = mark;
+        }
+
+        public int getDot() {
+            return dot;
+        }
+
+        public void setDot(int dot) {
+            this.dot = dot;
+        }
+
+        public int getMark() {
+            return mark;
+        }
+
+        public void setMark(int mark) {
+            this.mark = mark;
+        }
     }
 }
