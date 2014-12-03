@@ -8,7 +8,6 @@ import java.awt.*;
 import java.awt.event.*;
 import javax.swing.*;
 
-import java.util.HashMap;
 import java.util.Hashtable;
 import java.util.Map;
 import java.util.logging.Logger;
@@ -21,7 +20,7 @@ public class IHMImpl extends JFrame implements IHM, Observer {
     private Logger logger = Logger.getLogger("tpme.IHM.IHMImpl");
     private Map<String, Commande> commands;
     private Map<String, Commande> commandsCopy;
-    private JButton copyButton, pasteButton, cutButton, insertButton, deleteRight, deleteLeft, start, stop, play, undo, redo;
+    private JButton copyButton, pasteButton, cutButton, deleteRight, deleteLeft, start, stop, play, undo, redo;
     private Image recIcon;
     private JTextField userInput;
     private JTextField numberOfCharacter;
@@ -38,6 +37,10 @@ public class IHMImpl extends JFrame implements IHM, Observer {
     private JToolBar buttonToolbar;
     private JPanel bottomPanel;
 
+    private ImageIcon copyImage, pasteImage, cutImage, undoImage, redoImage, playImage, stopImage, recImage, backImage, supImage, frameImage;
+
+
+
     /**
      * Constructors
      */
@@ -47,13 +50,15 @@ public class IHMImpl extends JFrame implements IHM, Observer {
     }
 
     private void build() {
-        setTitle("Mini-Editeur");
-        setSize(800, 600);
+        setTitle("Mini-Editeur ©");
+        setSize(500, 600);
         setLocationRelativeTo(null);
         setResizable(false);
         setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
         setContentPane(buildContentPane());
         setVisible(true);
+        frameImage = new ImageIcon("C:\\Users\\Yoann\\IdeaProjects\\tpme\\src\\resources\\frameIcon.png");
+        setIconImage(frameImage.getImage());
     }
 
     private JPanel buildContentPane() {
@@ -68,25 +73,38 @@ public class IHMImpl extends JFrame implements IHM, Observer {
         commandsCopy = commands;
         bufferDisplay = new BufferDisplay(this, this.commandsCopy);
 
+        //Chargement des icones
+        copyImage = new ImageIcon("C:\\Users\\Yoann\\IdeaProjects\\tpme\\src\\resources\\files6.png");
+        pasteImage = new ImageIcon("C:\\Users\\Yoann\\IdeaProjects\\tpme\\src\\resources\\paste2.png");
+        cutImage = new ImageIcon("C:\\Users\\Yoann\\IdeaProjects\\tpme\\src\\resources\\1417667420_content-cut-20.png");
+        undoImage = new ImageIcon("C:\\Users\\Yoann\\IdeaProjects\\tpme\\src\\resources\\curve9.png");
+        redoImage = new ImageIcon("C:\\Users\\Yoann\\IdeaProjects\\tpme\\src\\resources\\redo3.png");
+        playImage = new ImageIcon("C:\\Users\\Yoann\\IdeaProjects\\tpme\\src\\resources\\play99.png");
+        recImage = new ImageIcon("C:\\Users\\Yoann\\IdeaProjects\\tpme\\src\\resources\\rec3.png");
+        stopImage = new ImageIcon("C:\\Users\\Yoann\\IdeaProjects\\tpme\\src\\resources\\stop44.png");
+        backImage = new ImageIcon("C:\\Users\\Yoann\\IdeaProjects\\tpme\\src\\resources\\left222.png");
+        supImage = new ImageIcon("C:\\Users\\Yoann\\IdeaProjects\\tpme\\src\\resources\\delete81.png");
+
         //Ajout des boutons
         buttonToolbar = new JToolBar();
-        copyButton = new JButton("Copy");
-        pasteButton = new JButton("Paste");
-        cutButton = new JButton("Cut");
-        insertButton = new JButton("Insert");
-        deleteRight = new JButton("Suppr");
-        deleteLeft = new JButton("Backspace");
+
+        copyButton = new JButton(copyImage);
+        pasteButton = new JButton(pasteImage);
+        cutButton = new JButton(cutImage);
+        //insertButton = new JButton("Insert");
+        deleteRight = new JButton(supImage);
+        deleteLeft = new JButton(backImage);
         //Icon warnIcon = new ImageIcon("Icons/recorder.png");
-        start = new JButton("Rec");//,warnIcon);
-        stop = new JButton("Stop");
-        play = new JButton("Play");
-        undo = new JButton("Undo");
-        redo = new JButton("redo");
+        start = new JButton(recImage);//,warnIcon);
+        stop = new JButton(stopImage);
+        play = new JButton(playImage);
+        undo = new JButton(undoImage);
+        redo = new JButton(redoImage);
         retourChariot = new JCheckBox("retour à la ligne");
         buttonToolbar.add(copyButton);
         buttonToolbar.add(pasteButton);
         buttonToolbar.add(cutButton);
-        buttonToolbar.add(insertButton);
+        //buttonToolbar.add(insertButton);
         buttonToolbar.add(deleteLeft);
         buttonToolbar.add(deleteRight);
         buttonToolbar.add(start);
@@ -163,7 +181,7 @@ public class IHMImpl extends JFrame implements IHM, Observer {
         copyButton.addActionListener(new ButtonAction("Copy", this.commandsCopy));
         pasteButton.addActionListener(new ButtonAction("Paste", this.commandsCopy));
         cutButton.addActionListener(new ButtonAction("Cut", this.commandsCopy));
-        insertButton.addActionListener(new ButtonAction("Insert", this.commandsCopy));
+        //insertButton.addActionListener(new ButtonAction("Insert", this.commandsCopy));
         deleteLeft.addActionListener(new ButtonAction("DeleteLeft", this.commandsCopy));
         deleteRight.addActionListener(new ButtonAction("DeleteRight", this.commandsCopy));
         start.addActionListener(new ButtonAction("Start", this.commandsCopy));
