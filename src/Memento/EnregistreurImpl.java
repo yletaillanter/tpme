@@ -21,6 +21,7 @@ public class EnregistreurImpl implements Enregistreur {
 
     @Override
     public void rec() {
+        listMementos.clear();
         setRec(true);
         logger.log(Level.INFO, "rec is called");
     }
