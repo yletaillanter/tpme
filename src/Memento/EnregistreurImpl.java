@@ -23,13 +23,13 @@ public class EnregistreurImpl implements Enregistreur {
     public void rec() {
         listMementos.clear();
         setRec(true);
-        logger.log(Level.INFO, "rec is called");
+        //logger.log(Level.INFO, "rec is called");
     }
 
     @Override
     public void stop() {
         setRec(false);
-        logger.log(Level.INFO, "stop is called");
+        //logger.log(Level.INFO, "stop is called");
     }
 
     @Override
@@ -43,7 +43,7 @@ public class EnregistreurImpl implements Enregistreur {
             Couple couple = it.next();
             couple.getCommande().setMemento(couple.getMemento());
             couple.getCommande().execute();
-            System.err.print("Play execute() ");
+            //System.err.print("Play execute() ");
         }
     }
 
