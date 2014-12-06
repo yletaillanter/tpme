@@ -33,7 +33,7 @@ public class UndoRedoManagerImpl implements UndoRedoManager {
     }
 
     @Override
-    public void save(MoteurEdition moteur) {
+    public void save() {
         if(isModeUndo()){
             //Si mode undo activé, on vide la pile de redo car cette dernière n'est plus valable
             clearStack(pileDeMementoRedo);
@@ -41,7 +41,7 @@ public class UndoRedoManagerImpl implements UndoRedoManager {
         }
 
         pileDeMemento.push(moteur.getMemento());
-        logger.log(Level.INFO, "Ajout d'un memento Moteur dans la pile");
+        //logger.log(Level.INFO, "Ajout d'un memento Moteur dans la pile");
     }
 
     @Override

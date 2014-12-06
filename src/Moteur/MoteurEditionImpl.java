@@ -136,7 +136,6 @@ public class MoteurEditionImpl implements MoteurEdition {
             selection.setDebut(dot);
             selection.setFin(mark);
         }
-        //actionSave();
     }
 
     /**
@@ -216,7 +215,7 @@ public class MoteurEditionImpl implements MoteurEdition {
     }
 
     public void actionSave(){
-        undoRedoManager.save(this);
+        undoRedoManager.save();
     }
 
     /**

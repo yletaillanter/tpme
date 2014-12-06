@@ -77,4 +77,6 @@ public interface MoteurEdition {
     public void setMemento(MoteurEditionMemento memento);
 
     public void setUndoRedoManager(UndoRedoManager undoRedoManager);
+
+    public void actionSave();
 }

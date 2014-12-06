@@ -1,24 +1,25 @@
 package Test;
 
 import Moteur.*;
+import UndoRedo.UndoRedoManager;
+import UndoRedo.UndoRedoManagerImpl;
 import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
+import org.mockito.Mockito;
 //import static org.mockito.Mockito.*;
 
 /**
  * Created by Yoann on 09/11/2014.
  */
 public class MoteurImplTest {
-/*
-    Buffer mockBuffer = mock(BufferImpl.class);
-    Selection mockedSelection = mock(SelectionImpl.class);
-    PressePapier mockedPressePapier = mock(PressePapierImpl.class);
-*/
-static MoteurEdition moteur;
+
+    private MoteurEdition moteur;
     private StringBuilder bufferTest;
     private String stringTest;
     private int curseur;
+    private UndoRedoManager mockitoUndoRedoManager;
+
 
     @Before
     public void setUp() {
@@ -29,6 +30,8 @@ static MoteurEdition moteur;
         this.stringTest = "";
         //déplacement manuel du curseur pour le test.
         curseur = 0;
+        mockitoUndoRedoManager = Mockito.mock(UndoRedoManagerImpl.class);
+        moteur.setUndoRedoManager(mockitoUndoRedoManager);
     }
 
     @Test
