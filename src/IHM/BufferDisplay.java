@@ -165,33 +165,10 @@ public class BufferDisplay extends JTextArea {
                     commands.get("DeleteLeft").execute();
             }
         });
-
-        // ANCIEN KEY LISTENER
-      /*  addKeyListener(new KeyListener() {
-            @Override
-            public void keyTyped(KeyEvent e) {
-            }
-
-            @Override
-            public void keyPressed(KeyEvent e) {
-                // touche del appel supprimerDroite
-                if(e.getKeyChar() == Event.DELETE)
-                    commands.get("DeleteRight").execute();
-
-                // Touche backspace appel supprimergauche
-                if (e.getKeyChar() == Event.BACK_SPACE)
-                    commands.get("DeleteLeft").execute();
-            }
-
-            @Override
-            public void keyReleased(KeyEvent e) {
-            }
-            });
-*/
     }
 
     /**
-     * Créer le menu JPopupMenu du clic droit
+     * Créer le menu JPopupMenu du clic droit et affecte les commandes aux boutons.
      */
     private void createPopupMenu() {
 

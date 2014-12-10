@@ -7,12 +7,27 @@ import Memento.*;
  */
 public class CommandeStart implements Commande {
 
+    /**
+     * L'enregistreur.
+     * Référence vers l'enregistreur du memento (Caretaker).
+     */
     private Enregistreur enregistreur;
 
+
+    /**
+     * Constructeur de <i>CommandeStart</i>
+     *
+     * @param enregistreur
+     */
     public CommandeStart(Enregistreur enregistreur) {
         this.enregistreur = enregistreur;
     }
 
+    /**
+     * Appel de la méthode <i>rec()</i> sur l'enregistreur.
+     *
+     * @see EnregistreurImpl
+     */
     @Override
     public void execute() {
         enregistreur.rec();

@@ -9,13 +9,27 @@ import UndoRedo.UndoRedoManager;
 public class CommandeUndo implements Commande {
 
 
+    /**
+     * Le manager d'Undo Redo.
+     * Référence vers le manager.
+     */
     private UndoRedoManager manager;
 
+    /**
+     * Constructeur de <i>CommandeUndo</i>
+     *
+     * @param manager
+     */
     public CommandeUndo(UndoRedoManager manager){
         this.manager = manager;
     }
 
 
+    /**
+     * Appel de la méthode <i>undo()</i> sur le manager d'Undo Redo.
+     *
+     * @see UndoRedo.UndoRedoManager#undo()
+     */
     @Override
     public void execute() {
         manager.undo();

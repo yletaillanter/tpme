@@ -19,19 +19,20 @@ public class UndoRedoManagerImpl implements UndoRedoManager {
     Logger logger = Logger.getLogger("UndoRedo.UndoRedoManagerImpl");
     private MoteurEdition moteur;
 
-    /**
-     *  Compteur d'action pour l'Undo/Redo
-     */
-    private int counter;
 
     public UndoRedoManagerImpl(MoteurEdition moteur){
         this.moteur = moteur;
         pileDeMemento = new Stack<MoteurEditionMemento>();
         pileDeMementoRedo = new Stack<MoteurEditionMemento>();
         modeUndo = false;
-        //pileDeMemento.push(moteur.getInitialMemento());
     }
 
+    /**<p>
+     * Sauvegarde le memento du moteur. si l'état undo est activé, donc si l'utilisateur a commencé a revenir en arrière dans ses actions
+     * et qu'il a modifié le texte il faut effacer la pile de redo, qui n'a plus lieu d'être. (des actions dans le passé ont un impact dans sur le "future".)
+     * puis on appel push sur la pile pour sauvegarder. </p>
+     *
+     */
     @Override
     public void save() {
         if(isModeUndo()){
@@ -44,6 +45,10 @@ public class UndoRedoManagerImpl implements UndoRedoManager {
         //logger.log(Level.INFO, "Ajout d'un memento Moteur dans la pile");
     }
 
+    /**
+     * <p>Active le mode undo. Si la pile n'est pas vide il sauvegarde l'état actuel en empilant
+     * dans la pile redo puis dépile et restaure l'état du dernier élément de la pile undo </p>
+     */
     @Override
     public void undo() {
         setModeUndo(true);
@@ -54,6 +59,11 @@ public class UndoRedoManagerImpl implements UndoRedoManager {
         }
     }
 
+    /**
+     *<p> Si la pile n'est pas vide et si le mode undo est activé (sinon pas de redo ...) on emple l'état actuel
+     * dans les redo puis dépile et restaure le premier redo de la pile.
+     * Lorsque la pile est vide l'état modeUndo est annulé, l'utilisateur est au dernier état possible.</p>
+     */
     @Override
     public void redo() {
         if(!pileDeMementoRedo.isEmpty()){
@@ -76,6 +86,10 @@ public class UndoRedoManagerImpl implements UndoRedoManager {
         this.modeUndo = modeUndo;
     }
 
+    /**
+     * vidage la pile avec une technique ancestrale trés sophistiquée.
+     * @param stack
+     */
     public void clearStack(Stack stack){
         while(!stack.empty()){
             stack.pop();

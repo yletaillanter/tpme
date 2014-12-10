@@ -21,7 +21,6 @@ public class IHMImpl extends JFrame implements IHM, Observer {
     private Map<String, Commande> commands;
     private Map<String, Commande> commandsCopy;
     private JButton copyButton, pasteButton, cutButton, deleteRight, deleteLeft, start, stop, play, undo, redo;
-    private Image recIcon;
     private JTextField userInput;
     private JTextField numberOfCharacter;
     private JTextField cursorPosition;
@@ -47,6 +46,9 @@ public class IHMImpl extends JFrame implements IHM, Observer {
         build();
     }
 
+    /**
+     * Construit la fenêtre principale et définit ses paramétres.
+     */
     private void build() {
         setTitle("Mini-Editeur ©");
         setSize(500, 600);
@@ -59,6 +61,10 @@ public class IHMImpl extends JFrame implements IHM, Observer {
         setIconImage(frameImage.getImage());
     }
 
+    /**
+     * Construit le content panel principal de l'IHM
+     * @return un JPanel complet
+     */
     private JPanel buildContentPane() {
         mainPanel = new JPanel();
         mainPanel.setBackground(Color.white);

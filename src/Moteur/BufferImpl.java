@@ -92,11 +92,18 @@ public class BufferImpl implements Buffer, Subject {
         update();
     }
 
+    /**
+     * Modifie le buffer interne du bufferImpl
+     * @param innerBuffer
+     */
     public void setInnerBuffer(StringBuilder innerBuffer) {
         this.innerBuffer = innerBuffer;
         update();
     }
 
+    /**
+     * Efface le contenu du buffer.
+     */
     @Override
     public void clear() {
         innerBuffer.delete(0, innerBuffer.length());
@@ -112,6 +119,11 @@ public class BufferImpl implements Buffer, Subject {
         return innerBuffer.length();
     }
 
+    /**
+     * Enregistrer un nouvel observer
+     * @param o the observer to add to the set
+     * @throws IllegalArgumentException
+     */
     @Override
     public void register(Observer o) throws IllegalArgumentException {
         if (registeredObservers.contains(o)) {
@@ -120,6 +132,11 @@ public class BufferImpl implements Buffer, Subject {
         registeredObservers.add(o);
     }
 
+    /**
+     * Désinscrire un observer
+     * @param o the observer to remove
+     * @throws IllegalArgumentException
+     */
     @Override
     public void unregister(Observer o) throws IllegalArgumentException {
         if (!registeredObservers.contains(o)) {
@@ -128,6 +145,11 @@ public class BufferImpl implements Buffer, Subject {
         registeredObservers.remove(o);
     }
 
+    /**
+     * Dit si o est enregistré dans la liste des observers.
+     * @param o the observer to check
+     * @return
+     */
     @Override
     public boolean isRegistered(Observer o) {
         if (o == null) {
@@ -136,6 +158,9 @@ public class BufferImpl implements Buffer, Subject {
         return registeredObservers.contains(o);
     }
 
+    /**
+     * Dit au(x) observer(s) que l'état du sujet a changé.
+     */
     private void update() {
         for (Observer o : registeredObservers) {
             o.doUpdate(this);
@@ -143,35 +168,57 @@ public class BufferImpl implements Buffer, Subject {
     }
 
 
+    /**
+     * Créer un nouveau memento du buffer
+     * @return BufferMemento
+     * @see Moteur.BufferImpl.BufferMemento
+     */
     @Override
     public BufferImpl.BufferMemento getMemento() {
         return new BufferMemento(innerBuffer);
     }
 
-    @Override
-    public BufferMemento getInitialMemento() {
-        return new BufferMemento(new StringBuilder());
-    }
-
+    /**
+     * permet de restaurer l'état du buffer depuis le memento.
+     * @param memento
+     */
     @Override
     public void setMemento(BufferMemento memento) {
         setInnerBuffer(memento.getInnerBufferMemento());
 
     }
 
+    /**
+     * Class interne BufferMemento
+     */
     public class BufferMemento implements Memento {
 
+        /**
+         * état du buffer à sauvegarder
+         */
         StringBuilder innerBufferMemento;
 
+        /**
+         * constructor
+         * @param innerBufferMemento
+         */
         public BufferMemento(StringBuilder innerBufferMemento){
             this.innerBufferMemento = new StringBuilder();
             this.innerBufferMemento.append(innerBufferMemento.toString());
         }
 
+        /**
+         * Permet d'obtenir l'état du buffer interne sauvegardé dans le memento
+         * @return
+         */
         public StringBuilder getInnerBufferMemento() {
             return innerBufferMemento;
         }
 
+        /**
+         * permet de setter le buffer interne à sauvegarder.
+         * @param innerBufferMemento
+         */
         public void setInnerBufferMemento(StringBuilder innerBufferMemento) {
             this.innerBufferMemento = innerBufferMemento;
         }

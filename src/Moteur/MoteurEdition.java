@@ -78,5 +78,8 @@ public interface MoteurEdition {
 
     public void setUndoRedoManager(UndoRedoManager undoRedoManager);
 
+    /**
+     * Appel la fonction save sur l'undo-redo manager qui sauvegarde l'état du buffer.
+     */
     public void actionSave();
 }
